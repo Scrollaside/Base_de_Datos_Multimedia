@@ -1,0 +1,103 @@
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#banner {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 17px;
+    color: white;
+}
+
+#usuario {
+    display: flex;
+    align-items: center;
+}
+
+#FotoUsuario {
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+    margin-right: 18px;
+}
+
+#loginBTN button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    font-size: 21px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+#loginBTN button:hover {
+    background-color: darkred;
+}
+
+.content {
+    text-align: center;
+    padding: 50px;
+}
+
+
+.curso {
+    background-color: white;
+    width: 72%;
+    margin: 35px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+
+.curso img {
+    width: 390px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 90px;
+}
+
+.content div:hover {
+    background-color: #f4f4f4;
+}
+
+h1 {
+    font-size: 48px;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+.InfoPage {
+    width: 55%;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.curso-info .detalles {
+    font-size: 11.5px;
+    color: slategray;
+}
+
+.curso-link {
+    display: inline-block;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+.curso-link:hover {
+    background-color: #555;
+}
