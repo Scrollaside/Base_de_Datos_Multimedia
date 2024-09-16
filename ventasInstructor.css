@@ -1,0 +1,79 @@
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#banner {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.filters {
+    margin: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.6);
+}
+
+
+.filters select, .filters input {
+    margin-right: 105px;
+    padding: 5px;
+}
+
+button {
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+table td:hover {
+    background-color: #f4f4f4;
+}
+
+table th {
+    background-color: #333;
+    color: white;
+}
+
+table th:hover {
+    background-color: black;
+}
+
+#resumen-forma-pago table {
+    width: 35%;
+    margin: 0 auto;
+}
+
+#total-ingresos, #total-ingresos-curso {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.toggle-view {
+    text-align: center;
+    margin-top: 20px;
+}
