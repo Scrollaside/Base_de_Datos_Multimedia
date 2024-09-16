@@ -1,0 +1,142 @@
+/* Estilos para el header y video del curso */
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #f1f1f1;
+    color: rgb(0, 0, 0);
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.video-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 60%;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.topics-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 35%;
+}
+
+.topics {
+    list-style: none;
+    padding: 0;
+}
+
+.topics li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topics li:hover {
+    background-color: #ddd;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+/* Estilos para el header y video del curso */
+
+/* Estilos para el programa del curso */
+input{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.tab label{
+    display: block;
+}
+
+.tab label h4 {
+    position: relative;
+    cursor: pointer;
+    background-color: #2068bd;
+    padding: 16px 16px 16px 48px;
+    border-radius: 5px;
+}
+
+.tab label h4:hover {
+    background-color: #2d7edb
+}
+
+.tab input:checked~.tab-content{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.tab-videos{
+    display: flex;
+}
+
+ul.list-class{
+    margin: 0;
+}
+
+.tab-content{
+    background: 0 0;
+    overflow: hidden;
+    transition: max-height .5s;
+    padding-left: 10px;
+}
+
+ul.list-class a{
+    border: 1px solid #D2DAE8;
+    border-radius: 5px;
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+ul.list-class a img{
+    margin: 7px 10px auto 0;
+}
+
+ul.list-class a:hover, .columna-detalles a:hover {
+    background-color: #F2F8FF;
+    border: 1px solid #2979FF
+}
+
+.name-class{
+    display: flex;
+}
+
+.videos-desactivado{
+    display: none;
+}
+
+.videos-activo{
+    display: flow;
+}
+/* Estilos para el programa del curso */
