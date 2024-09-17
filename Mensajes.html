@@ -70,11 +70,39 @@
         }
     </style>
 </head>
+<nav id="uc-navbar" class="navbar">
+    <link rel="icon" type="image/x-icon" href="./img/icon.png">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <div id="uc-navbar-container" class="container">
+        <div id="uc-logo" class="logo">
+            <a href="../index.html">UNIVERSAL CLASSROOM</a>
+        </div>
+        <ul id="uc-nav-links" class="nav-links">
+            <li><a href="../index.html">Inicio</a></li>
+            <li id="uc-dropdown" class="dropdown">
+                <a href="#">Categorías <span>&#x25BC;</span></a>
+                <ul id="uc-dropdown-content" class="dropdown-content">
+                    <li><a href="#">IT & Software</a></li>
+                    <li><a href="#">Marketing</a></li>
+                    <li><a href="#">Diseño</a></li>
+                </ul>
+            </li>
+            <li><a href="./cursos.html">Mis Cursos</a></li>
+            <li><a href="./crear.html">Publicar Curso</a></li>
+        </ul>
+        <div id="uc-nav-right" class="nav-right">
+            <a href="./perfil.html" class="avatar-link">
+                <img src="./img/user.png" alt="Perfil" class="avatar">
+            </a>
+            <a href="./login.html" class="btn login-btn">Iniciar Sesión</a>
+        </div>
+    </div>
+</nav>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mi Sitio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -101,7 +129,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
     <!-- Contenido Principal - Mensajes Privados -->
     <div class="container">

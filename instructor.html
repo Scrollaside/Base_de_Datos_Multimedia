@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructor MainPage</title>
     <link rel="stylesheet" href="instructor.css">
 </head>
+</head>
+<nav id="uc-navbar" class="navbar">
+    <link rel="icon" type="image/x-icon" href="./img/icon.png">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <div id="uc-navbar-container" class="container">
+        <div id="uc-logo" class="logo">
+            <a href="../index.html">UNIVERSAL CLASSROOM</a>
+        </div>
+        <ul id="uc-nav-links" class="nav-links">
+            <li><a href="../index.html">Inicio</a></li>
+            <li id="uc-dropdown" class="dropdown">
+                <a href="#">Categorías <span>&#x25BC;</span></a>
+                <ul id="uc-dropdown-content" class="dropdown-content">
+                    <li><a href="#">IT & Software</a></li>
+                    <li><a href="#">Marketing</a></li>
+                    <li><a href="#">Diseño</a></li>
+                </ul>
+            </li>
+            <li><a href="./cursos.html">Mis Cursos</a></li>
+            <li><a href="./crear.html">Publicar Curso</a></li>
+        </ul>
+        <div id="uc-nav-right" class="nav-right">
+            <a href="./perfil.html" class="avatar-link">
+                <img src="./img/user.png" alt="Perfil" class="avatar">
+            </a>
+            <a href="./login.html" class="btn login-btn">Iniciar Sesión</a>
+        </div>
+    </div>
+</nav>
 
 <body>
-    <div id="banner">
+    <!-- <div id="banner">
         <div id="usuario">
             <a href="perfil.html">
                 <img src="https://blog.bismart.com/hubfs/los-10-mejores-bots-disponibles-en-Internet.jpg" alt="Foto del Usuario" id="FotoUsuario">
@@ -20,9 +50,10 @@
             <a href="ventasInstructor.html"><button>Reportes</button></a>
             <a href="crear.html"><button>Crear</button></a>
         </div>
-    </div>
+    </div> -->
 
-    <br><h1 align="center">CURSOS IMPARTIDOS</h1>
+    <br>
+    <h1 align="center">CURSOS IMPARTIDOS</h1>
 
     <div class="content">
 
@@ -30,7 +61,8 @@
 
             <!-- Curso 1 -->
             <div class="curso" id="curso1">
-                <img src="https://administraciondesistemas.com/wp-content/uploads/2024/01/lenguajes-programacion-unsplash.jpg" alt="Imagen del curso">
+                <img src="https://administraciondesistemas.com/wp-content/uploads/2024/01/lenguajes-programacion-unsplash.jpg"
+                    alt="Imagen del curso">
                 <div class="curso-info" align="left">
                     <h2>Curso de Programación</h2>
                     <p>Aprende a programar desde cero en C++ y C# fácil y sencillo.</p><br>
@@ -47,10 +79,13 @@
 
             <!-- Curso 2 -->
             <div class="curso" id="curso2">
-                <img src="https://academyofanimatedart.com/wp-content/uploads/2021/12/unreal-image-1.jpg" alt="Imagen del curso" alt="Imagen del curso">
+                <img src="https://academyofanimatedart.com/wp-content/uploads/2021/12/unreal-image-1.jpg"
+                    alt="Imagen del curso" alt="Imagen del curso">
                 <div class="curso-info" align="left">
                     <h2>Todo sobre Unreal Engine</h2>
-                    <p>Ven y aprende todo sobre este software para ¡HACER TU PROPIO VIDEOJUEGO! Saca a lucir tus habilidades y pon a volar tu propia imaginación, aprende la interfaz, los nodos y como hacer un videojuego divertido.</p><br>
+                    <p>Ven y aprende todo sobre este software para ¡HACER TU PROPIO VIDEOJUEGO! Saca a lucir tus
+                        habilidades y pon a volar tu propia imaginación, aprende la interfaz, los nodos y como hacer un
+                        videojuego divertido.</p><br>
 
                     <div class="detalles">
                         <p>Categorías: Tecnología, Programación</p>
@@ -61,13 +96,17 @@
                     <button class="curso-link" onclick="toggleCurso(2)">Deshabilitar Curso</button>
                 </div>
             </div>
-            
+
             <!-- Curso 3 -->
             <div class="curso" id="curso3">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa_EipSRfPVNEeyj6Q16qE79vugIbrS7s3YA&s" alt="Imagen del curso">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa_EipSRfPVNEeyj6Q16qE79vugIbrS7s3YA&s"
+                    alt="Imagen del curso">
                 <div class="curso-info" align="left">
                     <h2>Curso de HTML</h2>
-                    <p>Aprende a realizar páginas web, ¿no sueles diseñarlas y al tan poca imaginación haces las cosas repetidas una y otra vez? ¿No te cansas de no saber que escribir para tener una página creible? ¿Te falta imaginación para saber que datos dummy poner en tus prácticas? Ven y descubre que puedes hacer, además de tips para mejorar tus proyectos.</p><br>
+                    <p>Aprende a realizar páginas web, ¿no sueles diseñarlas y al tan poca imaginación haces las cosas
+                        repetidas una y otra vez? ¿No te cansas de no saber que escribir para tener una página creible?
+                        ¿Te falta imaginación para saber que datos dummy poner en tus prácticas? Ven y descubre que
+                        puedes hacer, además de tips para mejorar tus proyectos.</p><br>
 
                     <div class="detalles">
                         <p>Categorías: Tecnología, Web</p>
@@ -84,7 +123,8 @@
                 <img src="https://img-c.udemycdn.com/course/750x422/5066618_1a4f.jpg" alt="Imagen del curso">
                 <div class="curso-info" align="left">
                     <h2>Curso de C#</h2>
-                    <p>Descubre las bases para el lenguaje C# y el uso de recursos por forms, ven y aprende de una manera fácil y divertida todos los componentes que puedes utilizar.</p><br>
+                    <p>Descubre las bases para el lenguaje C# y el uso de recursos por forms, ven y aprende de una
+                        manera fácil y divertida todos los componentes que puedes utilizar.</p><br>
 
                     <div class="detalles">
                         <p>Categorías: Tecnología, Programación</p>
@@ -105,7 +145,7 @@
         function toggleCurso(cursoId) {
             const curso = document.getElementById(`curso${cursoId}`);
             const button = curso.querySelector('button');
-            
+
             if (button.textContent === 'Deshabilitar Curso') {
                 curso.style.opacity = '0.5';
                 button.textContent = 'Habilitar Curso';
@@ -119,4 +159,5 @@
     </script>
 
 </body>
+
 </html>

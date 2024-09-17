@@ -1,13 +1,13 @@
 /* General styles */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-}
+} */
 
 /* Navbar Styles */
-.navbar {
+#uc-navbar {
     background-color: #333;
     padding: 10px 0;
     position: sticky;
@@ -16,7 +16,7 @@
     z-index: 1000;
 }
 
-.container {
+#uc-navbar-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -25,7 +25,7 @@
     padding: 0 20px;
 }
 
-.logo a {
+#uc-logo a {
     color: #fff;
     font-size: 24px;
     text-transform: uppercase;
@@ -34,28 +34,28 @@
     letter-spacing: 1.5px;
 }
 
-.nav-links {
+#uc-nav-links {
     list-style: none;
     display: flex;
 }
 
-.nav-links li {
+#uc-nav-links li {
     margin-left: 20px;
     position: relative;
 }
 
-.nav-links a {
+#uc-nav-links a {
     color: #fff;
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s;
 }
 
-.nav-links a:hover {
+#uc-nav-links a:hover {
     color: #ff5555;
 }
 
-.dropdown-content {
+#uc-dropdown-content {
     display: none;
     position: absolute;
     background-color: #444;
@@ -64,23 +64,23 @@
     z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
+#uc-dropdown:hover #uc-dropdown-content {
     display: block;
 }
 
-.dropdown-content li {
+#uc-dropdown-content li {
     padding: 10px;
 }
 
-.dropdown-content li a {
+#uc-dropdown-content li a {
     color: #fff;
 }
 
-.dropdown-content li a:hover {
+#uc-dropdown-content li a:hover {
     background-color: #555;
 }
 
-.nav-right {
+#uc-nav-right {
     display: flex;
     align-items: center;
 }
@@ -130,7 +130,7 @@
 }
 
 @media (max-width: 768px) {
-    .nav-links {
+    #uc-nav-links {
         display: none;
         flex-direction: column;
         background-color: #333;
@@ -141,7 +141,7 @@
         border-radius: 0 0 8px 8px;
     }
 
-    .nav-links li {
+    #uc-nav-links li {
         margin: 10px 0;
     }
 
@@ -149,11 +149,11 @@
         display: flex;
     }
 
-    .nav-right {
+    #uc-nav-right {
         display: none;
     }
 
-    .navbar.active .nav-links {
+    #uc-navbar.active #uc-nav-links {
         display: flex;
     }
 }
