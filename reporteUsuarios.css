@@ -1,0 +1,55 @@
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#banner {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+button {
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+table td:hover {
+    background-color: #f4f4f4;
+}
+
+table th {
+    background-color: #333;
+    color: white;
+}
+
+table th:hover {
+    background-color: black;
+}
+
+.toggle-view {
+    text-align: center;
+    margin-top: 20px;
+}
