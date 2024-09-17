@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,54 @@
         body {
             background-color: #f8f9fa;
         }
+
         .container {
             margin-top: 90px;
         }
+
         .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(0,0,0,.05);
+            background-color: rgba(0, 0, 0, .05);
         }
     </style>
 </head>
+<nav class="navbar">
+    <link rel="icon" type="image/x-icon" href="../img/icon.png">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">UNIVERSAL CLASSROOM</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li class="dropdown">
+                <a href="#">Categorías <span>&#x25BC;</span></a>
+                <ul class="dropdown-content">
+                    <li><a href="#">IT & Software</a></li>
+                    <li><a href="#">Marketing</a></li>
+                    <li><a href="#">Diseño</a></li>
+                </ul>
+            </li>
+            <li><a href="mis-cursos.html">Mis Cursos</a></li>
+            <li><a href="publicar-curso.html">Publicar Curso</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="perfil.html" class="avatar-link">
+                <img src="../img/user.png" alt="Perfil" class="avatar">
+            </a>
+            <!-- <a href="carrito.html" class="cart-link">
+                <img src="../img/cart.png" alt="Carrito" class="cart-icon">
+            </a> -->
+            <a href="login.html" class="btn login-btn">Iniciar Sesión</a>
+        </div>
+
+    </div>
+</nav>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar -->
+    <div id="navbar"></div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Mi Sitio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,124 +84,141 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
-<!-- Contenido Principal - Kardex de Cursos -->
-<div class="container">
-    <h3 class="text-center mb-4">Kardex de Cursos</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Curso</th>
-                    <th>Estado</th>
-                    <th>Fecha Inscripción</th>
-                    <th>Última Fecha de Acceso</th>
-                    <th>Fecha de Finalización</th>
-                    <th>Nivel 1</th>
-                    <th>Nivel 2</th>
-                    <th>Nivel 3</th>
-                    <th>Nivel 4</th>
-                    <th>Nivel 5</th>
-                    <th>Nivel 6</th>
-                    <th>Nivel 7</th>
-                    <th>Nivel 8</th>
-                    <th>Nivel 9</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Curso 1 -->
-                <tr>
-                    <td>Curso 1</td>
-                    <td><span class="badge bg-success">Completo</span></td>
-                    <td>01/01/2023</td>
-                    <td>15/08/2023</td>
-                    <td>20/08/2023</td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                </tr>
-                <!-- Curso 2 -->
-                <tr>
-                    <td>Curso 2</td>
-                    <td><span class="badge bg-warning">Incompleto</span></td>
-                    <td>01/03/2023</td>
-                    <td>10/09/2023</td>
-                    <td>-</td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-warning">En Progreso</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <!-- Curso 3 -->
-                <tr>
-                    <td>Curso 3</td>
-                    <td><span class="badge bg-danger">Incompleto</span></td>
-                    <td>01/05/2023</td>
-                    <td>01/07/2023</td>
-                    <td>-</td>
-                    <td><span class="badge bg-danger">Reprobado</span></td>
-                    <td><span class="badge bg-danger">Reprobado</span></td>
-                    <td><span class="badge bg-warning">En Progreso</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <!-- Curso 4 -->
-                <tr>
-                    <td>Curso 4</td>
-                    <td><span class="badge bg-warning">Incompleto</span></td>
-                    <td>01/07/2023</td>
-                    <td>15/09/2023</td>
-                    <td>-</td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-success">Aprobado</span></td>
-                    <td><span class="badge bg-warning">En Progreso</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <!-- Curso 5 -->
-                <tr>
-                    <td>Curso 5</td>
-                    <td><span class="badge bg-warning">Incompleto</span></td>
-                    <td>01/09/2023</td>
-                    <td>10/09/2023</td>
-                    <td>-</td>
-                    <td><span class="badge bg-warning">En Progreso</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Contenido Principal - Kardex de Cursos -->
+    <div class="container">
+        <h3 class="text-center mb-4">Kardex de Cursos</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Curso</th>
+                        <th>Estado</th>
+                        <th>Fecha Inscripción</th>
+                        <th>Última Fecha de Acceso</th>
+                        <th>Fecha de Finalización</th>
+                        <th>Nivel 1</th>
+                        <th>Nivel 2</th>
+                        <th>Nivel 3</th>
+                        <th>Nivel 4</th>
+                        <th>Nivel 5</th>
+                        <th>Nivel 6</th>
+                        <th>Nivel 7</th>
+                        <th>Nivel 8</th>
+                        <th>Nivel 9</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Curso 1 -->
+                    <tr>
+                        <td>Curso 1</td>
+                        <td><span class="badge bg-success">Completo</span></td>
+                        <td>01/01/2023</td>
+                        <td>15/08/2023</td>
+                        <td>20/08/2023</td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                    </tr>
+                    <!-- Curso 2 -->
+                    <tr>
+                        <td>Curso 2</td>
+                        <td><span class="badge bg-warning">Incompleto</span></td>
+                        <td>01/03/2023</td>
+                        <td>10/09/2023</td>
+                        <td>-</td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-warning">En Progreso</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <!-- Curso 3 -->
+                    <tr>
+                        <td>Curso 3</td>
+                        <td><span class="badge bg-danger">Incompleto</span></td>
+                        <td>01/05/2023</td>
+                        <td>01/07/2023</td>
+                        <td>-</td>
+                        <td><span class="badge bg-danger">Reprobado</span></td>
+                        <td><span class="badge bg-danger">Reprobado</span></td>
+                        <td><span class="badge bg-warning">En Progreso</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <!-- Curso 4 -->
+                    <tr>
+                        <td>Curso 4</td>
+                        <td><span class="badge bg-warning">Incompleto</span></td>
+                        <td>01/07/2023</td>
+                        <td>15/09/2023</td>
+                        <td>-</td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-success">Aprobado</span></td>
+                        <td><span class="badge bg-warning">En Progreso</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <!-- Curso 5 -->
+                    <tr>
+                        <td>Curso 5</td>
+                        <td><span class="badge bg-warning">Incompleto</span></td>
+                        <td>01/09/2023</td>
+                        <td>10/09/2023</td>
+                        <td>-</td>
+                        <td><span class="badge bg-warning">En Progreso</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<!-- Bootstrap JS y dependencias de Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Bootstrap JS y dependencias de Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('./html/navbar.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar la barra de navegación');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
+
 </html>
