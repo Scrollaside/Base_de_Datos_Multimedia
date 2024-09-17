@@ -1,0 +1,73 @@
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+#banner {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.admin-panel {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 21px;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.categoria-lista {
+    margin: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #333;
+    color: white;
+}
+
+table th:hover {
+    background-color: black;
+}
+
+table td {
+    background-color: #fff;
+}
+
+table td:hover {
+    background-color: #f4f4f4;
+}
