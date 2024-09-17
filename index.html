@@ -172,5 +172,44 @@
         </div>
     </div>
 
+<script>
+        function mostrarEstrellas(calificacion) {
+            const estrellasLlenas = Math.floor(calificacion); // Estrellas completas
+            const mediaEstrella = calificacion % 1 >= 0.5; // Media estrella si el decimal es >= 0.5
+            let estrellasHTML = '';
+    
+            // Agregar estrellas llenas
+            for (let i = 0; i < estrellasLlenas; i++) {
+                estrellasHTML += '<i class="bi bi-star-fill text-warning"></i>';
+            }
+    
+            // Agregar media estrella si corresponde
+            if (mediaEstrella) {
+                estrellasHTML += '<i class="bi bi-star-half text-warning"></i>';
+            }
+    
+            // Completar con estrellas vacías hasta llegar a 5
+            const estrellasRestantes = 5 - estrellasLlenas - (mediaEstrella ? 1 : 0);
+            for (let i = 0; i < estrellasRestantes; i++) {
+                estrellasHTML += '<i class="bi bi-star text-warning"></i>';
+            }
+    
+            return estrellasHTML;
+        }
+    
+        // Convertir calificaciones a estrellas cuando se cargue la página
+        window.onload = function() {
+            const cursos = document.querySelectorAll('.curso');
+            
+            cursos.forEach(curso => {
+                const calificacionTexto = curso.querySelector('.detalles p:nth-child(2)').innerText;
+                const calificacion = parseFloat(calificacionTexto.split(': ')[1]) / 2; // Dividir entre 2 para convertir de 10 a 5 estrellas
+    
+                curso.querySelector('.detalles p:nth-child(2)').innerHTML = `Calificación: ${mostrarEstrellas(calificacion)}`;
+            });
+        };
+    </script>
+    
+    
 </body>
 </html>
