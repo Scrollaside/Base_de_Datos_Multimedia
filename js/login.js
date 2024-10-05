@@ -13,7 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         window.location.href = "instructor.html";
     }
     else if(usuario === "3" && password === "3"){
-        window.location.href = "admin.html";
+        window.location.href = "bloqueoDesbloqueo.html";
     }
     else {
         document.getElementById("errorMsg").textContent = "El usuario y/o la contraseña es incorrecta.";
