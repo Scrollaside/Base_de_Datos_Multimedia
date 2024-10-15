@@ -77,3 +77,12 @@ table th:hover {
     text-align: center;
     margin-top: 20px;
 }
+
+
+
+h2 {
+    font-size: 32px;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+}
