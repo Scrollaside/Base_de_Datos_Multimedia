@@ -27,7 +27,10 @@ label {
 input, textarea, select {
     padding: 10px;
     margin-top: 5px;
+    margin-bottom: 25px;
     border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input:hover, textarea:hover, select:hover {
@@ -67,3 +70,18 @@ button:hover {
     border-radius: 5px;
 }
 
+.nivel input, .nivel textarea {
+    width: 100%; 
+}
+
+.categorias-options select {
+    width: auto; /* Cambiar a 'auto' para que no cubra toda la sección */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.categorias-options select {
+    width: auto; /* Cambiar a 'auto' para que no cubra toda la sección */
+    padding: 10px;
+    border-radius: 5px;
+}

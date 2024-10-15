@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const agregarCategoriaBtn = document.getElementById("agregar-categoria");
     const categoriasSeleccionadasDiv = document.getElementById("categorias-seleccionadas");
     const form = document.getElementById("crear-curso-form");
-
+    
     const categoriasSeleccionadas = [];
 
-    // Función para agregar categorpías
+    // Función para agregar categorías
     agregarCategoriaBtn.addEventListener("click", () => {
         const categoriaSeleccionada = categoriasSelect.value;
 
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-
         if (categoriasSeleccionadas.length === 0) {
             alert('Por favor, selecciona al menos una categoría.');
             return; 
@@ -50,35 +49,48 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'instructor.html'; 
     });
 
-    // Manejar la creación de niveles
-    document.getElementById("niveles").addEventListener("change", function() {
-        const numNiveles = parseInt(this.value);
-        const nivelesContainer = document.getElementById("niveles-container");
-        nivelesContainer.innerHTML = ''; 
+    // Manejar la creación de niveles con la nueva validación
+    document.getElementById("niveles").addEventListener("input", function() {
+        let numNiveles = this.value;
 
-        for (let i = 1; i <= numNiveles; i++) {
-            nivelesContainer.innerHTML += `
-                <div class="nivel">
-                    <h3>Nivel ${i}</h3>
-                    <label for="titulo-nivel-${i}">Título del Nivel:</label>
-                    <input type="text" id="titulo-nivel-${i}" name="titulo-nivel-${i}" required><br>
+        // Limitar la longitud a un dígito
+        if (numNiveles.length > 1) {
+            this.value = numNiveles.slice(0, 1);
+        }
 
-                    <label for="costo-nivel-${i}">Costo Individual del Nivel:</label>
-                    <input type="number" id="costo-nivel-${i}" name="costo-nivel-${i}" required><br>
+        // Validar que el número sea entre 1 y 9
+        numNiveles = parseInt(this.value);
+        if (isNaN(numNiveles) || numNiveles < 1 || numNiveles > 9) {
+            this.value = '';
+        } else {
+            // Lógica para mostrar los niveles si es un número válido
+            const nivelesContainer = document.getElementById("niveles-container");
+            nivelesContainer.innerHTML = ''; 
 
-                    <label for="contenido-nivel-${i}">Contenido:</label>
-                    <textarea id="contenido-nivel-${i}" name="contenido-nivel-${i}" rows="4"></textarea><br>
+            for (let i = 1; i <= numNiveles; i++) {
+                nivelesContainer.innerHTML += `
+                    <div class="nivel">
+                        <h3>Nivel ${i}</h3>
+                        <label for="titulo-nivel-${i}">Título del Nivel:</label>
+                        <input type="text" id="titulo-nivel-${i}" name="titulo-nivel-${i}" required><br>
 
-                    <label for="pdf-nivel-${i}">Adjuntar PDF:</label>
-                    <input type="file" id="pdf-nivel-${i}" name="pdf-nivel-${i}" accept="application/pdf"><br>
+                        <label for="costo-nivel-${i}">Costo Individual del Nivel:</label>
+                        <input type="number" id="costo-nivel-${i}" name="costo-nivel-${i}" required><br>
 
-                    <label for="link-nivel-${i}">Link Externo:</label>
-                    <input type="url" id="link-nivel-${i}" name="link-nivel-${i}"><br>
+                        <label for="contenido-nivel-${i}">Contenido:</label>
+                        <textarea id="contenido-nivel-${i}" name="contenido-nivel-${i}" rows="4"></textarea><br>
 
-                    <label for="video-nivel-${i}">Video:</label>
-                    <input type="file" id="video-nivel-${i}" name="video-nivel-${i}" accept="video/*" required><br>
-                </div>
-            `;
+                        <label for="pdf-nivel-${i}">Adjuntar PDF:</label>
+                        <input type="file" id="pdf-nivel-${i}" name="pdf-nivel-${i}" accept="application/pdf"><br>
+
+                        <label for="link-nivel-${i}">Link Externo:</label>
+                        <input type="url" id="link-nivel-${i}" name="link-nivel-${i}"><br>
+
+                        <label for="video-nivel-${i}">Video:</label>
+                        <input type="file" id="video-nivel-${i}" name="video-nivel-${i}" accept="video/*" required><br>
+                    </div>
+                `;
+            }
         }
     });
 });
