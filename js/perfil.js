@@ -12,36 +12,7 @@ const editBtn = document.getElementById('editBtn');
 const saveBtn = document.getElementById('saveBtn');
 const cancelBtn = document.getElementById('cancelBtn');
 const statusMessage = document.getElementById('errorMsg');
-
-
-
-// VALIDACIONES
-
-// Validar nombre
-function validarNombre(nombre) {
-    const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-    return nombreRegex.test(nombre);
-}
-
-// Validar contraseña 
-function validarContraseña(contraseña) {
-    const contraseñaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}|[\]:";'<>?,./]).{8,}$/;
-    return contraseñaRegex.test(contraseña);
-}
-
-// Validar fecha de nacimiento
-function validarFechaNacimiento(fecha) {
-    const fechaActual = new Date();
-    const fechaNacimiento = new Date(fecha);
-    return fechaNacimiento <= fechaActual;
-}
-
-// Validar email
-function validarEmail(email) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-}
-
+let validaciones = true;
 
 
 // Habilitar edición
@@ -67,7 +38,7 @@ function cancelarEdicion() {
     birthday.value = "2024-09-16";      
     email.value = "dani.morysi@hotmail.com"; 
     password.value = "123+dummY";
-    confirmPassword.value = "123+dummY";
+    confirmPassword.value = "123.dummY";
     photo.value = "";
     name.disabled = true;
     username.disabled = true;
@@ -85,32 +56,72 @@ function cancelarEdicion() {
 
 // Guardar cambios
 function guardarCambios() {
-
-    if (!validarNombre(name.value)) {
-        statusMessage.textContent = "El nombre no es válido.";
+   
+    // Validar campos vacíos
+    if (!name.value || !username.value || !gender.value || !birthday.value.trim() || !photo.value || 
+    !email.value.trim() || !password.value || !confirmPassword.value) {
+        statusMessage.textContent = "Llenar todos los campos del Registro.";
+        validaciones = false;
         return;
     }
 
-    if (!validarEmail(email.value)) {
-        statusMessage.textContent = "Introduce un correo electrónico válido.";
+
+    // Validación para el nombre
+    const nombreRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$/;
+    if (!nombreRegex.test(name.value)) {
+        statusMessage.textContent = "El nombre solo puede contener letras y espacios.";
+        validaciones = false;
         return;
     }
 
-    if (!validarFechaNacimiento(birthday.value)) {
-        statusMessage.textContent = "Fecha de nacimiento inválido.";
+
+    //Validación para el usuario
+    const usuarioRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s0-9]+$/;
+    if (!usuarioRegex.test(username.value)) {
+        statusMessage.textContent = "El nombre de usuario solo puede contener letras y números.";
+        validaciones = false;
         return;
     }
 
-    if (!validarContraseña(password.value)) {
-        statusMessage.textContent = "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.";
+
+    // Validación para la fecha de nacimieto
+    const fechaActual = new Date().toISOString().split("T")[0];
+    if (birthday.value.trim() >= fechaActual) {
+        statusMessage.textContent = "Fecha inválida.";
+        validaciones = false;
+        return;
+    }
+
+
+    //Validación de correo electreónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) {
+        statusMessage.textContent = "El formato del correo electrónico es inválido.";
+        validaciones = false;
+        return;
+    }
+
+    // Validación para la contraseña
+    const passwordRegex = /^(?=.*[A-ZÀ-ÿ])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;;
+    if (!passwordRegex.test(password.value)) {
+        statusMessage.textContent = "La contraseña debe tener 8 carácteres, mayúscula, número y carácter especial como mínimo.";
+        validaciones = false;
         return;
     }
 
     if (password.value !== confirmPassword.value) {
         statusMessage.textContent = "Las contraseñas no coinciden.";
+        validaciones = false;
         return;
     }
 
+    
+    // Si ninguna validación falla, entonces no regresa y entra aqui
+    if(validaciones){    
+        //window.location.href = "login.html";
+    }    
+
+    
 
     statusMessage.textContent = "Información guardada correctamente.";
     name.disabled = true;
@@ -130,3 +141,4 @@ function guardarCambios() {
 editBtn.addEventListener("click", habilitarEdicion);
 cancelBtn.addEventListener("click", cancelarEdicion);
 saveBtn.addEventListener("click", guardarCambios);
+
