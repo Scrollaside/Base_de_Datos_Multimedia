@@ -3,8 +3,7 @@ window.addEventListener("DOMContentLoaded", function() {
     let typeUsuario = localStorage.getItem('Type_Usuario'); 
     let navFile;
 
-
-    // Determinar el archivo de navegación según el valor de Type_Usuario
+    // Determinar el NavBar según el valor de Type_Usuario
     if (typeUsuario === '1') {
         navFile = 'NavBarEstudiante.html';
     } else if (typeUsuario === '2') {
@@ -20,6 +19,24 @@ window.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             navbarContainer.innerHTML = data;
             document.body.insertAdjacentElement('afterbegin', navbarContainer);
+
+            
+            if (navFile !== 'NavBarDefault.html') {
+
+                const logoutButton = document.getElementById('loginBTN');
+
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', function(event) {
+                        event.preventDefault(); 
+                        
+                        localStorage.removeItem('ID_Usuario');
+                        localStorage.removeItem('Nombre_Usuario');
+                        localStorage.removeItem('Type_Usuario');
+
+                        window.location.href = 'index.html';
+                    });
+                }
+            }
         })
         .catch(error => console.error('Error al cargar la barra de navegación:', error));
 });
