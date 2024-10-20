@@ -14,12 +14,11 @@
       data-sdk-integration-source="developer-studio"
     ></script>
 
-    <link rel="stylesheet" href="../css/estilosBtnNavbar.css">
-    <link rel="stylesheet" href="../css/estilosCurso.css">
+    <link rel="stylesheet" href="css/estilosBtnNavbar.css">
+    <link rel="stylesheet" href="css/estilosCurso.css">
     <link rel="stylesheet" href="css/NavBar.css">
     <title>Detalles del curso</title>
 </head>
-
 <body>
     
     <!--Contenido general-->
@@ -29,6 +28,7 @@
                 <!--Cuadro para la descripcion del curso, valoraciones, video, etc-->
                 <div class="columna-detalles">
                     <h1 class="web">Curso de Programación</h1>
+                    <h3 class="web">Impartido por: Prof. Julian</h1>
                     <p></p>
                     <p>
                         Aprende a programar desde cero en C++ y C# fácil y sencillo.
@@ -68,7 +68,7 @@
                     <div class="video">
                         <div class="youtube" data-id="">
                             <img class="player" src="" alt="">
-                            <img class="play_y" src="../img/cursoHtml.jpg" alt="" width="56px" height="56px" loading="lazy">
+                            <img class="play_y" src="img/cursoHtml.jpg" alt="" width="56px" height="56px" loading="lazy">
                         </div>
                     </div>
                     <button class="ir-curso" id="a">Ir al curso</button>
@@ -122,7 +122,7 @@
             <div class="columna-detalles">
                 <ul class="mas">                    
                     <li>
-                        <img src="../img/play.png" alt="play" width="23" height="23" loading="lazy">
+                        <img src="img/play.png" alt="play" width="23" height="23" loading="lazy">
                         <h4><strong>Video clases</strong><br>Aprende a través de videos explicativos y lecturas concretas</h4>
                     </li>
                 </ul>
@@ -138,7 +138,7 @@
             <!--Unidad individual-->
             <div class="tab">
                 <input type="checkbox" id="tab-1">
-                <label for="tab-1" onclick="location.href='cursoCompleto.php'">
+                <label for="tab-1" onclick="location.href='cursoCompleto.html'">
                     <h4>Nivel 1. Introduccion</h4>
                 </label>
             </div>
@@ -147,7 +147,7 @@
             <!--Unidad individual-->
             <div class="tab">
                 <input type="checkbox" id="tab-2">
-                <label for="tab-2" onclick="location.href='cursoCompleto.php'">
+                <label for="tab-2" onclick="location.href='cursoCompleto.html'">
                     <h4>Nivel 2. Primer tema</h4>
                 </label>
             </div>
@@ -331,7 +331,7 @@
         <ul class="lista-comentarios" id="lista-comentarios">
             <li class="fila-comentario" name="user-comment">
                 <a href="" class="user">
-                    <img src="../img/user.png" alt="Foto-usuario" width="56" height="56" loading="lazy">
+                    <img src="img/user.png" alt="Foto-usuario" width="56" height="56" loading="lazy">
                 </a>
                 <div>
                     <a href="">Nombre de un usuario</a>
@@ -367,21 +367,21 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Acceso al curso
-            <div class="purchase-options">
+            <div class="purchase-options" id="opciones-compra">
                 <p>¿Desea comprar el curso completo o niveles individuales?</p>
                 <label class="custom-checkbox">
-                    <input type="checkbox" id="fullCourseCheckbox"> Comprar curso completo
+                    <input type="checkbox" id="fullCourseCheckbox" onclick="handleCheckboxes('full')"> Comprar curso completo
                     <span class="checkmark"></span>
                 </label>
                 <label class="custom-checkbox">
-                    <input type="checkbox" id="individualLevelsCheckbox" onclick="toggleLevelOptions()"> Comprar niveles individuales
+                    <input type="checkbox" id="individualLevelsCheckbox" onclick="handleCheckboxes('individual')"> Comprar niveles individuales
                     <span class="checkmark"></span>
                 </label>
     
                 <!-- Opciones de niveles individuales que se mostrarán al seleccionar "Niveles individuales" -->
                 <div id="levelOptions" style="display: none; margin-top: 10px;">
                     <label for="levelSelect">Elige el nivel:</label>
-                    <select id="levelSelect">
+                    <select id="levelSelect" onchange="cambiarPrecio();">
                         <option value="1">Nivel 1</option>
                         <option value="2">Nivel 2</option>
                     </select>
@@ -389,14 +389,13 @@
             </div>
           </h2>
           <div class="modal-options">
-            <div class="option">
+            <div class="option" id="gratuito" style="display: none;">
               <h3>Acceso gratuito</h3>
-              <p>Este cuadro aparecera cuando sea un curso gratis.</p>
               <button id="freeAccessBtn">Ir al curso</button>
             </div>
-            <div class="option">
+            <div class="option" id="pago" style="display: none;">
               <h3>Curso de pago</h3>
-              <p>Aqui aparecera si es un nivel o todo el curso. Precio: $50 (cambiara segun la seleccion)</p>
+              <p id="pago-contenido">Precio: $50 (cambiara segun la seleccion)</p>
               <div id="paypal-button-container"></div>
             </div>
           </div>
@@ -406,7 +405,7 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="../js/estiloBotones.js"></script>
-<script src="../js/paypal.js"></script>
+<script src="js/estiloBotones.js"></script>
+<script src="js/paypal.js"></script>
 <script src="js/loadNavBar.js"></script>
 </html>

@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/NavBar.css">
+    <link rel="stylesheet" href="css/kardexEstilo.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -19,8 +20,37 @@
         }
     </style>
 </head>
-
 <body>
+
+    <div class="filters">
+
+        <label for="fecha-inicio">Desde:</label>
+        <input type="date" id="fecha-inicio">
+        
+        <label for="fecha-fin">Hasta:</label>
+        <input type="date" id="fecha-fin">
+        
+        <label for="categoria">Categoría:</label>
+        <select id="categoria">
+            <option value="todas">Todas</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="programacion">Programación</option>
+            <option value="dibujo">Dibujo</option>
+            <option value="web">Web</option>
+            <option value="videojuegos">VideoJuegos</option>
+            <option value="basededatos">Base de Datos</option>
+            <option value="marketing">Marketing</option>
+        </select>
+
+        <label for="estado">Estado del Curso:</label>
+        <select id="estado">
+            <option value="todos">Todos</option>
+            <option value="activos">Activos</option>
+            <option value="inactivos">Inactivos</option>
+        </select>
+
+        <button onclick="filtrarVentas()">Filtrar</button>
+    </div>
 
 <!-- Contenido Principal - Kardex de Cursos -->
 <div class="container">
@@ -140,6 +170,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="js/loadNavBar.js"></script>
+<script src="js/kardex.js"></script>
 
 </body>
 </html>

@@ -122,6 +122,11 @@ body{
     margin: 0 0 16px;
 }
 
+.columna-detalles h3{
+    margin: 0 0 16px;
+    color:cadetblue;
+}
+
 .columna-detalles p{
     font-size: 22px;
 }
