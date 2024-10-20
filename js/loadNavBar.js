@@ -5,13 +5,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
     // Determinar el NavBar según el valor de Type_Usuario
     if (typeUsuario === '1') {
-        navFile = 'NavBarEstudiante.html';
+        navFile = 'NavBarEstudiante.php';
     } else if (typeUsuario === '2') {
-        navFile = 'NavBarInstructor.html';
+        navFile = 'NavBarInstructor.php';
     } else if (typeUsuario === '3') {
-        navFile = 'NavBarAdmin.html';
+        navFile = 'NavBarAdmin.php';
     } else {
-        navFile = 'NavBarDefault.html'; 
+        navFile = 'NavBarDefault.php'; 
     }
 
     fetch(navFile)
@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", function() {
             document.body.insertAdjacentElement('afterbegin', navbarContainer);
 
             
-            if (navFile !== 'NavBarDefault.html') {
+            if (navFile !== 'NavBarDefault.php') {
 
                 const logoutButton = document.getElementById('loginBTN');
 
@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", function() {
                         localStorage.removeItem('Nombre_Usuario');
                         localStorage.removeItem('Type_Usuario');
 
-                        window.location.href = 'index.html';
+                        window.location.href = 'index.php';
                     });
                 }
             }

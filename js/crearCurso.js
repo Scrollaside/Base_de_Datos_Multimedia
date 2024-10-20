@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         alert('¡Curso creado con éxito!');
-        window.location.href = 'instructor.html'; 
+        window.location.href = 'instructor.php'; 
     });
 
     // Manejar la creación de niveles con la nueva validación

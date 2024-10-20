@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/NavBar.css">
     <title>Detalles del curso</title>
 </head>
+
 <body>
     
     <!--Contenido general-->
@@ -137,7 +138,7 @@
             <!--Unidad individual-->
             <div class="tab">
                 <input type="checkbox" id="tab-1">
-                <label for="tab-1" onclick="location.href='cursoCompleto.html'">
+                <label for="tab-1" onclick="location.href='cursoCompleto.php'">
                     <h4>Nivel 1. Introduccion</h4>
                 </label>
             </div>
@@ -146,7 +147,7 @@
             <!--Unidad individual-->
             <div class="tab">
                 <input type="checkbox" id="tab-2">
-                <label for="tab-2" onclick="location.href='cursoCompleto.html'">
+                <label for="tab-2" onclick="location.href='cursoCompleto.php'">
                     <h4>Nivel 2. Primer tema</h4>
                 </label>
             </div>

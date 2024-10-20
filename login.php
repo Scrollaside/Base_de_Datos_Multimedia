@@ -24,7 +24,7 @@
         </form>
 
         <p id="errorMsg" class="error"></p>
-        <a href="registro.html" class="LinkRegistro">¿No tienes cuenta? Creé una.</a>
+        <a href="registro.php" class="LinkRegistro">¿No tienes cuenta? Creé una.</a>
     </div>
 
     <script src="js/login.js"></script>

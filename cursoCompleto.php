@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/estiloCursoCompleto.css">
     <link rel="stylesheet" href="css/NavBar.css">
 </head>
+
 <body>
     <div class="contenedor">
         

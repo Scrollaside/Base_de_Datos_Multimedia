@@ -7,7 +7,7 @@ item.addEventListener('click', () => {
     cuadro.classList.toggle('activo');
 });
 //Muestra o oculta el cuadro del boton para los cursos
-
+html
 //Muestra o oculta los enlaces de los videos en el programa del curso
 const label = document.getElementById('tab-1');
 const cuadroVideos = document.getElementById('ul-tab-1');
@@ -55,7 +55,7 @@ window.onclick = function(event) {
 // Acceder al curso gratis
 document.getElementById('freeAccessBtn').addEventListener('click', function() {
     // Aquí se integraría la API de pago con PayPal
-    window.location.href = "cursoCompleto.html";
+    window.location.href = "cursoCompleto.php";
 });
 
 // Pagar con tarjeta

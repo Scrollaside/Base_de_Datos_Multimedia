@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", function() {
     const navbarContainer = document.createElement('div');
-    fetch('NavBarAdmin.html')
+    fetch('NavBarAdmin.php')
         .then(response => response.text())
         .then(data => {
             navbarContainer.innerHTML = data;

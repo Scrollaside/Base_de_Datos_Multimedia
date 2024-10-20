@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/estilosCurso.css">
     <title>Detalles del curso</title>
 </head>
+
 <body>
     <!--Boton de navbar-->
     <div class="content">
@@ -33,13 +34,13 @@
                         <div class="dropContent-section cursos">
                             <div class="row align-items-start">
                                 <div class="col" style="margin: 5px 100px 5px 10px;">
-                                    <a class="enlace" href="cursos.html">
+                                    <a class="enlace" href="cursos.php">
                                         <img src="../img/pc.png" alt="Pc" height="20px" width="20px">
                                         <span>Curso uno</span>
                                     </a>
                                 </div>
                                 <div class="col" style="margin: 5px 100px 5px 10px;">
-                                    <a class="enlace" href="cursos.html">
+                                    <a class="enlace" href="cursos.php">
                                         <img src="../img/pc.png" alt="Pc" height="20px" width="20px">
                                         <span>Curso dos</span>
                                     </a>
@@ -47,13 +48,13 @@
                             </div>
                             <div class="row align-items-start">
                                 <div class="col" style="margin: 5px 100px 5px 10px;">
-                                    <a class="enlace" href="cursos.html">
+                                    <a class="enlace" href="cursos.php">
                                         <img src="../img/pc.png" alt="Pc" height="20px" width="20px">
                                         <span>Curso tres</span>
                                     </a>
                                 </div>
                                 <div class="col" style="margin: 5px 100px 5px 10px;">
-                                    <a class="enlace" href="cursos.html">
+                                    <a class="enlace" href="cursos.php">
                                         <img src="../img/pc.png" alt="Pc" height="20px" width="20px">
                                         <span>Curso cuatro</span>
                                     </a>

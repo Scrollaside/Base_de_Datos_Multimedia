@@ -70,7 +70,7 @@ document.getElementById("registroForm").addEventListener("submit", function(even
     
     // Si ninguna validación falla, entonces no regresa y entra aqui
     if(validaciones){    
-        window.location.href = "login.html";
+        window.location.href = "login.php";
     }    
 });
 

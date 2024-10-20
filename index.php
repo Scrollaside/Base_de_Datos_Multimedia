@@ -40,7 +40,7 @@
                         <p>Calificación: 4.5/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                         <p>Calificación: 5/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
 
@@ -78,7 +78,7 @@
                         <p>Calificación: 5/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
 
@@ -109,7 +109,7 @@
                         <p>Calificación: 3.5/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
 
@@ -128,7 +128,7 @@
                         <p>Calificación: 2.5/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
 
@@ -147,7 +147,7 @@
                         <p>Calificación: 4/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
                     
@@ -178,7 +178,7 @@
                         <p>Calificación: 0/5</p>
                     </div>
                     
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                 </div>
             </div>
            
@@ -191,7 +191,7 @@
 
      <!-- EXPLORAR MAS -->
      <div class="explore-more">
-        <a href="Busqueda.html" class="explore-btn">EXPLORA MÁS</a>
+        <a href="Busqueda.php" class="explore-btn">EXPLORA MÁS</a>
     </div>
 
 

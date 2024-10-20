@@ -28,7 +28,7 @@
                         <p>Calificación: 9/10</p>
                     </div>
 
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                     <button class="curso-link" onclick="toggleCurso(1)">Deshabilitar Curso</button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                         <p>Calificación: 9.9/10</p>
                     </div>
 
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                     <button class="curso-link" onclick="toggleCurso(2)">Deshabilitar Curso</button>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <p>Calificación: -10/10</p>
                     </div>
 
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                     <button class="curso-link" onclick="toggleCurso(3)">Deshabilitar Curso</button>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <p>Calificación: 7.4/10</p>
                     </div>
 
-                    <a href="detallesCurso.html" class="curso-link">Explorar Clase</a>
+                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
                     <button class="curso-link" onclick="toggleCurso(4)">Deshabilitar Curso</button>
                 </div>
             </div>
