@@ -7,7 +7,7 @@ item.addEventListener('click', () => {
     cuadro.classList.toggle('activo');
 });
 //Muestra o oculta el cuadro del boton para los cursos
-html
+
 //Muestra o oculta los enlaces de los videos en el programa del curso
 const label = document.getElementById('tab-1');
 const cuadroVideos = document.getElementById('ul-tab-1');
