@@ -1,9 +1,7 @@
 <div class="navbar-container">
     <div class="profile">
-        <a href="perfil.php">
-            <img src="img/dummy.png" alt="Foto de Perfil" class="profile-pic">
-        </a>
-
+        <!-- <a href="perfil.php"> </a>-->
+        <img src="img/dummy.png" alt="Foto de Perfil" class="profile-pic">
         <span class="username"></span>
     </div>
     <nav>

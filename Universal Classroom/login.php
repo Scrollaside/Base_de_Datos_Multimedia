@@ -6,11 +6,8 @@
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
-
 <body>
-
     <div class="iniSesion">
-
         <h1>Iniciar Sesión</h1><br><br>
 
         <form id="loginForm">
@@ -28,6 +25,5 @@
     </div>
 
     <script src="js/login.js"></script>
-
 </body>
 </html>

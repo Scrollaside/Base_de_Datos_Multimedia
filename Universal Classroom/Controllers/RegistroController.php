@@ -1,5 +1,5 @@
 <?php
-require_once 'models/Usuario.php';
+require_once 'Models/Usuario.php';
 
 class RegistroController {
 
@@ -8,19 +8,27 @@ class RegistroController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = new Usuario();
     
-            $usuario->nombreCompleto = $_POST['nombreCompleto'];
-            $usuario->genero = $_POST['genero'] === "Masculino" ? 'M' : ($_POST['genero'] === "Femenino" ? 'F' : 'O');
-            $usuario->fechaNacimiento = $_POST['fechaNacimiento'];
-            $usuario->foto = file_get_contents($_FILES['foto']['tmp_name']); // Asegúrate de manejar el error si no se sube archivo
-            $usuario->email = $_POST['email'];
-            $usuario->contraseña = $_POST['password'];
-            $usuario->tipoUsuario = $_POST['tipoUsuario']; // Aquí deberías dejarlo como string
+            $usuario->nombreCompleto = trim($_POST['nombreCompleto']);
+            $usuario->nombreUsuario = trim($_POST['nombreUsuario']);
+            $usuario->genero = trim($_POST['genero']) === "Masculino" ? 'M' : ($_POST['genero'] === "Femenino" ? 'F' : 'O');
+            $usuario->fechaNacimiento = trim($_POST['fechaNacimiento']);
+           
+           if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+                $usuario->foto = file_get_contents($_FILES['foto']['tmp_name']);
+           } else {
+               echo "Error al subir la imagen.";
+               return;
+           }
+
+            $usuario->email = trim($_POST['email']);
+            $usuario->contraseña = trim($_POST['password']);
+            $usuario->tipoUsuario = trim($_POST['tipoUsuario']); // Aquí deberías dejarlo como string
     
             if ($usuario->registrarUsuario()) {
-                header("Location: login.php");
-                exit();
+                header("Location:login.php");
+                exit();  // Redirigir al login después de un registro exitoso
             } else {
-                echo "Error al registrar el usuario.";
+                echo "Error al registrar el usuario.";  // Mostrar un mensaje de error si falla
             }
         }
     }

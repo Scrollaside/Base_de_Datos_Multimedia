@@ -1,11 +1,6 @@
 <?php
 require_once 'controllers/RegistroController.php';
 
-// Mostrar errores para depuración
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $controller = new RegistroController();
 $controller->registrar();
 ?>
@@ -59,6 +54,7 @@ $controller->registrar();
             </select>
 
             <button type="submit">Registrarse</button>
+
         </form>
 
         <p id="errorMsg" class="error"></p>
