@@ -1,12 +1,30 @@
 CREATE DATABASE BDM;
 USE BDM;
 
+
+ALTER TABLE Usuario MODIFY COLUMN Foto MEDIUMBLOB;
+ALTER TABLE Usuario ADD NombreUsuario VARCHAR(255) NOT NULL AFTER NombreCompleto;
+
+
+SELECT * FROM Usuario;
+
+DROP TABLE ReporteUsuario;
+DROP TABLE Diploma;
+DROP TABLE Mensaje;
+DROP TABLE Comentario;
+DROP TABLE Inscripcion;
+DROP TABLE Nivel;
+DROP TABLE Curso;
+DROP TABLE Categoria;
+DROP TABLE Usuario;
+
 CREATE TABLE Usuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     NombreCompleto VARCHAR(255),
+    NombreUsuario VARCHAR(255),
     Genero CHAR,
     FechaNacimiento DATE,
-    Foto VARCHAR(255),
+    Foto MEDIUMBLOB,
     Email VARCHAR(255) UNIQUE,
     Contraseña VARCHAR(255),
     FechaRegistro DATETIME,
@@ -95,3 +113,5 @@ CREATE TABLE ReporteUsuario (
     Total FLOAT,
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID)
 );
+
+
