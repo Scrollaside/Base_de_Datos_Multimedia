@@ -1,0 +1,691 @@
+body{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+}
+
+/* Estilos para el cuadro explicativo */
+.explicacion-curso{
+    background-color: azure;
+}
+
+.explicacion-curso .cuadrado{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px 2rem;
+}
+
+.explicacion-curso .texto{
+    flex: 0 0 50%;
+    margin-right: 370px;
+}
+
+.explicacion-curso p{
+    font-size: 17px;
+}
+
+.explicacion-curso .imagen-curso{
+    margin: auto;
+    position: relative;
+}
+/* Estilos para el cuadro explicativo */
+
+/* Estilos para el contenido del curso */
+.contenido-curso{
+    background-color: rgb(240, 240, 240);
+}
+
+.contenido-curso .cursos{
+    padding: 20px 2rem 0;
+    max-width: 1080px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.contenido-curso .cursos .header{
+    margin-bottom: 18px;
+}
+
+.contenido-curso .cursos .tarjeta-curso{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contenido-curso .columna{
+    display: flex;
+    overflow: hidden;
+}
+
+.contenido-curso .cursos .tarjeta-curso .tarjeta{
+    flex: 1 1 40%;
+    box-sizing: border-box;
+}
+
+.contenido-curso .cursos .tarjeta{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 1px 8px 12px 5px;
+    border: 1px solid transparent;
+    height: auto;
+    box-shadow: 0 2px 2px -1px rgba(50, 50, 93, 25), 0 1px 3px -1px rgba(0, 0, 0, .3);
+}
+
+.contenido-curso .cursos .tarjeta:last-of-type{
+   background-color: transparent;
+   box-shadow: none;
+   border: none;
+   cursor: inherit;
+}
+
+.contenido-curso a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.contenido-curso .cursos .tarjeta-curso .imagen{
+    overflow: hidden;
+    border-radius: 6px;
+    width: 60%;
+    margin-right: 12px;
+}
+
+.contenido-curso .cursos .tarjeta-curso img{
+    width: 35%;
+}
+
+.contenido-curso .cursos .tarjeta-curso .descripcion{
+    overflow: hidden;
+    width: 80%;
+}
+/* Estilos para el contenido del curso */
+
+/* Estilos para el contenido de detalles del curso */
+.contenido-detalles{
+    background-color: rgb(255, 255, 255);
+}
+
+.contenido-detalles .contenido-detalles-main{
+    padding: 60px 2rem 0;
+    max-width: 1080px;
+    margin: 0 auto;
+    box-sizing: content-box;
+}
+
+.columna-detalles{
+    flex: 0 0 60%;
+    margin-right: 50px;
+}
+
+.columna-detalles h1{
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0 0 16px;
+}
+
+.columna-detalles h3{
+    margin: 0 0 16px;
+    color:cadetblue;
+}
+
+.columna-detalles p{
+    font-size: 22px;
+}
+
+.columna-detalles ul li{
+    font-size: 20px;
+}
+
+.estadisticas{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.valoracion{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.estadisticas .star{
+    margin-right: 8px;
+}
+
+ul.star{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style: none;
+}
+
+ul.star li{
+    margin-right: 4px;
+}
+
+.puntuacion{
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.view{
+    margin-left: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.otro{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.otro span{
+    margin-left: 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+.row .columna-detalles{
+    flex: 1;
+}
+
+.video{
+    position: relative;
+}
+
+.youtube{
+    position: relative;
+    padding-bottom: 56.23%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 0;
+    background: blueviolet;
+}
+
+.youtube .player{
+    bottom: 0;
+    display: block;
+    left: 0px;
+    margin: auto;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 16px;
+    border: none;
+    height: auto;
+    cursor: pointer;
+    transition: .4s all;
+}
+
+.youtube .play_y{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    cursor: pointer;
+    background-color: rgb(0 0 0 / 30%);
+    border-radius: 50%;
+    padding: 20px 16px 20px 24px;
+}
+
+button.ir-curso{
+    font-size: 17px;
+    color: #fff;
+    background-color: #2979FF;
+    border: 1px solid #2979FF;
+    font-weight: 600;
+    text-align: center;
+    padding: 16px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+}
+
+#a:hover{
+    background-color: #0056BF;
+    border: 1px solid #0056BF
+}
+/* Estilos para el contenido de detalles del curso */
+
+/* Estilos para el contenido de aprendizaje del curso */
+.contenido-aprender{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 50px 2rem 0;
+    box-sizing: content-box;
+}
+
+.contenido-programa-unidades{
+    flex: 0 0 60%;
+    margin-right: 50px;
+}
+
+ul.mas{
+    border: 1px solid #D2DAE8;
+    border-radius: 5px;
+    padding: 20px;
+    list-style: none;
+    font-weight: lighter;
+}
+
+ul.mas li{
+    margin-bottom: 16px;
+    display: flex;
+}
+
+ul.mas img{
+    margin: 4px 8px auto 0;
+}
+
+ul.mas h4{
+    margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+ul strong{
+    font-weight: 600;
+    font-size: 20px;
+}
+/* Estilos para el contenido de aprendizaje del curso */
+
+/* Estilos para el programa del curso */
+.contenido-programa{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 50px 2rem 0;
+    box-sizing: content-box;
+}
+
+.tab{
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+input{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.tab label{
+    display: block;
+}
+
+.tab label h4 {
+    position: relative;
+    cursor: pointer;
+    background-color: #F2F8FF;
+    padding: 16px 16px 16px 48px;
+    border-radius: 5px
+}
+
+.tab label h4:hover {
+    background-color: #d4e2f9
+}
+
+.tab input:checked~.tab-content{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.tab-videos{
+    display: flex;
+}
+
+ul.list-class{
+    margin: 0;
+}
+
+.tab-content{
+    background: 0 0;
+    overflow: hidden;
+    transition: max-height .5s;
+}
+
+ul.list-class a:first-of-type{
+    margin-top: 10px;
+}
+
+ul.list-class a:last-of-type {
+    margin-bottom: 30px
+}
+
+ul.list-class a{
+    border: 1px solid #D2DAE8;
+    border-radius: 5px;
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+ul.list-class a img{
+    margin: 7px 10px auto 0;
+}
+
+ul.list-class a:hover, .columna-detalles a:hover {
+    background-color: #F2F8FF;
+    border: 1px solid #2979FF
+}
+
+.name-class{
+    display: flex;
+}
+
+.videos-desactivado{
+    display: none;
+}
+
+.videos-activo{
+    display: flow;
+}
+/* Estilos para el programa del curso */
+
+/* Estilos para comentarios del curso */
+.contenido-comentarios{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 50px 2rem 0;
+    box-sizing: content-box;
+}
+
+.contenido-comentarios{
+    padding-top: 90px;
+}
+
+.contenido-comentarios h2{
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.cuadro-rating{
+    display: flex;
+}
+
+.rating{
+    margin: 0 30px;
+}
+
+.numero-rating{
+    font-size: 4em;
+}
+
+.fila-estrellas{
+    display: flex;
+}
+
+.columna-detalles.bar{
+    margin: auto 20px auto 0;
+}
+
+.progreso{
+    background-color: #F2F8FF;
+    border-radius: 3px;
+    height: 10px;
+}
+
+.progreso.bar{
+    background-color: #F7B500;
+}
+
+.porcentaje{
+    font-size: 14px;
+    width: 36px;
+    margin-left: 8px;
+}
+
+ul.lista-comentarios{
+    list-style: none;
+    padding-left: 0;
+    margin-top: 40px;
+}
+
+ul.lista-comentarios a{
+    text-decoration: none;
+    color: black;
+}
+
+ul.lista-comentarios > li{
+    margin-top: 30px;
+}
+
+.fila-comentario{
+    display: flex;
+}
+
+.user{
+    margin-right: 12px;
+}
+
+.fecha-comentario{
+    font-size: 13px;
+    color: #687695;
+    margin-left: 30px;
+}
+
+.informacion-comentario{
+    margin: 8px 0 0;
+}
+
+#opcion-admin{
+    background-color: #ff6e6e;
+    padding: 1px 1px 1px 1px;
+    margin-left: 340px;
+}
+
+#opcion-admin:hover{
+    background-color: #ff3d3d;
+}
+/* Estilos para comentarios del curso */
+
+/* Estilos para el fondo del modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Fijar el modal en la pantalla */
+    z-index: 1000; /* Asegurarse de que el modal esté sobre otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Agregar scroll si es necesario */
+    background: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px; /* Ancho máximo del modal */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin: 0 0 20px;
+}
+
+.modal-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.option {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.option:hover {
+    background-color: #f1f1f1;
+}
+
+.option h3 {
+    margin-top: 0;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.close {
+    color: #dc3545;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close:hover {
+    color: #c82333;
+}
+
+.modal .purchase-options {
+    margin-bottom: 20px;
+}
+
+.modal .purchase-options p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.custom-checkbox {
+    position: relative;
+    padding-left: 25px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    display: block;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 3px;
+    border: 2px solid #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.custom-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.custom-checkbox .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+#levelOptions select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    color: #333;
+}
+
+#levelOptions select:focus {
+    border-color: #28a745;
+}
+
+.modal-options {
+    margin-top: 30px;
+}
+
+.modal .option {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.modal .option h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.modal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+
+span.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+/* Estilos para el fondo del modal */

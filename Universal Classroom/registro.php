@@ -1,3 +1,15 @@
+<?php
+require_once 'controllers/RegistroController.php';
+
+// Mostrar errores para depuración
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$controller = new RegistroController();
+$controller->registrar();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +25,7 @@
 
         <h1 align="center">Registro de Usuario</h1>
 
-        <form id="registroForm">
+        <form method="POST" action="registro.php" enctype="multipart/form-data" id="registroForm">
 
             <label for="nombreCompleto">Nombre Completo:</label>
             <input type="text" id="nombreCompleto" name="nombreCompleto">
