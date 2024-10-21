@@ -1,5 +1,5 @@
 <?php
-require_once 'Controllers/database.php';
+require_once '../Controllers/database.php';
 
 class Usuario {
     private $conn;
@@ -50,27 +50,24 @@ class Usuario {
        
 
         // Llamar al procedimiento almacenado 'RegistrarUsuario'
-        $query = "CALL RegistrarUsuario(:nombreCompleto, :nombreUsuario, :genero, :fechaNacimiento, :foto, :email, :contraseña, :tipoUsuario)";
-
+        $query = "CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)";
+        
         // Preparar la consulta
         $consulta = $this->conn->prepare($query);
 
         $foto_param = $this->foto !== null ? $this->foto : null;
-              
+        //var_dump($this->nombreCompleto, $this->nombreUsuario, $this->genero, $this->fechaNacimiento, $foto_param, $this->email, $this->contraseña, $this->tipoUsuario);
         // Vincular los parámetros
-        $consulta->bindParam(':nombreCompleto', $this->nombreCompleto);
-        $consulta->bindParam(':nombreUsuario', $this->nombreUsuario);
-        $consulta->bindParam(':genero', $this->genero);
-        $consulta->bindParam(':fechaNacimiento', $this->fechaNacimiento);
-        $consulta->bindParam(':foto', $foto_param, PDO::PARAM_LOB);
-        $consulta->bindParam(':email', $this->email);
-        $consulta->bindParam(':contraseña', $this->contraseña);
-        $consulta->bindParam(':tipoUsuario', $this->tipoUsuario, PDO::PARAM_INT);
+        $consulta->bindParam(1, $this->nombreCompleto);
+        $consulta->bindParam(2, $this->nombreUsuario);
+        $consulta->bindParam(3, $this->genero);
+        $consulta->bindParam(4, $this->fechaNacimiento);
+        $consulta->bindParam(5, $foto_param, PDO::PARAM_LOB);
+        $consulta->bindParam(6, $this->email);
+        $consulta->bindParam(7, $this->contraseña);
+        $consulta->bindParam(8, $this->tipoUsuario, PDO::PARAM_INT);
 
-        if (!$consulta->execute()) {
-            $consulta->debugDumpParams(); // Esto mostrará los parámetros vinculados y los posibles errores
-        }
-        
+        //$consulta->debugDumpParams(); // Para depurar en caso de error
         
         // Ejecutar la consulta
         try {
@@ -78,7 +75,6 @@ class Usuario {
                 echo "<h2 class='Exitoso'>Se registró el usuario correctamente</h2>";
             } else {
                 echo "<h2 class='Error'>Error al ejecutar el procedimiento almacenado</h2>";
-                $consulta->debugDumpParams(); // Para depurar en caso de error
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

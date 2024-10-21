@@ -1,10 +1,3 @@
-<?php
-require_once 'controllers/RegistroController.php';
-
-$controller = new RegistroController();
-$controller->registrar();
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +13,7 @@ $controller->registrar();
 
         <h1 align="center">Registro de Usuario</h1>
 
-        <form method="POST" action="registro.php" enctype="multipart/form-data" id="registroForm">
+        <form method="POST" action="Controllers/Registro.php" enctype="multipart/form-data" id="registroForm">
 
             <label for="nombreCompleto">Nombre Completo:</label>
             <input type="text" id="nombreCompleto" name="nombreCompleto">

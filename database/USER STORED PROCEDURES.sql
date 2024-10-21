@@ -17,8 +17,8 @@ CREATE PROCEDURE RegistrarUsuario (
     IN p_tipoUsuario INT
 )
 BEGIN
-    INSERT INTO Usuario (NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Foto, Email, Contraseña, FechaRegistro, TipoUsuario, Estado)
-    VALUES (p_nombre, p_nombreUsuario, p_genero, p_fechaNacimiento, p_foto, p_email, p_contraseña, NOW(), p_tipoUsuario, true);
+    INSERT INTO Usuario (NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Foto, Email, Contraseña, FechaRegistro, FechaActualizacion, TipoUsuario, Estado)
+    VALUES (p_nombre, p_nombreUsuario, p_genero, p_fechaNacimiento, p_foto, p_email, p_contraseña, NOW(), NOW(), p_tipoUsuario, true);
 END //
 DELIMITER ;
 
