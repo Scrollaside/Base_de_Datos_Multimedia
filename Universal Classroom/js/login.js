@@ -1,11 +1,11 @@
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+document.getElementById("btn").addEventListener('click', function(event) {
     event.preventDefault();
     
     const usuario = document.getElementById("usuario").value;
     const password = document.getElementById("password").value;
 
     // Realizar la solicitud AJAX al servidor
-    fetch('Controllers/LoginController.php', {
+    fetch('Controllers/Login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,16 +16,16 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     .then(data => {
         if (data.success) {
             // Guardar en Local Storage
-            localStorage.setItem("ID_Usuario", data.ID_Usuario);
+            localStorage.setItem("ID_Usuario", data.ID);
             localStorage.setItem("Nombre_Usuario", data.Nombre_Usuario);
-            localStorage.setItem("Type_Usuario", data.Type_Usuario);
+            localStorage.setItem("Type_Usuario", data.TipoUsuario);
 
             // Redirigir según el tipo de usuario
-            if (data.Type_Usuario === 1) {
+            if (data.TipoUsuario === 1) {
                 window.location.href = "index.php";
-            } else if (data.Type_Usuario === 2) {
+            } else if (data.TipoUsuario === 2) {
                 window.location.href = "instructor.php";
-            } else if (data.Type_Usuario === 3) {
+            } else if (data.TipoUsuario === 3) {
                 window.location.href = "bloqueoDesbloqueo.php";
             }
         } else {

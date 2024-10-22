@@ -10,15 +10,14 @@
     <div class="iniSesion">
         <h1>Iniciar Sesión</h1><br><br>
 
-        <form id="loginForm">
             <label for="usuario">Usuario:</label>
             <input type="text" id="usuario" name="usuario" required><br>
 
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required><br><br><br><br>
 
-            <button type="submit">Iniciar Sesión</button>
-        </form>
+            <button id="btn" type="button">Iniciar Sesión</button>
+
 
         <p id="errorMsg" class="error"></p>
         <a href="registro.php" class="LinkRegistro">¿No tienes cuenta? Creé una.</a>

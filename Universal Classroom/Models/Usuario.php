@@ -72,9 +72,9 @@ class Usuario {
         // Ejecutar la consulta
         try {
             if ($consulta->execute()) {
-                echo "<h2 class='Exitoso'>Se registró el usuario correctamente</h2>";
+                return true;
             } else {
-                echo "<h2 class='Error'>Error al ejecutar el procedimiento almacenado</h2>";
+                return false;
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -84,11 +84,10 @@ class Usuario {
 
     public function validarLogin($nombreUsuario, $contraseña) {
         $this->obtenerConexion();
-        $query = "SELECT ID_Usuario, NombreUsuario, Contraseña, Type_Usuario FROM Usuario WHERE NombreUsuario = :nombreUsuario";
+        $query = "SELECT ID, NombreUsuario, Contraseña, TipoUsuario FROM Usuario WHERE NombreUsuario = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':nombreUsuario', $nombreUsuario);
+        $stmt->bindParam(1, $nombreUsuario);
         $stmt->execute();
-
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($usuario['Contraseña'] === $contraseña) {

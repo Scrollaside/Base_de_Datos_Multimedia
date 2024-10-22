@@ -25,10 +25,12 @@ class RegistroController {
             $usuario->tipoUsuario = trim($_POST['tipoUsuario']); // Aquí deberías dejarlo como string
     
             if ($usuario->registrarUsuario()) {
-                header("Location:login.php");
+                echo'<script language="javascript">alert("Usuario registrado correctamente.");
+                window.location.href="../login.php";</script>';
+                //header("Location:../login.php");
                 //exit();  // Redirigir al login después de un registro exitoso
             } else {
-                echo "Error al registrar el usuario.";  // Mostrar un mensaje de error si falla
+                echo'<script language="javascript">alert("Hubo un error al registrar al usuario. Intente nuevamente.");</script>';  // Mostrar un mensaje de error si falla
             }
         }
     }
