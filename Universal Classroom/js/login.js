@@ -19,7 +19,10 @@ document.getElementById("btn").addEventListener('click', function(event) {
             localStorage.setItem("ID_Usuario", data.ID);
             localStorage.setItem("Nombre_Usuario", usuario);
             localStorage.setItem("Type_Usuario", data.TipoUsuario);
-
+        
+            // Mostrar un mensaje pop-up
+            alert("Usuario registrado exitosamente.");
+        
             // Redirigir según el tipo de usuario
             if (data.TipoUsuario === 1) {
                 window.location.href = "index.php";
