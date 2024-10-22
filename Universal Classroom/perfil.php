@@ -76,10 +76,16 @@
                 if (data.success) {
                     document.getElementById('name').value = data.NombreCompleto;
                     document.getElementById('username').value = data.NombreUsuario;
-                    document.getElementById('gender').value = data.Genero;
+
+                    // Ajustar el género basado en la letra
+                    document.getElementById('gender').value = (data.Genero === 'm') ? 'masculino' : 'femenino';
+
                     document.getElementById('birth').value = data.FechaNacimiento;
                     document.getElementById('email').value = data.Email;
-                } else {
+                    document.getElementById('password').value = data.Contraseña; // Asigna la contraseña
+                    document.getElementById('confirmPassword').value = data.Contraseña; // Asigna la contraseña a confirmPassword
+                } 
+                else {
                     console.error(data.error);
                     document.getElementById('errorMsg').textContent = data.error;
                 }
