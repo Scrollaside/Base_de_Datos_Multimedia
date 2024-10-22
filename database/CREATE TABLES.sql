@@ -1,23 +1,6 @@
 CREATE DATABASE BDM;
 USE BDM;
 
-
-ALTER TABLE Usuario MODIFY COLUMN Foto MEDIUMBLOB;
-ALTER TABLE Usuario ADD NombreUsuario VARCHAR(255) NOT NULL AFTER NombreCompleto;
-
-
-SELECT * FROM Usuario;
-
-DROP TABLE ReporteUsuario;
-DROP TABLE Diploma;
-DROP TABLE Mensaje;
-DROP TABLE Comentario;
-DROP TABLE Inscripcion;
-DROP TABLE Nivel;
-DROP TABLE Curso;
-DROP TABLE Categoria;
-DROP TABLE Usuario;
-
 CREATE TABLE Usuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     NombreCompleto VARCHAR(255),
@@ -41,18 +24,24 @@ CREATE TABLE Categoria (
     FOREIGN KEY (Creador) REFERENCES Usuario(ID)
 );
 CREATE TABLE Curso (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Titulo VARCHAR(255),
-    Descripcion TEXT,
-    Costo FLOAT,
-    Header VARCHAR(255),
-    Calificacion FLOAT,
-    FechaCreacion DATETIME,
-    Instructor INT,
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Titulo VARCHAR(255) NOT NULL,
+    Descripcion TEXT NOT NULL,
     Imagen VARCHAR(255),
-    CategoriaID INT,
-    FOREIGN KEY (Instructor) REFERENCES Usuario(ID),
-    FOREIGN KEY (CategoriaID) REFERENCES Categoria(ID)
+    Costo DECIMAL(10, 2) NOT NULL,
+    CantidadNiveles INT DEFAULT 1,
+    Estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
+    PromedioCalificacion DECIMAL(3, 2) DEFAULT 0.0,
+    FechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UsuarioCreador INT NOT NULL,
+    FOREIGN KEY (UsuarioCreador) REFERENCES Usuario(ID)
+);
+CREATE TABLE CursoCategoria (
+    CursoID INT NOT NULL,
+    CategoriaID INT NOT NULL,
+    PRIMARY KEY (CursoID, CategoriaID),
+    FOREIGN KEY (CursoID) REFERENCES Curso(ID) ON DELETE CASCADE,
+    FOREIGN KEY (CategoriaID) REFERENCES Categoria(ID) ON DELETE CASCADE
 );
 CREATE TABLE Nivel (
     ID INT PRIMARY KEY AUTO_INCREMENT,
