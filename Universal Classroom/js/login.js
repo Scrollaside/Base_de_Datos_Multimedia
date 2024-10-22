@@ -17,7 +17,7 @@ document.getElementById("btn").addEventListener('click', function(event) {
         if (data.success) {
             // Guardar en Local Storage
             localStorage.setItem("ID_Usuario", data.ID);
-            localStorage.setItem("Nombre_Usuario", data.Nombre_Usuario);
+            localStorage.setItem("Nombre_Usuario", usuario);
             localStorage.setItem("Type_Usuario", data.TipoUsuario);
 
             // Redirigir según el tipo de usuario
