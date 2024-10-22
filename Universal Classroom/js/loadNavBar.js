@@ -22,7 +22,6 @@ window.addEventListener("DOMContentLoaded", function() {
 
             
             if (navFile !== 'NavBarDefault.php') {
-
                 const logoutButton = document.getElementById('loginBTN');
 
                 if (logoutButton) {
@@ -35,6 +34,20 @@ window.addEventListener("DOMContentLoaded", function() {
 
                         window.location.href = 'index.php';
                     });
+                }
+
+                // Actualizar el nombre de usuario en la barra de navegación
+                const nombreUsuario = localStorage.getItem("Nombre_Usuario");
+                
+                if (nombreUsuario) {
+                    const usernameDisplay = document.getElementById('usernameDisplay');
+                    if (usernameDisplay) {
+                        usernameDisplay.textContent = nombreUsuario; // Solo si el elemento existe
+                    } else {
+                        console.log("No se encontró el elemento con ID 'usernameDisplay'.");
+                    }
+                } else {
+                    console.log("No se encontró el nombre de usuario en el Local Storage.");
                 }
             }
         })

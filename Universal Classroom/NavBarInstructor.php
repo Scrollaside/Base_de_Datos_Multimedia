@@ -4,7 +4,7 @@
             <img src="img/bot.png" alt="Foto de Perfil" class="profile-pic">
         </a>
 
-        <span class="username">Brenda Ovalle Torres</span>
+        <span class="username" id="usernameDisplay">Brenda Ovalle Torres</span>
     </div>
     <nav>
         <ul class="menu">

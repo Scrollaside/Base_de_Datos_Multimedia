@@ -4,7 +4,7 @@
             <img src="img/admin.png" alt="Foto de Perfil" class="profile-pic">
         </a>
 
-        <span class="username">Alfonso David Marcelo Ibarra Navarro</span>
+        <span class="username" id="usernameDisplay">Alfonso David Marcelo Ibarra Navarro</span>
     </div>
     <nav>
         <ul class="menu">

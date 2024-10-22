@@ -4,7 +4,7 @@
             <img src="img/dummy.png" alt="Foto de Perfil" class="profile-pic">
         </a>
 
-        <span class="username">Daniel Uriel Max Moreno Ysiel</span>
+        <span class="username" id="usernameDisplay">Daniel Uriel Max Moreno Ysiel</span>
     </div>
     <nav>
         <ul class="menu">
