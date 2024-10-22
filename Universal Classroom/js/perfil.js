@@ -32,26 +32,7 @@ function habilitarEdicion() {
 
 // Deshabilitar edición y restaurar valores por defecto
 function cancelarEdicion() {
-    name.value = "Daniel Uriel Max Moreno Ysiel"; 
-    username.value = "Dummy";     
-    gender.value = "Masculino";    
-    birthday.value = "2024-09-16";      
-    email.value = "dani.morysi@hotmail.com"; 
-    password.value = "123+dummY";
-    confirmPassword.value = "123.dummY";
-    photo.value = "";
-    name.disabled = true;
-    username.disabled = true;
-    gender.disabled = true;
-    birthday.disabled = true;
-    email.disabled = true;
-    password.disabled = true;
-    confirmPassword.disabled = true;
-    photo.disabled = true;
-    editBtn.disabled = false;
-    saveBtn.disabled = true;
-    cancelBtn.disabled = true;
-    statusMessage.textContent = "";
+    location.reload();
 }
 
 // Guardar cambios
