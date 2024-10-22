@@ -21,7 +21,7 @@ document.getElementById("btn").addEventListener('click', function(event) {
             localStorage.setItem("Type_Usuario", data.TipoUsuario);
         
             // Mostrar un mensaje pop-up
-            alert("Usuario registrado exitosamente.");
+            alert("Inicio de Sesión exitoso.");
         
             // Redirigir según el tipo de usuario
             if (data.TipoUsuario === 1) {
