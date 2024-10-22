@@ -101,6 +101,20 @@ class Usuario {
     }
 
 
+    public function obtenerUsuarioPorID($id) {
+        $this->obtenerConexion();
+        $query = "SELECT NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Email FROM Usuario WHERE ID = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    
+        return false;
+    }
+
 
 }
 ?>
