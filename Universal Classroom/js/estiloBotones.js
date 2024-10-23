@@ -55,7 +55,7 @@ window.onclick = function(event) {
 // Acceder al curso gratis
 document.getElementById('freeAccessBtn').addEventListener('click', function() {
     // Aquí se integraría la API de pago con PayPal
-    window.location.href = "cursoCompleto.html";
+    window.location.href = "cursoCompleto.php";
 });
 
 // Pagar con tarjeta
