@@ -1,6 +1,8 @@
 CREATE DATABASE BDM;
 USE BDM;
 
+SELECT * FROM Usuario;
+
 CREATE TABLE Usuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     NombreCompleto VARCHAR(255),
@@ -13,7 +15,8 @@ CREATE TABLE Usuario (
     FechaRegistro DATETIME,
     FechaActualizacion DATETIME,
     TipoUsuario INT,
-    Estado BOOLEAN
+    Estado BOOLEAN,
+    Errores INT										-- Variable para contra los errores del usuario (TRIGGER)
 );
 CREATE TABLE Categoria (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -27,19 +30,22 @@ CREATE TABLE Curso (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Titulo VARCHAR(255) NOT NULL,
     Descripcion TEXT NOT NULL,
-    Imagen VARCHAR(255),
+    Imagen MEDIUMBLOB,    												-- Cambio de varchar a medium blob
     Costo DECIMAL(10, 2) NOT NULL,
     CantidadNiveles INT DEFAULT 1,
     Estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
     PromedioCalificacion DECIMAL(3, 2) DEFAULT 0.0,
     FechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CantidadVendidas INT DEFAULT 0,										-- Variable agregada Sumar ventas
     UsuarioCreador INT NOT NULL,
+    
     FOREIGN KEY (UsuarioCreador) REFERENCES Usuario(ID)
 );
 CREATE TABLE CursoCategoria (
     CursoID INT NOT NULL,
     CategoriaID INT NOT NULL,
     PRIMARY KEY (CursoID, CategoriaID),
+    
     FOREIGN KEY (CursoID) REFERENCES Curso(ID) ON DELETE CASCADE,
     FOREIGN KEY (CategoriaID) REFERENCES Categoria(ID) ON DELETE CASCADE
 );
@@ -47,7 +53,9 @@ CREATE TABLE Nivel (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(255),
     Descripcion TEXT,
-    Video VARCHAR(255),
+    Video VARCHAR(255) NOT NULL,
+    Documento VARCHAR(255), 											-- Variable agregada de documento
+    LinkRef VARCHAR(255),												-- Variable agregada link de referido
     CursoID INT,
     Costo FLOAT,
     FOREIGN KEY (CursoID) REFERENCES Curso(ID)
@@ -55,13 +63,15 @@ CREATE TABLE Nivel (
 CREATE TABLE Inscripcion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     UsuarioID INT,
-    CursoID INT,
+    NivelID INT,
     FechaInscripcion DATETIME,
-    Progreso FLOAT,
+    FechaAcceso DATETIME,												-- Nueva variable de la ultima fecha de acceso
     FechaFinalizacion DATETIME,
     Estado BOOLEAN,
+    MetodoPago BOOLEAN, 												-- Nueva variable tipo de pago, 0 paypal y 1 tarjeta
+    
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID),
-    FOREIGN KEY (CursoID) REFERENCES Curso(ID)
+    FOREIGN KEY (NivelID) REFERENCES Nivel(ID)						-- Cambiado la referencia de la compra del usuario
 );
 CREATE TABLE Comentario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -70,6 +80,8 @@ CREATE TABLE Comentario (
     FechaHora DATETIME,
     CursoID INT,
     UsuarioID INT,
+    Estado BOOLEAN,													-- Variable agregada para ver si el comentario esta borrado
+    
     FOREIGN KEY (CursoID) REFERENCES Curso(ID),
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID)
 );
