@@ -1,5 +1,6 @@
 <?php
 require_once '../models/Usuario.php';
+session_start();
 
 class LoginController {
     public function login() {
@@ -12,7 +13,19 @@ class LoginController {
     
             $usuario = new Usuario();
             $resultado = $usuario->validarLogin($nombreUsuario, $contraseña);
+
             if ($resultado) {
+                // Guardar en la sesión solo los datos necesarios
+                $_SESSION['ID'] = $resultado['ID'];
+                $_SESSION['NombreCompleto'] = $resultado['NombreCompleto'];
+                $_SESSION['NombreUsuario'] = $resultado['NombreUsuario'];
+                $_SESSION['Genero'] = $resultado['Genero'];
+                $_SESSION['FechaNacimiento'] = $resultado['FechaNacimiento'];
+                $_SESSION['Email'] = $resultado['Email'];
+                $_SESSION['Contraseña'] = $resultado['Contraseña'];
+                $_SESSION['TipoUsuario'] = $resultado['TipoUsuario'];
+                $_SESSION['Estado'] = $resultado['Estado'];
+
                 // Login exitoso, guarda los datos en Local Storage
                 echo json_encode([
                     'success' => true,
@@ -20,7 +33,8 @@ class LoginController {
                     'NombreUsuario' => $resultado['NombreUsuario'],
                     'TipoUsuario' => $resultado['TipoUsuario']
                 ]);
-            } else {
+            } 
+            else {
                 // Usuario no encontrado o contraseña incorrecta
                 echo json_encode(['success' => false, 'error' => 'El usuario y/o la contraseña son incorrectos.']);
             }

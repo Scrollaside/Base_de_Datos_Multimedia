@@ -84,7 +84,7 @@ class Usuario {
 
     public function validarLogin($nombreUsuario, $contraseña) {
         $this->obtenerConexion();
-        $query = "SELECT ID, NombreUsuario, Contraseña, TipoUsuario FROM Usuario WHERE NombreUsuario = ?";
+        $query = "SELECT * FROM Usuario WHERE NombreUsuario = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $nombreUsuario);
         $stmt->execute();

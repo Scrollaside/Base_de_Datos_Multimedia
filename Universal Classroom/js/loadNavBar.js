@@ -3,6 +3,9 @@ window.addEventListener("DOMContentLoaded", function() {
     let typeUsuario = localStorage.getItem('Type_Usuario'); 
     let navFile;
 
+
+
+
     // Determinar el NavBar según el valor de Type_Usuario
     if (typeUsuario === '1') {
         navFile = 'NavBarEstudiante.php';
@@ -13,6 +16,36 @@ window.addEventListener("DOMContentLoaded", function() {
     } else {
         navFile = 'NavBarDefault.php'; 
     }
+
+    fetch('./Controllers/sessionData.php')
+        .then(response => response.json())
+        .then(data => {
+            navbarContainer.innerHTML = data;
+            document.body.insertAdjacentElement('afterbegin', navbarContainer);
+
+            if (data.loggedIn) {
+                const typeUsuario = data.TipoUsuario;
+
+                // Determinar el NavBar según el valor de TipoUsuario
+                if (typeUsuario === 1) {
+                    navFile = 'NavBarEstudiante.php';
+                } else if (typeUsuario === 2) {
+                    navFile = 'NavBarInstructor.php';
+                } else if (typeUsuario === 3) {
+                    navFile = 'NavBarAdmin.php';
+                } else {
+                    navFile = 'NavBarDefault.php';
+                }
+            }
+            else{
+                navFile = 'NavBarDefault.php';
+            }
+            
+            
+        })
+        .catch(error => console.error('Error en el inicio de sesión.', error));
+
+
 
     fetch(navFile)
         .then(response => response.text())
