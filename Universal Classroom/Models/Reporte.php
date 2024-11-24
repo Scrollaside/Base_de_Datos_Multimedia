@@ -1,5 +1,5 @@
 <?php
-require_once '../Controllers/database.php';
+require_once PROJECT_ROOT . '/Controllers/database.php';
 
 class Reporte {
     private $conn;
@@ -38,9 +38,19 @@ class Reporte {
         // Vincular los parámetros
         $consulta->bindParam(1, $this->tipoUsuario);
        
-
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $userr = array(
+                    "Usuario" => $row['Usuario'],
+                    "Nombre" => $row['Nombre'],
+                    
+                );
+                array_push($userdata, $user);
+            }
+        }
         //$consulta->debugDumpParams(); // Para depurar en caso de error
-        
+        echo json_encode($userdata);
+
         // Ejecutar la consulta
         try {
             if ($consulta->execute()) {

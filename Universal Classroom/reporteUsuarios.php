@@ -13,11 +13,11 @@
     <div id="banner">
         <h1>Reporte de Usuarios</h1>
     </div>
-<form method="POST" >
+<!-- <form method="POST" > -->
     <div class="toggle-view" >
         <button onclick="toggleView()" id = "reporteToggle" action="Controllers/Reporte.php" >Reporte de Estudiantes</button>
     </div>
-</FORM>
+<!-- </FORM> -->
 
     <div class="reporteInstructores" id="reporteInstructores">
 
@@ -33,8 +33,8 @@
                     <th>Total de ganancias</th>
                 </tr>
             </thead>
-            <tbody id="tabla-ventas-generales">
-                <tr>
+            <tbody id="tabla-reporte">
+                <!-- <tr>
                     <td>Benny</td>
                     <td>Brenda Ovalle Torre</td>
                     <td>12 oct 2021</td>
@@ -61,7 +61,7 @@
                     <td>31 mar 2008</td>
                     <td>12</td>
                     <td>$12,000.00</td>
-                </tr>
+                </tr> -->
             </tbody>           
         </table>
 
@@ -84,8 +84,8 @@
                     <th>Cursos terminados (%)</th>
                 </tr>
             </thead>
-            <tbody id="tabla-detalle-ventas">
-                <tr>
+            <tbody id="tabla-reporte">
+                <!-- <tr>
                     <td>Dummy</td>
                     <td>Daniel Uriel Max Moreno Ysiel</td>
                     <td>14 sep 2020</td>
@@ -126,7 +126,7 @@
                     <td>21 may 2019</td>
                     <td>16</td>
                     <td>80</td>
-                </tr>                
+                </tr>                 -->
             </tbody>
         </table>
     </div>

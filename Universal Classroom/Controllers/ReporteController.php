@@ -1,11 +1,13 @@
 <?php
-require_once '../Models/Reporte.php';
+require_once __DIR__ .  '/../config.php';
+require_once PROJECT_ROOT .'/Models/Reporte.php';
 
 class ReporteController {
-
     public function reporte() {
-        
+        header('Content-Type: application/json');
+       
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
             $reporte = new Reporte();
             $reporte->tipoUsuario = trim($_POST['reporteToggle']); // Aquí deberías dejarlo como string
     
