@@ -1,10 +1,32 @@
+<?php
+session_start();
+require_once __DIR__ . '/config.php';
+require_once PROJECT_ROOT . '/Models/Usuario.php';
+
+// Verificar si hay sesión activa y si el ID del usuario está disponible
+$fotoPerfilSrc = 'img/admin.png'; // Imagen de perfil predeterminada
+
+if (isset($_SESSION['ID'])) {
+    $usuarioID = $_SESSION['ID'];
+    $usuario = new Usuario();
+    $foto = $usuario->obtenerFotoPorID($usuarioID);
+
+    if ($foto) {
+        // Convertir la foto en un formato que pueda ser usado en el <img> (Base64)
+        $fotoPerfilSrc = 'data:image/jpeg;base64,' . base64_encode($foto);
+    }
+}
+?>
+
 <div class="navbar-container">
     <div class="profile">
         <a href="perfil.php">
-            <img src="img/admin.png" alt="Foto de Perfil" class="profile-pic">
+            <img src="<?php echo $fotoPerfilSrc; ?>" alt="Foto de Perfil" class="profile-pic">
         </a>
 
-        <span class="username" id="usernameDisplay">Alfonso David Marcelo Ibarra Navarro</span>
+        <span class="username" id="usernameDisplay">
+            <?php echo $_SESSION['NombreUsuario'] ?? 'Usuario'; ?>
+        </span>
     </div>
     <nav>
         <ul class="menu">

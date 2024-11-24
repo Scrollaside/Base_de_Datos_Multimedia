@@ -84,7 +84,7 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE ActualizarCalificacionCurso (
+CREATE PROCEDURE ActualizarCalificacionCurso (				-- Checar storage procedure
     IN p_cursoID INT
 )
 BEGIN

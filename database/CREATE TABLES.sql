@@ -14,7 +14,7 @@ CREATE TABLE Usuario (
     FechaActualizacion DATETIME,
     TipoUsuario INT,
     Estado BOOLEAN,
-    Errores INT										-- Variable para contra los errores del usuario (TRIGGER)
+    Errores INT DEFAULT 0										-- Variable para contra los errores del usuario (TRIGGER)
 );
 CREATE TABLE Categoria (
     ID INT PRIMARY KEY AUTO_INCREMENT,

@@ -1,5 +1,6 @@
 <?php
-require_once '../Controllers/database.php';
+require_once PROJECT_ROOT . '/Controllers/database.php';
+
 
 class Usuario {
     private $conn;
@@ -113,6 +114,21 @@ class Usuario {
         }
     
         return false;
+    }
+
+    public function obtenerFotoPorID($id) {
+        $this->obtenerConexion();
+        $query = "SELECT Foto FROM Usuario WHERE ID = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            $foto = $stmt->fetch(PDO::FETCH_ASSOC)['Foto'];
+            return $foto; 
+        }
+    
+        return null;
     }
 
 
