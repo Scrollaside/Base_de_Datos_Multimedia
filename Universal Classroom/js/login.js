@@ -15,20 +15,16 @@ document.getElementById("btn").addEventListener('click', function(event) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Guardar en Local Storage
-            localStorage.setItem("ID_Usuario", data.ID);
-            localStorage.setItem("Nombre_Usuario", usuario);
-            localStorage.setItem("Type_Usuario", data.TipoUsuario);
         
             // Mostrar un mensaje pop-up
             alert("Inicio de Sesión exitoso.");
         
             // Redirigir según el tipo de usuario
-            if (data.TipoUsuario === 1) {
+            if (data.TipoUsuario == 1) {
                 window.location.href = "index.php";
-            } else if (data.TipoUsuario === 2) {
+            } else if (data.TipoUsuario == 2) {
                 window.location.href = "instructor.php";
-            } else if (data.TipoUsuario === 3) {
+            } else if (data.TipoUsuario == 3) {
                 window.location.href = "bloqueoDesbloqueo.php";
             }
         } else {

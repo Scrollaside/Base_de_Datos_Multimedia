@@ -48,8 +48,7 @@ window.addEventListener("DOMContentLoaded", function() {
                             .then(response => {
                                 if (response.ok) {
                                     console.log("Sesión cerrada exitosamente");
-                                    // Recargar la barra de navegación después de cerrar sesión
-                                    window.location.reload();
+                                    window.location.href = "index.php";
                                 } else {
                                     console.error("Error al cerrar sesión.");
                                 }
