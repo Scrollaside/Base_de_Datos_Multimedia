@@ -131,6 +131,33 @@ class Usuario {
         return null;
     }
 
+    public function actualizarUsuarioPorID($id, $nombreCompleto, $nombreUsuario, $genero, $fechaNacimiento, $email, $contraseña, $foto = null) {
+        $this->obtenerConexion();
+        $query = "UPDATE Usuario SET NombreCompleto = ?, NombreUsuario = ?, Genero = ?, FechaNacimiento = ?, Email = ?, Contraseña = ?, FechaActualizacion = NOW()";
+        if ($foto) {
+            $query .= ", Foto = ?";
+        }
+        $query .= " WHERE ID = ?";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $nombreCompleto, PDO::PARAM_STR);
+        $stmt->bindParam(2, $nombreUsuario, PDO::PARAM_STR);
+        $stmt->bindParam(3, $genero, PDO::PARAM_STR);
+        $stmt->bindParam(4, $fechaNacimiento, PDO::PARAM_STR);
+        $stmt->bindParam(5, $email, PDO::PARAM_STR);
+        $stmt->bindParam(6, $contraseña, PDO::PARAM_STR);
+        
+        if ($foto) {
+            $stmt->bindParam(7, $foto, PDO::PARAM_LOB);
+            $stmt->bindParam(8, $id, PDO::PARAM_INT);
+        } else {
+            $stmt->bindParam(7, $id, PDO::PARAM_INT);
+        }
+    
+        return $stmt->execute();
+    }
+    
+
 
 }
 ?>

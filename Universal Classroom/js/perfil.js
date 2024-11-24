@@ -98,24 +98,53 @@ function guardarCambios() {
 
     
     // Si ninguna validación falla, entonces no regresa y entra aqui
-    if(validaciones){    
-        //window.location.href = "login.html";
-    }    
+    if (validaciones) {
+        const formData = new FormData();
+        const usuarioID = document.getElementById("profileForm").getAttribute("data-usuario-id");
+        formData.append("id", usuarioID);
+        formData.append("nombreCompleto", name.value);
+        formData.append("nombreUsuario", username.value);
+        formData.append("genero", gender.value);
+        formData.append("fechaNacimiento", birthday.value);
+        formData.append("email", email.value);
+        formData.append("contraseña", password.value);
+        formData.append("confirmarContraseña", confirmPassword.value);
+        
+        // Si hay una nueva foto seleccionada
+        if (photo.files[0]) {
+            formData.append("foto", photo.files[0]);
+        }
+
+        fetch("perfil.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                statusMessage.textContent = "Información guardada correctamente.";
+                // Deshabilita los campos nuevamente después de guardar
+                name.disabled = true;
+                username.disabled = true;
+                gender.disabled = true;
+                birthday.disabled = true;
+                email.disabled = true;
+                password.disabled = true;
+                confirmPassword.disabled = true;
+                photo.disabled = true;
+                editBtn.disabled = false;
+                saveBtn.disabled = true;
+                cancelBtn.disabled = true;
+            } else {
+                statusMessage.textContent = "Error al guardar los cambios: " + data.message;
+            }
+        })
+        .catch(error => {
+            statusMessage.textContent = "Error de red: " + error.message;
+        });
+    } 
 
     
-
-    statusMessage.textContent = "Información guardada correctamente.";
-    name.disabled = true;
-    username.disabled = true;
-    gender.disabled = true;
-    birthday.disabled = true;
-    email.disabled = true;
-    password.disabled = true;
-    confirmPassword.disabled = true;
-    photo.disabled = true;
-    editBtn.disabled = false;
-    saveBtn.disabled = true;
-    cancelBtn.disabled = true;
 }
 
 // Eventos de los botones

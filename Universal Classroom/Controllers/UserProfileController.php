@@ -1,5 +1,5 @@
 <?php
-require_once '../models/Usuario.php';
+require_once PROJECT_ROOT . '/Models/Usuario.php';
 
 class UserProfileController {
     public function obtenerPerfil() {
