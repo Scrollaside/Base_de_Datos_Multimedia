@@ -109,16 +109,6 @@ BEGIN
 END //
 DELIMITER ;
 DELIMITER //
-CREATE PROCEDURE ReporteUsuariosPorTipo (
-    IN p_tipoUsuario ENUM('Instructor', 'Estudiante')
-)
-BEGIN
-    SELECT ID, NombreCompleto, Email, FechaRegistro
-    FROM Usuario
-    WHERE TipoUsuario = p_tipoUsuario;
-END //
-DELIMITER ;
-DELIMITER //
 CREATE PROCEDURE ActualizarUsuario (
     IN p_usuarioID INT,
     IN p_nombre VARCHAR(255),
@@ -210,3 +200,15 @@ BEGIN
     ORDER BY FechaCreacion DESC;
 END //
 DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE ReporteUsuarios (
+    IN p_tipoUsuario INT
+)
+BEGIN
+    SELECT NombreUsuario, NombreCompleto, FechaRegistro, CursosTotal, Total
+    FROM Usuario, ReporteUsuario
+    WHERE TipoUsuario = p_tipoUsuario AND Usuario.ID = UsuarioID;
+END //
+DELIMITER ;
+
+CALL ReporteUsuarios(2)

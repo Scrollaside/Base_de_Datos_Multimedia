@@ -1,6 +1,6 @@
 
-document.getElementById("registroForm").addEventListener("submit", function(event) {
-    
+document.getElementById("registroForm").addEventListener("submit", function (event) {
+
     event.preventDefault();
 
     const nombreCompleto = document.getElementById("nombreCompleto").value;
@@ -67,12 +67,12 @@ document.getElementById("registroForm").addEventListener("submit", function(even
         return;
     }
 
-    
+
     // Si ninguna validación falla, entonces no regresa y entra aqui
-    if(validaciones){    
+    if (validaciones) {
         console.log("Validaciones correctas, enviando el formulario.");
         this.submit();
-    }    
+    }
 });
 
 document.getElementById("fechaNacimiento").setAttribute("max", new Date().toISOString().split("T")[0]);
