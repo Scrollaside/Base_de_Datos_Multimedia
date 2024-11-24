@@ -13,7 +13,7 @@
             <li><a href="Mensajes.php">Mensajes</a></li>
             <li><a href="Kardex.php">Kárdex</a></li>
             <li><a href="certificado.php">Diplomas</a></li>
-            <a href="login.php" id="loginBTN"><button>Cerrar Sesión</button></a>
+            <a href="index.php" id="loginBTN"><button>Cerrar Sesión</button></a>
         </ul>
     </nav>
 </div>

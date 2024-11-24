@@ -13,7 +13,7 @@
             <li><a href="Mensajes.php">Mensajes</a></li>
             <li><a href="crear.php">Crear curso</a></li>
             <li><a href="ventasInstructor.php">Reportes de Ventas</a></li>
-            <a href="login.php" id="loginBTN"><button>Cerrar Sesión</button></a>
+            <a href="index.php" id="loginBTN"><button>Cerrar Sesión</button></a>
         </ul>
     </nav>
 </div>

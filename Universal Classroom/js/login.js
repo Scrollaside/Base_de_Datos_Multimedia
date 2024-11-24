@@ -5,7 +5,7 @@ document.getElementById("btn").addEventListener('click', function(event) {
     const password = document.getElementById("password").value;
 
     // Realizar la solicitud AJAX al servidor
-    fetch('Controllers/Login.php', {
+    fetch('./Controllers/Login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

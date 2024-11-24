@@ -1,86 +1,72 @@
 window.addEventListener("DOMContentLoaded", function() {
     const navbarContainer = document.createElement('div');
-    let typeUsuario = localStorage.getItem('Type_Usuario'); 
     let navFile;
+    let globalSessionData;  
 
-
-
-
-    // Determinar el NavBar según el valor de Type_Usuario
-    if (typeUsuario === '1') {
-        navFile = 'NavBarEstudiante.php';
-    } else if (typeUsuario === '2') {
-        navFile = 'NavBarInstructor.php';
-    } else if (typeUsuario === '3') {
-        navFile = 'NavBarAdmin.php';
-    } else {
-        navFile = 'NavBarDefault.php'; 
-    }
-
+    
     fetch('./Controllers/sessionData.php')
         .then(response => response.json())
-        .then(data => {
-            navbarContainer.innerHTML = data;
-            document.body.insertAdjacentElement('afterbegin', navbarContainer);
+        .then(sessionData => {
+            globalSessionData = sessionData;
 
-            if (data.loggedIn) {
-                const typeUsuario = data.TipoUsuario;
+            if (sessionData.error) {
+                navFile = 'NavBarDefault.php';
+                console.log("No hay sesión activa, cargando NavBarDefault.php");
+            } else {
+                console.log("Sesión activa encontrada, cargando NavBar según tipo de usuario");
 
-                // Determinar el NavBar según el valor de TipoUsuario
-                if (typeUsuario === 1) {
+                // Determinar el NavBar según el TipoUsuario de la sesión
+                const typeUsuario = sessionData.TipoUsuario;
+                if (typeUsuario == 1) {
                     navFile = 'NavBarEstudiante.php';
-                } else if (typeUsuario === 2) {
+                } else if (typeUsuario == 2) {
                     navFile = 'NavBarInstructor.php';
-                } else if (typeUsuario === 3) {
+                } else if (typeUsuario == 3) {
                     navFile = 'NavBarAdmin.php';
                 } else {
                     navFile = 'NavBarDefault.php';
                 }
+
             }
-            else{
-                navFile = 'NavBarDefault.php';
-            }
-            
-            
+
+            // Cargar el archivo de navegación correspondiente
+            return fetch(navFile);
         })
-        .catch(error => console.error('Error en el inicio de sesión.', error));
-
-
-
-    fetch(navFile)
         .then(response => response.text())
         .then(data => {
             navbarContainer.innerHTML = data;
             document.body.insertAdjacentElement('afterbegin', navbarContainer);
+            console.log("Navbar cargado:", navFile);
 
-            
-            if (navFile !== 'NavBarDefault.php') {
+            if (!globalSessionData.error) {
                 const logoutButton = document.getElementById('loginBTN');
-
                 if (logoutButton) {
                     logoutButton.addEventListener('click', function(event) {
-                        event.preventDefault(); 
+                        event.preventDefault();
                         
-                        localStorage.removeItem('ID_Usuario');
-                        localStorage.removeItem('Nombre_Usuario');
-                        localStorage.removeItem('Type_Usuario');
-
-                        window.location.href = 'index.php';
+                        fetch('./Controllers/logout.php')
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log("Sesión cerrada exitosamente");
+                                    // Recargar la barra de navegación después de cerrar sesión
+                                    window.location.reload();
+                                } else {
+                                    console.error("Error al cerrar sesión.");
+                                }
+                            })
+                            .catch(error => console.error('Error al cerrar sesión:', error));
                     });
                 }
+            }
 
-                // Actualizar el nombre de usuario en la barra de navegación
-                const nombreUsuario = localStorage.getItem("Nombre_Usuario");
-                
-                if (nombreUsuario) {
-                    const usernameDisplay = document.getElementById('usernameDisplay');
-                    if (usernameDisplay) {
-                        usernameDisplay.textContent = nombreUsuario; // Solo si el elemento existe
-                    } else {
-                        console.log("No se encontró el elemento con ID 'usernameDisplay'.");
-                    }
+            // Actualizar el nombre de usuario en la barra de navegación si existe
+            if (globalSessionData && globalSessionData.NombreUsuario) {
+                const usernameDisplay = document.getElementById('usernameDisplay');
+                if (usernameDisplay) {
+                    usernameDisplay.textContent = globalSessionData.NombreUsuario;
+                    console.log("Nombre de usuario actualizado:", globalSessionData.NombreUsuario);
                 } else {
-                    console.log("No se encontró el nombre de usuario en el Local Storage.");
+                    console.log("No se encontró el elemento con ID 'usernameDisplay'.");
                 }
             }
         })
