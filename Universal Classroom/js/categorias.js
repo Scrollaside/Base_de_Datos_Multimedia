@@ -1,36 +1,54 @@
-const categorias = [
-    // {
-    //     nombre: "Programación",
-    //     descripcion: "Cursos relacionados con el desarrollo de software",
-    //     admin: "Alfonso David Marcelo Ibarra Navarro",
-    //     fecha: "15 sept 2024, 10:00"
-    // },
-    // {
-    //     nombre: "Modelado",
-    //     descripcion: "Técnica de crear una imagen digital tridimensional de un objeto mediante un software CAD.",
-    //     admin: "Alfonso David Marcelo Ibarra Navarro",
-    //     fecha: "15 sept 2024, 12:10"
-    // },
-    // {
-    //     nombre: "Web",
-    //     descripcion: "Red informática.",
-    //     admin: "Alfonso David Marcelo Ibarra Navarro",
-    //     fecha: "12 octu 2022, 14:45"
-    // },
-    // {
-    //     nombre: "Dibujo",
-    //     descripcion: "Forma de expresión artística que consiste en crear imágenes sobre una superficie plana mediante líneas, trazos y formas.",
-    //     admin: "Alfonso David Marcelo Ibarra Navarro",
-    //     fecha: "21 abri 2021, 21:01"
-    // },
-    // {
-    //     nombre: "Marketing",
-    //     descripcion: "Conjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.",
-    //     admin: "Alfonso David Marcelo Ibarra Navarro",
-    //     fecha: "04 juni 2018, 11:11"
-    // }
-];
+// const categorias = [
+//     {
+//         nombre: "Programación",
+//         descripcion: "Cursos relacionados con el desarrollo de software",
+//         admin: "Alfonso David Marcelo Ibarra Navarro",
+//         fecha: "15 sept 2024, 10:00"
+//     },
+//     {
+//         nombre: "Modelado",
+//         descripcion: "Técnica de crear una imagen digital tridimensional de un objeto mediante un software CAD.",
+//         admin: "Alfonso David Marcelo Ibarra Navarro",
+//         fecha: "15 sept 2024, 12:10"
+//     },
+//     {
+//         nombre: "Web",
+//         descripcion: "Red informática.",
+//         admin: "Alfonso David Marcelo Ibarra Navarro",
+//         fecha: "12 octu 2022, 14:45"
+//     },
+//     {
+//         nombre: "Dibujo",
+//         descripcion: "Forma de expresión artística que consiste en crear imágenes sobre una superficie plana mediante líneas, trazos y formas.",
+//         admin: "Alfonso David Marcelo Ibarra Navarro",
+//         fecha: "21 abri 2021, 21:01"
+//     },
+//     {
+//         nombre: "Marketing",
+//         descripcion: "Conjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.",
+//         admin: "Alfonso David Marcelo Ibarra Navarro",
+//         fecha: "04 juni 2018, 11:11"
+//     }
+// ];
+class Categorie {
+    constructor(nombre, descripcion, creador, creacion) {
+        this.Nombre = nombre;
+        this.Descripcion = descripcion;
+        this.Creador = creador;
+        this.Creacion = creacion; 
+    }
 
+    get catelist() {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${this.Nombre}</td>
+            <td>${this.Descripcion}</td>
+            <td>${this.Creador}</td>
+            <td>${this.Creacion}</td>
+        `;
+        return row;
+    }
+}
 
 let editando = false;
 let indiceCategoriaEditar = -1;
@@ -86,25 +104,76 @@ function agregarCategoria() {
     mostrarCategorias();
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    mostrarCategorias(); // Cargar las categorías al inicio
+});
 
-function mostrarCategorias() {
-    const tabla = document.getElementById('tablaCategorias');
-    tabla.innerHTML = '';
-
-    categorias.forEach((categoria, index) => {
-
-        const fila = `
-            <tr>
-                <td>${categoria.nombre}</td>
-                <td>${categoria.descripcion}</td>
-                <td>${categoria.admin}</td>
-                <td>${categoria.fecha}</td>
-                <td><button onclick="editarCategoria(${index})">Editar</button></td>
-                <td><button onclick="eliminarCategoria(${index})">Eliminar</button></td>
-            </tr>
-        `;
-        tabla.innerHTML += fila; 
+function getTableBody() {
+    return document.getElementById("tablaCategorias");
+}
+let userdata = [];
+function listarUsuarios() {
+    const tableBody = getTableBody();
+    tableBody.innerHTML = "";
+    catdata.forEach((cat) => {
+        tableBody.appendChild(cat.catelist);
     });
+}
+
+async function mostrarCategorias() {
+    let response = await fetch("./Controllers/Categoria.php", {
+      // action: 'listar',
+        headers: { "Content-Type": "application/json" },
+      
+    });
+  //  const userType = localStorage.setItem('Text', document.getElementById("reporteToggle").textContent)
+    let responseJSON = await response.json();
+    catdata = []; // Limpia datos anteriores
+
+    if (Array.isArray(responseJSON)) {
+        responseJSON.forEach((r) => {
+            let newCat = new Categorie(
+                r.Nombre,
+                r.Descripcion,
+                r.Creador,
+                r.Creacion 
+            );
+            catdata.push(newCat);
+        });
+        listarUsuarios();
+    } else {
+        console.error(responseJSON.error || "Error desconocido.");
+    }
+// } catch (error) {
+//     console.error("Error al obtener datos:", error);
+// }
+    // try {
+    //     // Llamada al backend para obtener categorías
+    //     const response = await fetch("./Controllers/categoria.php?action=listar");
+    //     const categorias = await response.json(); // Parsear respuesta JSON
+
+    //     if (response.ok) {
+    //         const tabla = document.getElementById('tablaCategorias');
+    //         tabla.innerHTML = ''; // Limpiar tabla antes de llenarla
+
+    //         // Llenar la tabla con los datos obtenidos
+    //         categorias.forEach((categoria) => {
+    //             const fila = `
+    //                 <tr>
+    //                     <td>${categoria.Nombre}</td>
+    //                     <td>${categoria.Descripcion}</td>
+    //                     <td>${categoria.Creador}</td>
+    //                     <td>${categoria.Creacion}</td>
+    //                 </tr>
+    //             `;
+    //             tabla.innerHTML += fila;
+    //         });
+    //     } else {
+    //         console.error("Error al obtener datos: ", categorias.error || "Error desconocido");
+    //     }
+    // } catch (error) {
+    //     console.error("Error al conectar con el servidor:", error);
+    // }
 }
 
 

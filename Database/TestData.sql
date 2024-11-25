@@ -31,7 +31,7 @@ VALUES ('Web', 'Red informática.', 1, NOW()) ;
 INSERT INTO Categoria (Nombre, Descripcion, Creador, Creacion)
 VALUES ('Dibujo', 'Forma de expresión artística que consiste en crear imágenes sobre una superficie plana mediante líneas, trazos y formas.', 1, NOW()) ;
 INSERT INTO Categoria (Nombre, Descripcion, Creador, Creacion)
-VALUES ('Marketing', 'onjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.', 1, NOW()) ;
+VALUES ('Marketing', 'Conjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.', 1, NOW()) ;
 
 SELECT * FROM Categoria;
 

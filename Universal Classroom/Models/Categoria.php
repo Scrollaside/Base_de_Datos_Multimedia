@@ -1,5 +1,5 @@
 <?php
-require_once '../Controllers/database.php';
+require_once PROJECT_ROOT . '../Controllers/database.php';
 
 class Categoria {
     private $conn;
@@ -67,19 +67,13 @@ class Categoria {
 
     public function ListarCategorias() {
         $this->obtenerConexion();
-        
-        // Validar el tipo de usuario
-      
-        // Llamar al procedimiento almacenado
-        $query = "SELECT * FROM VistaCategorias";
+        $query = "SELECT * FROM VistaCategorias"; // Vista que contiene las categorías
         $consulta = $this->conn->prepare($query);
-        $consulta->bindParam(1, $tipo, PDO::PARAM_INT);
-
+    
         try {
             $consulta->execute();
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
-            // Verificar si hay resultados
+    
             if (count($resultado) > 0) {
                 echo json_encode($resultado); // Retorna datos como JSON
             } else {
@@ -89,6 +83,7 @@ class Categoria {
             echo json_encode(["error" => $e->getMessage()]);
         }
     }
+    
     public function obtenerCategoriaporID($id) {
         $this->obtenerConexion();
         $query = "SELECT Nombre, Descripcion FROM Categoria WHERE ID = ?";

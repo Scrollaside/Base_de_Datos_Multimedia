@@ -62,7 +62,7 @@ async function obtenerDB() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ reporteToggle: document.getElementById("reporteToggle").textContent }),
         });
-        const userType = localStorage.setItem('Text', document.getElementById("reporteToggle").textContent)
+      //  const userType = localStorage.setItem('Text', document.getElementById("reporteToggle").textContent)
         let responseJSON = await response.json();
         userdata = []; // Limpia datos anteriores
 
