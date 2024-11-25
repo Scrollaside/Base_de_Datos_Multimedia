@@ -8,80 +8,80 @@ function toggleView() {
         reporteInstructores.style.display = 'block';
         reporteEstudiantes.style.display = 'none';
         toggleButton.textContent = 'Reporte de Estudiantes';
+       // const userType = localStorage.setItem('Type', 1);
+
     } else {
         reporteInstructores.style.display = 'none';
         reporteEstudiantes.style.display = 'block';
         toggleButton.textContent = 'Reporte de Instructores';
+        //const userType = localStorage.setItem('Type', 2);
     }
 }
 
-
 class Report {
-    constructor(Usuario, Nombre) {
-        this.Usuario = Usuario;
-        this.Nombre = Nombre;
-       
+    constructor(usuario, nombre, ingreso, cursos, total) {
+        this.Usuario = usuario;
+        this.Nombre = nombre;
+        this.Ingreso = ingreso;
+        this.Cursos = cursos;
+        this.Total = total; // Puede ser ganancias o porcentaje
     }
 
     get descripcion() {
         let row = document.createElement("tr");
-        row.innerHTML = `    
-          <tr>
-              <td>${this.Usuario}</td>
-              <td>${this.Nombre}</td>
-            
-          </tr>   
-      `;
+        row.innerHTML = `
+            <td>${this.Usuario}</td>
+            <td>${this.Nombre}</td>
+            <td>${this.Ingreso}</td>
+            <td>${this.Cursos}</td>
+            <td>${this.Total}</td>
+        `;
         return row;
     }
 }
 
 let tableBody = document.getElementById("tabla-reporte");
-let userdata = []; 
+let userdata = [];
 
 function listarUsuarios() {
     tableBody.innerHTML = "";
-    // console.log(playerdataTT);
-    userdata.forEach((userdata) => {
-        tableBody.appendChild(userdata.descripcion);
+    userdata.forEach((user) => {
+        tableBody.appendChild(user.descripcion);
     });
 }
 
-
 async function obtenerDB() {
-    {
-        let response = await fetch("./Controllers/Reporte.php");
-        // if (!response.ok) {
-        //     throw new Error(`HTTP error! Status: ${response.status}`);
-        // }
-
+    // try {
+        let response = await fetch("./Controllers/Reporte.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reporteToggle: document.getElementById("reporteToggle").textContent }),
+        });
+        const userType = localStorage.setItem('Text', document.getElementById("reporteToggle").textContent)
         let responseJSON = await response.json();
-        console.log(responseJSON)
+        userdata = []; // Limpia datos anteriores
 
-        // Procesar datos del modo historia
-        if (responseJSON.storyMode && Array.isArray(responseJSON.storyMode)) {
-            responseJSON.storyMode.forEach((r) => {
-                let newUserData = new Report(r.Usuario, r.Nombre);
-                userdata.push(newUserData);
+        if (Array.isArray(responseJSON)) {
+            responseJSON.forEach((r) => {
+                let newUser = new Report(
+                    r.Usuario,
+                    r.Nombre,
+                    r.Ingreso,
+                    r.Cursos,
+                    r.Total 
+                );
+                userdata.push(newUser);
             });
-            listarUsuarios(); // Listar jugadores en la tabla de historia
+            listarUsuarios();
+        } else {
+            console.error(responseJSON.error || "Error desconocido.");
         }
-
-        // Procesar datos del modo contrarreloj
-        if (responseJSON.timeTrial && Array.isArray(responseJSON.timeTrial)) {
-            responseJSON.timeTrial.forEach((p) => {
-                let newPlayerData = new TimeTrial(p.Posicion, p.Jugador, p.Tiempo);
-                playerdataTT.push(newPlayerData);
-            });
-            listarJugadoresTT(); // Listar jugadores en la tabla de contrarreloj
-        }
-    } 
+    // } catch (error) {
+    //     console.error("Error al obtener datos:", error);
+    // }
 }
 
-
-
-
-obtenerDB();
+document.getElementById("reporteToggle").addEventListener("click", obtenerDB);
 
 
 // document.addEventListener("DOMContentLoaded", function () {

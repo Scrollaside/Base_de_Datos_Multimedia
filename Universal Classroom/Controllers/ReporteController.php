@@ -1,26 +1,26 @@
 <?php
-require_once __DIR__ .  '/../config.php';
-require_once PROJECT_ROOT .'/Models/Reporte.php';
-
+require_once __DIR__ . '/../config.php';
+require_once PROJECT_ROOT . '/Models/Reporte.php';
 class ReporteController {
     public function reporte() {
         header('Content-Type: application/json');
-       
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-            $reporte = new Reporte();
-            $reporte->tipoUsuario = trim($_POST['reporteToggle']); // Aquí deberías dejarlo como string
-    
-            if ($usuario->ObtenerReporte()) {
-                echo'<script language="javascript">alert("Reporte obtenido correctamente.");
-                window.location.href="../login.php";</script>';
-                //header("Location:../login.php");
-                //exit();  // Redirigir al login después de un registro exitoso
+            // Leer el cuerpo de la solicitud
+            $input = file_get_contents("php://input");
+            $data = json_decode($input, true); // Decodificar JSON como arreglo asociativo
+
+            if (isset($data['reporteToggle'])) {
+                $reporte = new Reporte();
+                $reporte->tipoUsuario = trim($data['reporteToggle']); // Recibe el tipo de usuario
+                $reporte->ObtenerReporte(); // Ejecuta el reporte y retorna el JSON
             } else {
-                echo'<script language="javascript">alert("Hubo un error al obtener el reporte. Intente nuevamente.");</script>';  // Mostrar un mensaje de error si falla
+                echo json_encode(["error" => "El campo 'reporteToggle' no fue enviado."]);
             }
+        } else {
+            echo json_encode(["error" => "Método no permitido."]);
         }
     }
-    
 }
+
 ?>

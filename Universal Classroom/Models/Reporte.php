@@ -3,14 +3,13 @@ require_once PROJECT_ROOT . '/Controllers/database.php';
 
 class Reporte {
     private $conn;
-    
     public $tipoUsuario;
-    // public $Usuario;
+  // public $Usuario;
     // public $Nombre;
     // public $FechaRegistro;
     // public $CantidadCursos;
     // public $Total;
-
+    
     public function obtenerConexion() {
         $database = new db();
         $this->conn = $database->conectar();
@@ -18,67 +17,36 @@ class Reporte {
 
     public function ObtenerReporte() {
         $this->obtenerConexion();
-
-        if ($this->tipoUsuario === 'Reporte de Estudiantes') {
-            $this->tipoUsuario = 1;
-        } elseif ($this->tipoUsuario === 'Reporte de Instructores') {
-            $this->tipoUsuario = 2;
-        } else {
-            echo "<h2 class='Error'>Tipo de usuario inválido.</h2>";
-            return false;
-        }
-
-        // Llamar al procedimiento almacenado 'RegistrarUsuario'
-        $query = "CALL ReporteUsuarios(?)";
         
-        // Preparar la consulta
-        $consulta = $this->conn->prepare($query);
-
-        //var_dump($this->nombreCompleto, $this->nombreUsuario, $this->genero, $this->fechaNacimiento, $foto_param, $this->email, $this->contraseña, $this->tipoUsuario);
-        // Vincular los parámetros
-        $consulta->bindParam(1, $this->tipoUsuario);
-       
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $userr = array(
-                    "Usuario" => $row['Usuario'],
-                    "Nombre" => $row['Nombre'],
-                    
-                );
-                array_push($userdata, $user);
-            }
+        // Validar el tipo de usuario
+        if ($this->tipoUsuario === 'Reporte de Instructores') {
+            $tipo = 1;
+          
+        } elseif ($this->tipoUsuario === 'Reporte de Estudiantes') {
+            $tipo = 2;
+        } else {
+            echo json_encode(["error" => "Tipo de usuario inválido"]);
+            return;
         }
-        //$consulta->debugDumpParams(); // Para depurar en caso de error
-        echo json_encode($userdata);
 
-        // Ejecutar la consulta
+        // Llamar al procedimiento almacenado
+        $query = "CALL ReporteUsuarios(?)";
+        $consulta = $this->conn->prepare($query);
+        $consulta->bindParam(1, $tipo, PDO::PARAM_INT);
+
         try {
-            if ($consulta->execute()) {
-                return true;
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            // Verificar si hay resultados
+            if (count($resultado) > 0) {
+                echo json_encode($resultado); // Retorna datos como JSON
             } else {
-                return false;
+                echo json_encode(["error" => "No se encontraron resultados."]);
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo json_encode(["error" => $e->getMessage()]);
         }
-        
     }
-
-
-    // public function obtenerUsuarioPorID($id) {
-    //     $this->obtenerConexion();
-    //     $query = "SELECT NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Email, Contraseña FROM Usuario WHERE ID = ?";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->bindParam(1, $id);
-    //     $stmt->execute();
-    
-    //     if ($stmt->rowCount() > 0) {
-    //         return $stmt->fetch(PDO::FETCH_ASSOC);
-    //     }
-    
-    //     return false;
-    // }
-
-
 }
 ?>
