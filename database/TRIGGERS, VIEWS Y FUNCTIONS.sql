@@ -1,29 +1,84 @@
+DROP VIEW IF EXISTS View_MejoresCalificados;
+DROP VIEW IF EXISTS View_MasVendidos;
+DROP VIEW IF EXISTS View_MasRecientes;
 
+SELECT * FROM View_MejoresCalificados;
+SELECT * FROM View_MasVendidos;
+SELECT * FROM View_MasRecientes;
 
 -- VIEW 1 PARA CURSOS MEJOR CALIFICADOS
 CREATE VIEW View_MejoresCalificados AS
-SELECT ID, Titulo, Descripcion, Imagen, PromedioCalificacion
-FROM Curso
-WHERE Estado = 'Activo'
-ORDER BY PromedioCalificacion DESC
+SELECT 
+    Curso.ID,
+    Curso.Titulo,
+    Curso.Descripcion,
+    Curso.Imagen,
+    GROUP_CONCAT(Categoria.Nombre SEPARATOR ', ') AS Categorias,
+    Curso.PromedioCalificacion
+FROM 
+    Curso
+JOIN 
+    CursoCategoria ON Curso.ID = CursoCategoria.CursoID
+JOIN 
+    Categoria ON CursoCategoria.CategoriaID = Categoria.ID
+WHERE 
+    Curso.Estado = 'Activo'
+GROUP BY 
+    Curso.ID
+ORDER BY 
+    Curso.PromedioCalificacion DESC
 LIMIT 5;
+
 
 
 -- VIEW 2 PARA CURSOS MÁS VENDIDOS
 CREATE VIEW View_MasVendidos AS
-SELECT ID, Titulo, Descripcion, Imagen, CantidadVendidas
-FROM Curso
-WHERE Estado = 'Activo'
-ORDER BY CantidadVendidas DESC
+SELECT 
+    Curso.ID,
+    Curso.Titulo,
+    Curso.Descripcion,
+    Curso.Imagen,
+    GROUP_CONCAT(Categoria.Nombre SEPARATOR ', ') AS Categorias,
+    Curso.CantidadVendidas,
+    Curso.PromedioCalificacion
+FROM 
+    Curso
+JOIN 
+    CursoCategoria ON Curso.ID = CursoCategoria.CursoID
+JOIN 
+    Categoria ON CursoCategoria.CategoriaID = Categoria.ID
+WHERE 
+    Curso.Estado = 'Activo'
+GROUP BY 
+    Curso.ID
+ORDER BY 
+    Curso.CantidadVendidas DESC
 LIMIT 5;
+
 
 
 -- VIEW 3 PARA CURSOS MÁS RECIENTES
 CREATE VIEW View_MasRecientes AS
-SELECT ID, Titulo, Descripcion, Imagen, FechaCreacion
-FROM Curso
-WHERE Estado = 'Activo'
-ORDER BY FechaCreacion DESC
+SELECT 
+    Curso.ID,
+    Curso.Titulo,
+    Curso.Descripcion,
+    Curso.Imagen,
+    GROUP_CONCAT(Categoria.Nombre SEPARATOR ', ') AS Categorias,
+    Curso.FechaCreacion,
+    Curso.PromedioCalificacion
+FROM 
+    Curso
+JOIN 
+    CursoCategoria ON Curso.ID = CursoCategoria.CursoID
+JOIN 
+    Categoria ON CursoCategoria.CategoriaID = Categoria.ID
+WHERE 
+    Curso.Estado = 'Activo'
+GROUP BY 
+    Curso.ID
+ORDER BY 
+    Curso.FechaCreacion DESC
 LIMIT 5;
 
 -- VIEW 4, REPORTE DE USUARIOS

@@ -73,7 +73,8 @@ h1 {
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 36px;
+    padding: 20px;
 }
 
 .InfoPage {
@@ -148,4 +149,33 @@ h2 {
 .contact-info p {
     margin: 5px 0;
     font-size: 16px;
+}
+
+#course-details-container {
+    margin-left: 10%;
+}
+
+.curse-btn {
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 15px;
+    margin-left: 150px;
+    align-items: center;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    color: rgb(24, 211, 24);
+}
+
+.titulo-by-curso {
+    font-size: bold;
+    font-size: 26px;
 }

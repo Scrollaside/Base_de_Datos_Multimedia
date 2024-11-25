@@ -66,6 +66,8 @@ VALUES ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces
 
 SELECT * FROM curso;
 
+update curso set estado = 'Inactivo' where id = 6;
+
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
 VALUES 

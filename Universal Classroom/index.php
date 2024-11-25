@@ -39,7 +39,7 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
 
     <p class="InfoPage">En un mundo en constante evolución, la educación es la clave para mantenerse adelante. Nuestra plataforma ofrece una amplia variedad de cursos en línea diseñados para ayudarte a desarrollar nuevas habilidades, mejorar tus conocimientos y alcanzar tus objetivos personales y profesionales.<br><br>
     Con Universal Classroom, puedes aprender a tu propio ritmo, en cualquier momento y lugar. Nuestros cursos están creados por expertos en cada campo y están diseñados para ser accesibles, interactivos y fáciles de seguir.</p>
-
+    <br><br><br>
 
 
     <!-- Contenido principal -->
@@ -47,49 +47,55 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
         <!-- Aquí se cargará dinámicamente el contenido de detalleCurso.php -->
 
         <!-- Cursos Mejor Calificados -->
-<h2>Mejores Calificados</h2>
-<div class="cursos-container">
-    <?php foreach ($mejoresCalificados as $curso): ?>
-        <div class="curso">
-            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
-            <div class="detalles">
-                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
-                <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
-                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
-            </div>
+        <h2>Mejores Calificados</h2>
+        <div class="cursos-container">
+            <?php foreach ($mejoresCalificados as $curso): ?>
+                <div class="curso">
+                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <div class="detalles">
+                        <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                        <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
+                        <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
+                        <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
+                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                    </div>                    
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-</div>
-
-<!-- Cursos Más Vendidos -->
-<h2>Más Vendidos</h2>
-<div class="cursos-container">
-    <?php foreach ($masVendidos as $curso): ?>
-        <div class="curso">
-            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
-            <div class="detalles">
-                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
-                <p>Vendidos: <?= htmlspecialchars($curso['CantidadVendidas']) ?></p>
-                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
-            </div>
+            
+        <!-- Cursos Más Vendidos -->
+        <h2>Más Vendidos</h2>
+        <div class="cursos-container">
+            <?php foreach ($masVendidos as $curso): ?>
+                <div class="curso">
+                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <div class="detalles">
+                        <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                        <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
+                        <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
+                        <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
+                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-</div>
-
-<!-- Cursos Más Recientes -->
-<h2>Más Recientes</h2>
-<div class="cursos-container">
-    <?php foreach ($masRecientes as $curso): ?>
-        <div class="curso">
-            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
-            <div class="detalles">
-                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
-                <p>Creado el: <?= htmlspecialchars($curso['FechaCreacion']) ?></p>
-                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
-            </div>
+            
+        <!-- Cursos Más Recientes -->
+        <h2>Más Recientes</h2>
+        <div class="cursos-container">
+            <?php foreach ($masRecientes as $curso): ?>
+                <div class="curso">
+                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <div class="detalles">
+                        <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                        <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
+                        <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
+                        <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
+                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-</div>
     </div>
 
 
