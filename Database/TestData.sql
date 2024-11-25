@@ -64,7 +64,7 @@ VALUES
 INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
 VALUES ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 2);
 
-Select * from curso;
+SELECT * FROM curso;
 
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)

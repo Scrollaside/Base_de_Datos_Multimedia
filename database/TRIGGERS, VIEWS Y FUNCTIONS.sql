@@ -26,8 +26,19 @@ WHERE Estado = 'Activo'
 ORDER BY FechaCreacion DESC
 LIMIT 5;
 
+-- VIEW 4, REPORTE DE USUARIOS
+ALTER VIEW VistaReporteUsuarios AS
+SELECT 
+    u.NombreUsuario AS Usuario, 
+    u.NombreCompleto AS Nombre, 
+    DATE_FORMAT(u.FechaRegistro, '%M %D, %Y') AS Ingreso, 
+    r.CursosTotal AS Cursos, 
+    r.Total AS Total,
+    r.Tipo AS Tipo
+FROM Usuario u
+JOIN ReporteUsuario r
+ON u.ID = r.UsuarioID; 
 
--- VIEW 4
 -- VIEW 5
 -- VIEW 6
 -- VIEW 7
