@@ -18,15 +18,7 @@ class Categoria {
         $this->obtenerConexion();
 
         // Establecer el tipo de usuario
-        if ($this->tipoUsuario === 'Estudiante') {
-            $this->tipoUsuario = 1;
-        } elseif ($this->tipoUsuario === 'Instructor') {
-            $this->tipoUsuario = 2;
-        } else {
-            echo "<h2 class='Error'>Tipo de usuario inválido.</h2>";
-            return false;
-        }
-
+      
         // Verificar si el nombre de usuario ya está en uso
         $consulta_categoria = "SELECT * FROM Categoria WHERE Nombre = :nombreCategoria";
         $stmt = $this->conn->prepare($consulta_categoria);
@@ -41,7 +33,7 @@ class Categoria {
       
 
         // Llamar al procedimiento almacenado 'RegistrarUsuario'
-        $query = "CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "CALL RegistrarCategoria(?, ?, ?, ?)";
         
         // Preparar la consulta
         $consulta = $this->conn->prepare($query);
@@ -73,28 +65,33 @@ class Categoria {
         
     }
 
-    public function validarLogin($nombreUsuario, $contraseña) {
+    public function ListarCategorias() {
         $this->obtenerConexion();
-        $query = "SELECT * FROM Usuario WHERE NombreUsuario = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $nombreUsuario);
-        $stmt->execute();
-        if ($stmt->rowCount() > 0) {
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($usuario['Contraseña'] === $contraseña) {
-                // Retorna los detalles del usuario si el login es correcto
-                return $usuario;
+        
+        // Validar el tipo de usuario
+      
+        // Llamar al procedimiento almacenado
+        $query = "SELECT * FROM VistaCategorias";
+        $consulta = $this->conn->prepare($query);
+        $consulta->bindParam(1, $tipo, PDO::PARAM_INT);
+
+        try {
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            // Verificar si hay resultados
+            if (count($resultado) > 0) {
+                echo json_encode($resultado); // Retorna datos como JSON
+            } else {
+                echo json_encode(["error" => "No se encontraron resultados."]);
             }
+        } catch (PDOException $e) {
+            echo json_encode(["error" => $e->getMessage()]);
         }
-
-        // Si no coincide, retorna false
-        return false;
     }
-
-
-    public function obtenerUsuarioPorID($id) {
+    public function obtenerCategoriaporID($id) {
         $this->obtenerConexion();
-        $query = "SELECT NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Email, Contraseña FROM Usuario WHERE ID = ?";
+        $query = "SELECT Nombre, Descripcion FROM Categoria WHERE ID = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id);
         $stmt->execute();
@@ -106,6 +103,17 @@ class Categoria {
         return false;
     }
 
-
+    public function actualizarCategoria($id, $nombre, $desc) {
+        $this->obtenerConexion();
+        $query = "CALL ActualizarCategoria(?, ?, ?)";
+               
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->bindParam(2, $nombre, PDO::PARAM_STR);
+        $stmt->bindParam(3, $desc, PDO::PARAM_STR);
+            
+        return $stmt->execute();
+    }
+    
 }
 ?>

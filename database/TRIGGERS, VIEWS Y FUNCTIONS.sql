@@ -82,7 +82,7 @@ ORDER BY
 LIMIT 5;
 
 -- VIEW 4, REPORTE DE USUARIOS
-ALTER VIEW VistaReporteUsuarios AS
+CREATE VIEW VistaReporteUsuarios AS
 SELECT 
     u.NombreUsuario AS Usuario, 
     u.NombreCompleto AS Nombre, 
@@ -94,7 +94,14 @@ FROM Usuario u
 JOIN ReporteUsuario r
 ON u.ID = r.UsuarioID; 
 
--- VIEW 5
+-- VIEW 5, Categorias
+ALTER VIEW VistaCategorias AS
+SELECT ct.ID, ct.Nombre, ct.Descripcion, u.NombreUsuario AS Creador,  DATE_FORMAT(ct.Creacion, '%M %D %Y, %H:%i') AS Creacion
+FROM Categoria ct
+JOIN Usuario u 
+ON ct.Creador = u.ID;
+
+SELECT * FROM VistaCategorias
 -- VIEW 6
 -- VIEW 7
 -- VIEW 8

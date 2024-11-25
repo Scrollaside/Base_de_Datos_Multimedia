@@ -1,34 +1,34 @@
 const categorias = [
-    {
-        nombre: "Programación",
-        descripcion: "Cursos relacionados con el desarrollo de software",
-        admin: "Alfonso David Marcelo Ibarra Navarro",
-        fecha: "15 sept 2024, 10:00"
-    },
-    {
-        nombre: "Modelado",
-        descripcion: "Técnica de crear una imagen digital tridimensional de un objeto mediante un software CAD.",
-        admin: "Alfonso David Marcelo Ibarra Navarro",
-        fecha: "15 sept 2024, 12:10"
-    },
-    {
-        nombre: "Web",
-        descripcion: "Red informática.",
-        admin: "Alfonso David Marcelo Ibarra Navarro",
-        fecha: "12 octu 2022, 14:45"
-    },
-    {
-        nombre: "Dibujo",
-        descripcion: "Forma de expresión artística que consiste en crear imágenes sobre una superficie plana mediante líneas, trazos y formas.",
-        admin: "Alfonso David Marcelo Ibarra Navarro",
-        fecha: "21 abri 2021, 21:01"
-    },
-    {
-        nombre: "Marketing",
-        descripcion: "Conjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.",
-        admin: "Alfonso David Marcelo Ibarra Navarro",
-        fecha: "04 juni 2018, 11:11"
-    }
+    // {
+    //     nombre: "Programación",
+    //     descripcion: "Cursos relacionados con el desarrollo de software",
+    //     admin: "Alfonso David Marcelo Ibarra Navarro",
+    //     fecha: "15 sept 2024, 10:00"
+    // },
+    // {
+    //     nombre: "Modelado",
+    //     descripcion: "Técnica de crear una imagen digital tridimensional de un objeto mediante un software CAD.",
+    //     admin: "Alfonso David Marcelo Ibarra Navarro",
+    //     fecha: "15 sept 2024, 12:10"
+    // },
+    // {
+    //     nombre: "Web",
+    //     descripcion: "Red informática.",
+    //     admin: "Alfonso David Marcelo Ibarra Navarro",
+    //     fecha: "12 octu 2022, 14:45"
+    // },
+    // {
+    //     nombre: "Dibujo",
+    //     descripcion: "Forma de expresión artística que consiste en crear imágenes sobre una superficie plana mediante líneas, trazos y formas.",
+    //     admin: "Alfonso David Marcelo Ibarra Navarro",
+    //     fecha: "21 abri 2021, 21:01"
+    // },
+    // {
+    //     nombre: "Marketing",
+    //     descripcion: "Conjunto de técnicas, estrategias y procesos que una marca o empresa implementa de manera ética para crear, comunicar, intercambiar y entregar ofertas o mensajes que dan valor e interesan a clientes, audiencias, socios, proveedores y personas en general.",
+    //     admin: "Alfonso David Marcelo Ibarra Navarro",
+    //     fecha: "04 juni 2018, 11:11"
+    // }
 ];
 
 

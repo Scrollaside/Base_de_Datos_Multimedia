@@ -1,4 +1,4 @@
-
+let Table = "tabla-instructores";
 function toggleView() {
     const reporteInstructores = document.getElementById('reporteInstructores');
     const reporteEstudiantes = document.getElementById('reporteEstudiantes');
@@ -8,12 +8,14 @@ function toggleView() {
         reporteInstructores.style.display = 'block';
         reporteEstudiantes.style.display = 'none';
         toggleButton.textContent = 'Reporte de Estudiantes';
+        Table = "tabla-instructores";
        // const userType = localStorage.setItem('Type', 1);
 
     } else {
         reporteInstructores.style.display = 'none';
         reporteEstudiantes.style.display = 'block';
         toggleButton.textContent = 'Reporte de Instructores';
+        Table = "tabla-estudiantes";
         //const userType = localStorage.setItem('Type', 2);
     }
 }
@@ -40,10 +42,13 @@ class Report {
     }
 }
 
-let tableBody = document.getElementById("tabla-reporte");
+function getTableBody() {
+    return document.getElementById(Table);
+}
 let userdata = [];
 
 function listarUsuarios() {
+    const tableBody = getTableBody();
     tableBody.innerHTML = "";
     userdata.forEach((user) => {
         tableBody.appendChild(user.descripcion);
