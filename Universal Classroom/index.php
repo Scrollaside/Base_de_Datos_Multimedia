@@ -1,3 +1,27 @@
+<?php
+require_once 'config.php';
+require_once 'Models/Curso.php';
+
+$cursoModel = new Curso();
+
+function obtenerCursosMejoresCalificados($cursoModel) {
+    return $cursoModel->obtenerCursosPorCriterio('MejoresCalificados');
+}
+
+function obtenerCursosMasVendidos($cursoModel) {
+    return $cursoModel->obtenerCursosPorCriterio('MasVendidos');
+}
+
+function obtenerCursosMasRecientes($cursoModel) {
+    return $cursoModel->obtenerCursosPorCriterio('MasRecientes');
+}
+
+$mejoresCalificados = obtenerCursosMejoresCalificados($cursoModel);
+$masVendidos = obtenerCursosMasVendidos($cursoModel);
+$masRecientes = obtenerCursosMasRecientes($cursoModel);
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,174 +42,57 @@
 
 
 
-    <!-- LOS MEJORES CALIFICADOS -->
-     <br><br><br><br><br>
-    <h2 class="section-title">Los mejores calificados</h2>
+    <!-- Contenido principal -->
+    <div id="course-details-container">
+        <!-- Aquí se cargará dinámicamente el contenido de detalleCurso.php -->
 
-    <div class="content">
-
-        <div align="center">
-      
-            <!-- Curso 1 -->
-            <div class="curso">
-
-                <img src="https://administraciondesistemas.com/wp-content/uploads/2024/01/lenguajes-programacion-unsplash.jpg" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Curso de Programación</h2>
-                    <p>Aprende a programar desde cero en C++ y C# fácil y sencillo.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Tecnología, Programación</p>
-                        <p>Calificación: 4.5/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
+        <!-- Cursos Mejor Calificados -->
+<h2>Mejores Calificados</h2>
+<div class="cursos-container">
+    <?php foreach ($mejoresCalificados as $curso): ?>
+        <div class="curso">
+            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+            <div class="detalles">
+                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
+                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
             </div>
-
-
-           <!-- Curso 4 -->
-            <div class="curso">
-
-                <img src="https://academyofanimatedart.com/wp-content/uploads/2021/12/unreal-image-1.jpg" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Todo sobre Unreal Engine</h2>
-                    <p>Ven y aprende todo sobre este software para ¡HACER TU PROPIO VIDEOJUEGO! Saca a lucir tus habilidades y pon a volar tu propia imaginación, aprende la interfaz, los nodos y como hacer un videojuego divertido.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Tecnología, Programación</p>
-                        <p>Calificación: 5/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-
-
-            <!-- Curso 6 -->
-            <div class="curso">
-
-                <img src="https://i.ytimg.com/vi/_q1qKtGTGgo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLABg2BKejHT6Flje2wfGg49CAItSQ" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Origami</h2>
-                    <p>Hacer figuritas de papel es divertida. Ven y descubre las posibilidades que no te imaginabas que se podian hacer con un poco de pepel y tijeras.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Creatividad</p>
-                        <p>Calificación: 5/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-
         </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- Cursos Más Vendidos -->
+<h2>Más Vendidos</h2>
+<div class="cursos-container">
+    <?php foreach ($masVendidos as $curso): ?>
+        <div class="curso">
+            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+            <div class="detalles">
+                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                <p>Vendidos: <?= htmlspecialchars($curso['CantidadVendidas']) ?></p>
+                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- Cursos Más Recientes -->
+<h2>Más Recientes</h2>
+<div class="cursos-container">
+    <?php foreach ($masRecientes as $curso): ?>
+        <div class="curso">
+            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+            <div class="detalles">
+                <h3><?= htmlspecialchars($curso['Titulo']) ?></h3>
+                <p>Creado el: <?= htmlspecialchars($curso['FechaCreacion']) ?></p>
+                <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
     </div>
 
 
-
-    <!-- LOS MAS VENDIDOS -->
-    <br><br><br><br><br><br>
-    <h2 class="section-title">Los más vendidos</h2>
-
-    <div class="content">
-
-        <div align="center">
-      
-            <!-- Curso 2 -->
-            <div class="curso">
-
-                <img src="https://universidadeuropea.com/resources/media/images/herramientas_diseno_grafico.original.jpg" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Curso de Diseño Gráfico</h2>
-                    <p>Domina las herramientas de diseño más importantes.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Dibujo, Diseño, Creatividad</p>
-                        <p>Calificación: 3.5/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-
-
-            <!-- Curso 3 -->
-            <div class="curso">
-
-                <img src="https://i0.wp.com/www.erickpardo.com/wp-content/uploads/2020/11/marketing.webp?fit=1280%2C854&ssl=1" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Curso de Marketing Digital</h2>
-                    <p>Aprende estrategias efectivas de marketing.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Economia, Marketing, Estrategias</p>
-                        <p>Calificación: 2.5/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-
-
-            <!-- Curso 5 -->
-            <div class="curso">
-
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkN83XdU4WPm0oHMOrxdt1_rc1jN_FcYTIOA&s" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Tips y consejos para Dibujo Digital</h2>
-                    <p>¿Siempre te ha interesado dibujar pero no sabes por donde empezar? Ven a este curso y aprende pequeños tips que te ayudaran a convertirte en un gran artista.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Dibujo, Diseño, Creatividad</p>
-                        <p>Calificación: 4/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-                    
-        </div>
-    </div>
-
-
-
-    <!-- LOS MAS RECIENTES -->
-    <br><br><br><br><br><br>
-    <h2 class="section-title">Subidos recientemente</h2>
-
-    <div class="content">
-
-        <div align="center">
-      
-            <!-- Curso 7 -->
-            <div class="curso">
-
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa_EipSRfPVNEeyj6Q16qE79vugIbrS7s3YA&s" alt="Imagen del curso">
-
-                <div class="curso-info" align="left">
-                    <h2>Curso de HTML</h2>
-                    <p>Aprende a realizar páginas web, ¿no sueles diseñarlas y al tan poca imaginación haces las cosas repetidas una y otra vez? ¿No te cansas de no saber que escribir para tener una página creible? ¿Te falta imaginación para saber que datos dummy poner en tus prácticas? Ven y descubre que puedes hacer, además de tips para mejorar tus proyectos.</p><br>
-        
-                    <div class="detalles">
-                        <p>Categorías: Tecnología, Web</p>
-                        <p>Calificación: 0/5</p>
-                    </div>
-                    
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                </div>
-            </div>
-           
-
-
-        </div>
-    </div>
 
 
 
@@ -211,6 +118,7 @@
 
 
 <script src="js/loadNavBar.js"></script>
+<script src="js/loadCourses.js"></script>
 
 <script>
         function mostrarEstrellas(calificacion) {

@@ -61,8 +61,10 @@ VALUES
 ('Animación 3D', 'Principios básicos de animación 3D', NULL, 200.00, 10, 'Inactivo', 4.3, NOW(), 7, 3),
 ('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 3, 'Activo', 3.8, NOW(), 4, 4),
 ('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 6, 'Activo', 4.6, NOW(), 9, 2);
+INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
+VALUES ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 2);
 
-
+Select * from curso;
 
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
