@@ -101,7 +101,6 @@ FROM Categoria ct
 JOIN Usuario u 
 ON ct.Creador = u.ID;
 
-SELECT * FROM VistaCategorias
 -- VIEW 6
 -- VIEW 7
 -- VIEW 8

@@ -13,3 +13,4 @@ BEGIN
 END //
 DELIMITER ;
 
+CALL ReporteUsuarios (2)
