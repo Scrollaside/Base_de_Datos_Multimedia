@@ -27,6 +27,8 @@ document.getElementById("btn").addEventListener('click', function(event) {
             } else if (data.TipoUsuario == 3) {
                 window.location.href = "bloqueoDesbloqueo.php";
             }
+            localStorage.setItem("ID", data.ID);
+
         } else {
             // Mostrar mensaje de error
             document.getElementById("errorMsg").textContent = data.error;

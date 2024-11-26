@@ -1,3 +1,33 @@
+<?php
+session_start();
+require_once __DIR__ . '/config.php';
+require_once PROJECT_ROOT . '/Models/Usuario.php';
+
+// Verificar si hay una sesión iniciada
+if (!isset($_SESSION['ID'])) {
+    echo "<p>No hay usuario logueado.</p>";
+    exit;
+}
+
+// Cargar la información del usuario desde la sesión
+$usuarioID = $_SESSION['ID'];
+
+
+// // Obtener la foto de perfil
+// $usuario = new Usuario();
+// $fotoPerfil = $usuario->obtenerFotoPorID($usuarioID);
+// $fotoPerfilSrc = $fotoPerfil ? 'data:image/jpeg;base64,' . base64_encode($fotoPerfil) : 'https://cdn-icons-png.flaticon.com/512/3273/3273898.png';
+
+// Manejo de POST para actualización de usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    header('Content-Type: application/json');
+
+    $id = $_SESSION['ID'];
+    
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,10 +52,10 @@
         <br>
 
         <label for="adminName">Administrador:</label>
-        <input type="text" id="adminName" value="Alfonso David Marcelo Ibarra Navarro" disabled></input>
+        <input type="text" id="adminName" value="" disabled></input>
         <br>
 
-        <button type="button" onclick="agregarCategoria()">Agregar/Guardar Categoría</button>
+        <button type="button" onclick="guardarCategoria()">Agregar/Guardar Categoría</button>
     </form><br><br>
 
     <h2>Lista de Categorías</h2>
