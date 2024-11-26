@@ -58,6 +58,7 @@ CREATE TABLE Nivel (
     Costo FLOAT,
     FOREIGN KEY (CursoID) REFERENCES Curso(ID)
 );
+ALTER TABLE Nivel ADD NumNiv INT
 CREATE TABLE Inscripcion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     UsuarioID INT,
@@ -67,10 +68,12 @@ CREATE TABLE Inscripcion (
     FechaFinalizacion DATETIME,
     Estado BOOLEAN,
     MetodoPago BOOLEAN, 												-- Nueva variable tipo de pago, 0 paypal y 1 tarjeta
+    -- PrecioPagado INT,
     
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID),
     FOREIGN KEY (NivelID) REFERENCES Nivel(ID)						-- Cambiado la referencia de la compra del usuario
 );
+ALTER TABLE Inscripcion ADD PrecioPagado INT;
 CREATE TABLE Comentario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Texto TEXT,
@@ -112,5 +115,4 @@ CREATE TABLE ReporteUsuario (
     Total FLOAT,
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID)
 );
-
 

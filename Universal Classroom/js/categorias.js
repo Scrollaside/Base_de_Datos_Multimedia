@@ -11,6 +11,7 @@ class Categorie {
 
     get catelist() {
         let row = document.createElement("tr");
+        row.setAttribute("data-nombre", this.Nombre); 
         row.innerHTML = `
             <td>${this.Nombre}</td>
             <td>${this.Descripcion}</td>
@@ -194,9 +195,10 @@ function editarCategoria(Nombre, Descripcion, Creador) {
 
 // Función para eliminar una categoría
 function eliminarCategoria(nombre) {
-    categorias.splice(nombre, 1);
-    mostrarCategorias();
-    resetForm();
+    const fila = document.querySelector(`tr[data-nombre="${nombre}"]`);
+    if (fila) {
+        fila.classList.add("hidden"); // Agrega la clase para ocultarla
+    }
 }
 
 

@@ -102,6 +102,21 @@ JOIN Usuario u
 ON ct.Creador = u.ID;
 
 -- VIEW 6
+ALTER VIEW VentasGeneral AS
+SELECT c.Titulo AS Curso, COUNT(u.ID) AS Alumnos, CONCAT('$', FORMAT(SUM(PrecioPagado), 2)) AS Ingresos
+FROM Inscripcion i
+JOIN Nivel n
+ON n.ID = NivelID
+JOIN Curso c
+ON c.ID = n.CursoID
+JOIN Usuario u
+ON u.ID = i.UsuarioID;
+
+SELECT * FROM VentasGeneral
+SELECT * FROM Usuario
+SELECT * FROM Inscripcion
+SELECT * FROM Nivel
+SELECT * FROM Curso
 -- VIEW 7
 -- VIEW 8
 
@@ -139,7 +154,7 @@ BEGIN
 END //
 
 DELIMITER ;
---uso de la función
+-- uso de la función
 SELECT total_cursos_inscritos(1); -- ID del usuario
 
 

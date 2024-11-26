@@ -68,16 +68,9 @@ SELECT * FROM curso;
 
 update curso set estado = 'Inactivo' where id = 6;
 
--- Inserts Tabla Nivel
-INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo)
-VALUES
-('Nivel 1: Introducción al tema.', 'Aquí se verán las bases para comprender el curso completo.', '', '', '', 31, 200.00),
-('Nivel 2: Mi primer programa en Java.', 'Realizaremos un pequeño programa en el lenguaje Java.', '', '', '', 31, 300.00),
-('Nivel 3: Manejo de variables.', 'Veremos más a fondo temas de Java.', '', '', '', 31, 400.00),
-('Nivel 4: Funciones en java.', 'Veremos cómo crear e implementar funciones dentro de Java.', '', '', '', 31, 500.00),
-('Nivel 5: Manejo de variables.', 'Veremos más a fondo temas de Java.', '', '', '', 31, 600.00);
 
-SELECT * FROM Nivel;
+
+
 
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
@@ -94,22 +87,38 @@ VALUES
 (10, 3);
 
 
+-- Inserts Tabla Nivel
+INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo, Numero)
+VALUES
+    ('Nivel 1 - Introducción a Java', 'Introducción a los fundamentos de Java', 'video_java_nivel1.mp4', NULL, NULL, 1, 30.00, 1),
+    ('Nivel 2 - Fundamentos de Java', 'Profundización en conceptos básicos de Java', 'video_java_nivel2.mp4', NULL, NULL, 1, 30.00, 2),
+    ('Nivel 3 - Programación Orientada a Objetos', 'Curso de POO con Java', 'video_java_nivel3.mp4', NULL, NULL, 1, 30.00, 3),
+    ('Nivel 1 - Modelado Básico 3D', 'Fundamentos básicos de modelado 3D en Blender', 'video_modelado3d_nivel1.mp4', NULL, NULL, 2, 50.00, 1),
+    ('Nivel 2 - Modelado Intermedio 3D', 'Modelado 3D con técnicas avanzadas', 'video_modelado3d_nivel2.mp4', NULL, NULL, 2, 50.00, 2),
+    ('Nivel 3 - Renderizado 3D', 'Técnicas de renderizado en Blender', 'video_modelado3d_nivel3.mp4', NULL, NULL, 2, 50.00, 3),
+    ('Nivel 1 - Fundamentos de Desarrollo Web', 'Aprende HTML y CSS desde cero', 'video_web_nivel1.mp4', NULL, NULL, 3, 25.00, 1),
+    ('Nivel 2 - Desarrollo Web Interactivo', 'Inicia con JavaScript para el desarrollo web', 'video_web_nivel2.mp4', NULL, NULL, 3, 25.00, 2),
+    ('Nivel 3 - Desarrollo Web Avanzado', 'Desarrollo de aplicaciones dinámicas con JavaScript', 'video_web_nivel3.mp4', NULL, NULL, 3, 25.00, 3),
+    ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 40.00, 1);
 
--- Inserts Inscripcion    CHECAR; NO HACE LOS INSERTS
-INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
+SELECT * FROM Nivel;
+
+
+-- Inserts Inscripcion   
+INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago, PrecioPagado)
 VALUES 
-(1, 1, NOW(), NOW(), NULL, 1, 0),
-(2, 2, NOW(), NOW(), NULL, 1, 1),
-(3, 3, NOW(), NULL, NULL, 0, 0),
-(4, 4, NOW(), NULL, NULL, 1, 1),
-(1, 5, NOW(), NOW(), NULL, 1, 0),
-(2, 6, NOW(), NOW(), NULL, 1, 1),
-(3, 7, NOW(), NULL, NULL, 0, 0),
-(4, 8, NOW(), NULL, NULL, 1, 1),
-(1, 9, NOW(), NOW(), NULL, 1, 0),
-(2, 10, NOW(), NOW(), NULL, 1, 1);
+(1, 1, NOW(), NOW(), NULL, 1, 0, 5600),
+(2, 2, NOW(), NOW(), NULL, 1, 1, 1100),
+(3, 3, NOW(), NULL, NULL, 0, 0, 2400),
+(4, 4, NOW(), NULL, NULL, 1, 1, 4200),
+(1, 5, NOW(), NOW(), NULL, 1, 0, 500),
+(2, 6, NOW(), NOW(), NULL, 1, 1, 4350),
+(3, 7, NOW(), NULL, NULL, 0, 0, 200),
+(4, 8, NOW(), NULL, NULL, 1, 1, 400),
+(1, 9, NOW(), NOW(), NULL, 1, 0, 350),
+(2, 10, NOW(), NOW(), NULL, 1, 1, 200);
 
-
+SELECT * FROM Inscripcion;
 
 -- Inserts de Comentario
 INSERT INTO Comentario (Texto, Calificacion, FechaHora, CursoID, UsuarioID, Estado)
@@ -142,26 +151,6 @@ VALUES
 (2, 10, NOW(), 4);
 
 SELECT * FROM Diploma;
-
-
-
-
--- Inserts Tabla Nivel
-INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo)
-VALUES
-    ('Nivel 1 - Introducción a Java', 'Introducción a los fundamentos de Java', 'video_java_nivel1.mp4', NULL, NULL, 1, 30.00),
-    ('Nivel 2 - Fundamentos de Java', 'Profundización en conceptos básicos de Java', 'video_java_nivel2.mp4', NULL, NULL, 1, 30.00),
-    ('Nivel 3 - Programación Orientada a Objetos', 'Curso de POO con Java', 'video_java_nivel3.mp4', NULL, NULL, 1, 30.00),
-    ('Nivel 1 - Modelado Básico 3D', 'Fundamentos básicos de modelado 3D en Blender', 'video_modelado3d_nivel1.mp4', NULL, NULL, 2, 50.00),
-    ('Nivel 2 - Modelado Intermedio 3D', 'Modelado 3D con técnicas avanzadas', 'video_modelado3d_nivel2.mp4', NULL, NULL, 2, 50.00),
-    ('Nivel 3 - Renderizado 3D', 'Técnicas de renderizado en Blender', 'video_modelado3d_nivel3.mp4', NULL, NULL, 2, 50.00),
-    ('Nivel 1 - Fundamentos de Desarrollo Web', 'Aprende HTML y CSS desde cero', 'video_web_nivel1.mp4', NULL, NULL, 3, 25.00),
-    ('Nivel 2 - Desarrollo Web Interactivo', 'Inicia con JavaScript para el desarrollo web', 'video_web_nivel2.mp4', NULL, NULL, 3, 25.00),
-    ('Nivel 3 - Desarrollo Web Avanzado', 'Desarrollo de aplicaciones dinámicas con JavaScript', 'video_web_nivel3.mp4', NULL, NULL, 3, 25.00),
-    ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 40.00);
-
-Select * from nivel;
-
 
 
 
