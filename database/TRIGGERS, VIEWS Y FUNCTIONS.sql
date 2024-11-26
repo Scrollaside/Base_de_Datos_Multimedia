@@ -132,4 +132,14 @@ BEGIN
 END;
 
 
--- TRIGGER 2
+-- TRIGGER 2, Evita que un curso sea eliminado si tiene inscripciones activas.
+CREATE TRIGGER bloquear_eliminacion_curso
+BEFORE DELETE ON Curso
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM Inscripcion WHERE NivelID = OLD.ID AND Estado = 1) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede eliminar un curso con estudiantes inscritos.';
+    END IF;
+END;
+
