@@ -36,6 +36,7 @@ class Categorie {
         this.Descripcion = descripcion;
         this.Creador = creador;
         this.Creacion = creacion; 
+       // this.ID = id;
     }
 
     get catelist() {
@@ -45,13 +46,14 @@ class Categorie {
             <td>${this.Descripcion}</td>
             <td>${this.Creador}</td>
             <td>${this.Creacion}</td>
+            <td><button onclick="editarCategoria('${this.Nombre}', '${this.Descripcion}')">Editar</button></td>
+            <td><button onclick="eliminarCategoria()">Eliminar</button></td>
         `;
         return row;
     }
 }
 
 let editando = false;
-let indiceCategoriaEditar = -1;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -136,7 +138,7 @@ async function mostrarCategorias() {
                 r.Nombre,
                 r.Descripcion,
                 r.Creador,
-                r.Creacion 
+                r.Creacion
             );
             catdata.push(newCat);
         });
@@ -177,17 +179,17 @@ async function mostrarCategorias() {
 }
 
 
-function editarCategoria(index) {
-    const categoria = categorias[index];
-    document.getElementById('nombreCategoria').value = categoria.nombre;
-    document.getElementById('descripcionCategoria').value = categoria.descripcion;
+function editarCategoria(Nombre, Descripcion) {
+ //   const categoria = Categorie[nombre];
+    document.getElementById('nombreCategoria').value = Nombre;
+    document.getElementById('descripcionCategoria').value = Descripcion;
     editando = true;
-    indiceCategoriaEditar = index; 
+   // indiceCategoriaEditar = index; 
 }
 
 // Función para eliminar una categoría
-function eliminarCategoria(index) {
-    categorias.splice(index, 1); 
+function eliminarCategoria(nombre) {
+    categorias.splice(nombre, 1); 
     mostrarCategorias(); 
     resetForm(); 
 }

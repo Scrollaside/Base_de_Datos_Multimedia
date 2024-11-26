@@ -95,8 +95,8 @@ JOIN ReporteUsuario r
 ON u.ID = r.UsuarioID; 
 
 -- VIEW 5, Categorias
-ALTER VIEW VistaCategorias AS
-SELECT ct.ID, ct.Nombre, ct.Descripcion, u.NombreUsuario AS Creador,  DATE_FORMAT(ct.Creacion, '%M %D %Y, %H:%i') AS Creacion
+CREATE VIEW VistaCategorias AS
+SELECT ct.Nombre, ct.Descripcion, u.NombreUsuario AS Creador,  DATE_FORMAT(ct.Creacion, '%M %D %Y, %H:%i') AS Creacion -- , ct.ID
 FROM Categoria ct
 JOIN Usuario u 
 ON ct.Creador = u.ID;
