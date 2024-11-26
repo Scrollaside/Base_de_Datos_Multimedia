@@ -116,7 +116,7 @@ ON ct.Creador = u.ID;
 
 
 -- TRIGGER 1, Generar un diploma automáticamente al finalizar un curso
-CREATE TRIGGER Generar_Aiploma
+CREATE TRIGGER Generar_Diploma
 AFTER UPDATE ON Inscripcion
 FOR EACH ROW
 BEGIN
