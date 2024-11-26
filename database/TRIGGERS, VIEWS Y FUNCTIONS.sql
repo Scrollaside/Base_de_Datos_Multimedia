@@ -98,26 +98,32 @@ ON u.ID = r.UsuarioID;
 CREATE VIEW VistaCategorias AS
 SELECT ct.Nombre, ct.Descripcion, u.NombreUsuario AS Creador,  DATE_FORMAT(ct.Creacion, '%M %D %Y, %H:%i') AS Creacion -- , ct.ID
 FROM Categoria ct
-JOIN Usuario u 
-ON ct.Creador = u.ID;
+JOIN Usuario u ON ct.Creador = u.ID;
 
 -- VIEW 6
-ALTER VIEW VentasGeneral AS
-SELECT c.Titulo AS Curso, COUNT(u.ID) AS Alumnos, CONCAT('$', FORMAT(SUM(PrecioPagado), 2)) AS Ingresos
+CREATE VIEW VentasGeneral AS
+SELECT 
+    c.Titulo AS Curso, 
+    COUNT(DISTINCT u.ID) AS Alumnos, 
+    CONCAT('$', FORMAT(SUM(i.PrecioPagado), 2)) AS Ingresos, 
+    AVG(n.Numero) AS Promedio
 FROM Inscripcion i
-JOIN Nivel n
-ON n.ID = NivelID
-JOIN Curso c
-ON c.ID = n.CursoID
-JOIN Usuario u
-ON u.ID = i.UsuarioID;
+INNER JOIN Nivel n ON n.ID = i.NivelID
+INNER JOIN Curso c ON c.ID = n.CursoID
+INNER JOIN Usuario u ON u.ID = i.UsuarioID
+GROUP BY 
+    c.ID;
 
-SELECT * FROM VentasGeneral
-SELECT * FROM Usuario
-SELECT * FROM Inscripcion
-SELECT * FROM Nivel
-SELECT * FROM Curso
+SELECT * FROM VentasGeneral;
 -- VIEW 7
+CREATE VIEW MetodoPago AS
+SELECT c.Titulo AS Curso, i.MetodoPago, CONCAT('$', FORMAT(SUM(i.PrecioPagado), 2)) AS TotalGanancias
+FROM Inscripcion i
+JOIN Nivel n ON i.NivelID = n.ID
+JOIN Curso c ON n.CursoID = c.ID
+GROUP BY c.Titulo, i.MetodoPago;
+
+SELECT * FROM MetodoPago
 -- VIEW 8
 
 -- FUNCTION 1, obtener el total de ventas de un curso

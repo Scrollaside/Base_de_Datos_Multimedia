@@ -58,7 +58,7 @@ CREATE TABLE Nivel (
     Costo FLOAT,
     FOREIGN KEY (CursoID) REFERENCES Curso(ID)
 );
-ALTER TABLE Nivel ADD NumNiv INT
+ALTER TABLE Nivel ADD Numero INT;
 CREATE TABLE Inscripcion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     UsuarioID INT,
