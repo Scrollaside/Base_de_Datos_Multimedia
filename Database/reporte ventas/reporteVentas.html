@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Ventas de Cursos</title>
+    <link rel="stylesheet" href="reportes.css"> <!-- Archivo de estilos -->
+    <link rel="stylesheet" href="NavBar.css"> <!-- Barra de navegación -->
+</head>
+<body>
+
+    <div class="contenido">
+
+        <div class="reporte-ventas">
+            <h1>Reporte de Ventas de Cursos</h1>
+            <?php include 'procesarReporteVentas.php'; ?>
+        </div>
+        
+
+    
+
+        <!-- Formulario de filtros -->
+        <form id="reporte-form" method="POST" action="Controllers/ReporteVentas.php">
+            
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" required>
+            
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" id="fechaFin" name="fechaFin" required>
+
+            <label for="curso">Seleccionar Curso:</label>
+            <select id="curso" name="curso">
+                <option value="0">Todos los Cursos</option>
+                <!-- Aquí se llenarán las opciones dinámicamente con datos desde la base de datos -->
+            </select>
+
+            <button type="submit">Generar Reporte</button>
+        </form>
+
+        <!-- Tabla de resultados -->
+        <div class="tabla-reporte">
+            <table id="tabla-ventas">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Categoría</th>
+                        <th>Cantidad Vendida</th>
+                        <th>Ingresos Totales</th>
+                        <th>Fecha de Creación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se insertarán los datos de la consulta -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Llenar el select de cursos dinámicamente
+            fetch("Controllers/ObtenerCursos.php")
+                .then(response => response.json())
+                .then(data => {
+                    const cursoSelect = document.getElementById("curso");
+                    data.forEach(curso => {
+                        const option = document.createElement("option");
+                        option.value = curso.ID;
+                        option.textContent = curso.Titulo;
+                        cursoSelect.appendChild(option);
+                    });
+                });
+        });
+    </script>
+
+</body>
+</html>
