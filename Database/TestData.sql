@@ -144,3 +144,42 @@ VALUES
 SELECT * FROM Diploma;
 
 
+
+
+-- Inserts Tabla Nivel
+INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo)
+VALUES
+    ('Nivel 1 - Introducción a Java', 'Introducción a los fundamentos de Java', 'video_java_nivel1.mp4', NULL, NULL, 1, 30.00),
+    ('Nivel 2 - Fundamentos de Java', 'Profundización en conceptos básicos de Java', 'video_java_nivel2.mp4', NULL, NULL, 1, 30.00),
+    ('Nivel 3 - Programación Orientada a Objetos', 'Curso de POO con Java', 'video_java_nivel3.mp4', NULL, NULL, 1, 30.00),
+    ('Nivel 1 - Modelado Básico 3D', 'Fundamentos básicos de modelado 3D en Blender', 'video_modelado3d_nivel1.mp4', NULL, NULL, 2, 50.00),
+    ('Nivel 2 - Modelado Intermedio 3D', 'Modelado 3D con técnicas avanzadas', 'video_modelado3d_nivel2.mp4', NULL, NULL, 2, 50.00),
+    ('Nivel 3 - Renderizado 3D', 'Técnicas de renderizado en Blender', 'video_modelado3d_nivel3.mp4', NULL, NULL, 2, 50.00),
+    ('Nivel 1 - Fundamentos de Desarrollo Web', 'Aprende HTML y CSS desde cero', 'video_web_nivel1.mp4', NULL, NULL, 3, 25.00),
+    ('Nivel 2 - Desarrollo Web Interactivo', 'Inicia con JavaScript para el desarrollo web', 'video_web_nivel2.mp4', NULL, NULL, 3, 25.00),
+    ('Nivel 3 - Desarrollo Web Avanzado', 'Desarrollo de aplicaciones dinámicas con JavaScript', 'video_web_nivel3.mp4', NULL, NULL, 3, 25.00),
+    ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 40.00);
+
+Select * from nivel;
+
+
+
+
+-- Inserts Tabla Inscripcion
+INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
+VALUES
+    (1, 1, NOW(), NOW(), NULL, TRUE, 0), -- Aldo Gonzalez, Nivel 1 de Java, pago con PayPal
+    (1, 2, NOW(), NOW(), NULL, TRUE, 0), -- Aldo Gonzalez, Nivel 2 de Java, pago con PayPal
+    (2, 3, NOW(), NOW(), NULL, TRUE, 1), -- Guillermo Morin, Nivel 3 de Web, pago con tarjeta
+    (3, 5, NOW(), NOW(), NULL, TRUE, 1), -- Max Leon, Nivel 1 de 3D, pago con tarjeta
+    (4, 8, NOW(), NOW(), NULL, TRUE, 0), -- Alberto Ayala, Nivel 1 de Web, pago con PayPal
+    (2, 6, NOW(), NOW(), NULL, TRUE, 1), -- Guillermo Morin, Nivel 2 de 3D, pago con tarjeta
+    (1, 7, NOW(), NOW(), NULL, TRUE, 0); -- Aldo Gonzalez, Nivel 3 de 3D, pago con PayPal
+
+Select * from inscripcion;
+
+
+
+
+
+
