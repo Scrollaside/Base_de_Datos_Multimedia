@@ -115,5 +115,21 @@ ON ct.Creador = u.ID;
 -- FUNCTION 8
 
 
--- TRIGGER 1
+-- TRIGGER 1, Generar un diploma automáticamente al finalizar un curso
+CREATE TRIGGER Generar_Aiploma
+AFTER UPDATE ON Inscripcion
+FOR EACH ROW
+BEGIN
+    IF NEW.Estado = 1 AND OLD.Estado = 0 THEN
+        INSERT INTO Diploma (EstudianteID, CursoID, FechaFin, InstructorID)
+        VALUES (
+            NEW.UsuarioID,
+            NEW.NivelID,
+            NOW(),
+            (SELECT UsuarioCreador FROM Curso WHERE ID = NEW.NivelID)
+        );
+    END IF;
+END;
+
+
 -- TRIGGER 2
