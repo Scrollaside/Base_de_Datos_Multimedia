@@ -1,0 +1,39 @@
+body {
+    background-color: whitesmoke;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+#course-details-container {
+    margin-left: 10%;
+}
+
+.card-text button{
+    background-color: #333;
+}
+
+.card-text button:hover{
+    background-color: #161616;
+}
+
+.card mb-3 {
+    background-color: white;
+}
+
+.card mb-3:hover {
+    background-color: rgb(188, 188, 188);
+}
