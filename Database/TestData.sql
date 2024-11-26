@@ -68,6 +68,17 @@ SELECT * FROM curso;
 
 update curso set estado = 'Inactivo' where id = 6;
 
+-- Inserts Tabla Nivel
+INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo)
+VALUES
+('Nivel 1: Introducción al tema.', 'Aquí se verán las bases para comprender el curso completo.', '', '', '', 31, 200.00),
+('Nivel 2: Mi primer programa en Java.', 'Realizaremos un pequeño programa en el lenguaje Java.', '', '', '', 31, 300.00),
+('Nivel 3: Manejo de variables.', 'Veremos más a fondo temas de Java.', '', '', '', 31, 400.00),
+('Nivel 4: Funciones en java.', 'Veremos cómo crear e implementar funciones dentro de Java.', '', '', '', 31, 500.00),
+('Nivel 5: Manejo de variables.', 'Veremos más a fondo temas de Java.', '', '', '', 31, 600.00);
+
+SELECT * FROM Nivel;
+
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
 VALUES 
