@@ -27,40 +27,22 @@
             <div class="row">
                 <!--Cuadro para la descripcion del curso, valoraciones, video, etc-->
                 <div class="columna-detalles">
-                    <h1 class="web">Curso de Programación</h1>
-                    <h3 class="web">Impartido por: Prof. Julian</h1>
+                    <h1 class="web" id="Titulo"></h1>
+                    <h3 class="web" id="Creador"></h1>
                     <p></p>
-                    <p>
-                        Aprende a programar desde cero en C++ y C# fácil y sencillo.
+                    <p id="Descripcion">
+                        
                     </p>
                     <p></p>
                     <div class="estadisticas">
                         <div class="valoracion">
-                            <ul class="star">
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li >
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
+                            <ul class="star" id="Estrellas">
+                               
                             </ul>
-                            <span class="puntuacion">4.8</span>
-                            <div>
-                                <a href="" class="view">opiniones</a>
-                            </div>
+                            <span class="puntuacion" id="Puntuacion1"></span>
                         </div>
-                        <div class="otro">
-                            <i class="fa-solid fa-heart" style="color: #dd3131;"></i>
-                            <span>Curso gratis</span>
+                        <div class="otro" id="Costo">
+                           
                         </div>
                     </div>
                 </div>
@@ -105,53 +87,10 @@
     </div>
     <!--Contenido general-->
 
-    <!--Que aprenderas-->
-    <div class="contenido-aprender">
-        <h2>¿Qué aprenderás?</h2>
-        <div class="row">
-            <div class="columna-detalles">
-                <p></p>
-                <p>Al finalizar este curso podrás...</p>
-                <ul>
-                    <li><strong>Objetivo 1. </strong>Dominar el uso del lenguaje C++ y C#</li>
-                    <li><strong>Objetivo 2. </strong>Dominar el uso de pensamiento lógico para encontrar soluciones creativas</li>
-                    <li><strong>Objetivo 3. </strong>Dominar el uso de los softwares indicados para familializarse con ellos y sus funciones</li>
-                </ul>
-                <p></p>
-            </div>
-            <div class="columna-detalles">
-                <ul class="mas">                    
-                    <li>
-                        <img src="img/play.png" alt="play" width="23" height="23" loading="lazy">
-                        <h4><strong>Video clases</strong><br>Aprende a través de videos explicativos y lecturas concretas</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--Que aprenderas-->
-
     <!--Programa del curso-->
     <div class="contenido-programa">
         <h2>Programa del curso</h2>
-        <div class="contenido-programa-unidades">
-            <!--Unidad individual-->
-            <div class="tab">
-                <input type="checkbox" id="tab-1">
-                <label for="tab-1" onclick="location.href='cursoCompleto.php'">
-                    <h4>Nivel 1. Introduccion</h4>
-                </label>
-            </div>
-            <!--Unidad individual-->
-
-            <!--Unidad individual-->
-            <div class="tab">
-                <input type="checkbox" id="tab-2">
-                <label for="tab-2" onclick="location.href='cursoCompleto.php'">
-                    <h4>Nivel 2. Primer tema</h4>
-                </label>
-            </div>
-            <!--Unidad individual-->
+        <div class="contenido-programa-unidades" id="Niveles">
         </div>
     </div>
     <!--Programa del curso-->
@@ -163,24 +102,9 @@
             <div class="columna-detalles">
                 <div class="cuadro-rating">
                     <div class="rating">
-                        <div class="numero-rating">4.8</div>
+                        <div class="numero-rating" id="Puntuacion2"></div>
                         <div class="valoracion">
-                            <ul class="star">
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li >
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                </li>
+                            <ul class="star" id="Estrellas2">
                             </ul>
                         </div>
                     </div>
@@ -189,7 +113,7 @@
                         <div class="fila-estrellas">
                             <div class="columna-detalles bar">
                                 <div class="progreso">
-                                    <div class="progreso bar" style="width: 92%"></div>
+                                    <div class="progreso bar" style="width: 0%" id="Progreso1"></div>
                                 </div>
                             </div>
                             <ul class="star">
@@ -209,7 +133,7 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 </li>
                             </ul>
-                            <div class="porcentaje">92%</div>
+                            <div class="porcentaje" id="Porcentaje1">0</div>
                         </div>
                         <!--Barra y fila de estrellas del curso-->
 
@@ -217,7 +141,7 @@
                         <div class="fila-estrellas">
                             <div class="columna-detalles bar">
                                 <div class="progreso">
-                                    <div class="progreso bar" style="width: 8%"></div>
+                                    <div class="progreso bar" style="width: 0%" id="Progreso2"></div>
                                 </div>
                             </div>
                             <ul class="star">
@@ -234,10 +158,10 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                             </ul>
-                            <div class="porcentaje">8%</div>
+                            <div class="porcentaje" id="Porcentaje2">0</div>
                         </div>
                         <!--Barra y fila de estrellas del curso-->
 
@@ -245,7 +169,7 @@
                         <div class="fila-estrellas">
                             <div class="columna-detalles bar">
                                 <div class="progreso">
-                                    <div class="progreso bar" style="width: 0%"></div>
+                                    <div class="progreso bar" style="width: 0%" id="Progreso3"></div>
                                 </div>
                             </div>
                             <ul class="star">
@@ -259,13 +183,13 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                             </ul>
-                            <div class="porcentaje">0%</div>
+                            <div class="porcentaje" id="Porcentaje3">0</div>
                         </div>
                         <!--Barra y fila de estrellas del curso-->
 
@@ -273,7 +197,7 @@
                         <div class="fila-estrellas">
                             <div class="columna-detalles bar">
                                 <div class="progreso">
-                                    <div class="progreso bar" style="width: 0%"></div>
+                                    <div class="progreso bar" style="width: 0%" id="Progreso4"></div>
                                 </div>
                             </div>
                             <ul class="star">
@@ -283,17 +207,17 @@
                                 <li>
                                     <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 </li>
-                                <li >
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                <li>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                             </ul>
-                            <div class="porcentaje">0%</div>
+                            <div class="porcentaje" id="Porcentaje4">0</div>
                         </div>
                         <!--Barra y fila de estrellas del curso-->
 
@@ -301,7 +225,7 @@
                         <div class="fila-estrellas">
                             <div class="columna-detalles bar">
                                 <div class="progreso">
-                                    <div class="progreso bar" style="width: 0%"></div>
+                                    <div class="progreso bar" style="width: 0%" id="Progreso5"></div>
                                 </div>
                             </div>
                             <ul class="star">
@@ -309,56 +233,27 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li >
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
                                 </li>
                             </ul>
-                            <div class="porcentaje">0%</div>
+                            <div class="porcentaje" id="Porcentaje5">0</div>
                         </div>
                         <!--Barra y fila de estrellas del curso-->
                     </div>
                 </div>
             </div>
         </div>
-        <ul class="lista-comentarios" id="lista-comentarios">
-            <li class="fila-comentario" name="user-comment">
-                <a href="" class="user">
-                    <img src="img/user.png" alt="Foto-usuario" width="56" height="56" loading="lazy">
-                </a>
-                <div>
-                    <a href="">Nombre de un usuario</a>
-                    <div class="valoracion">
-                        <ul class="star">
-                            <li>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </li>
-                            <li >
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </li>
-                        </ul>
-                        <div class="fecha-comentario">Hace 2 semanas
-                        </div>
-                    </div>
-                    <p class="informacion-comentario">Muy buen curso!</p>
-                </div>
-            </li>
+
+        <ul class="lista-comentarios" id="lista-comentarios">     
         </ul>
     </div>
     <!--Comentarios del curso-->
@@ -370,20 +265,19 @@
             <div class="purchase-options" id="opciones-compra">
                 <p>¿Desea comprar el curso completo o niveles individuales?</p>
                 <label class="custom-checkbox">
-                    <input type="checkbox" id="fullCourseCheckbox" onclick="handleCheckboxes('full')"> Comprar curso completo
+                    <input type="checkbox" id="fullCourseCheckbox"> Comprar curso completo
                     <span class="checkmark"></span>
                 </label>
                 <label class="custom-checkbox">
-                    <input type="checkbox" id="individualLevelsCheckbox" onclick="handleCheckboxes('individual')"> Comprar niveles individuales
+                    <input type="checkbox" id="individualLevelsCheckbox"> Comprar niveles individuales
                     <span class="checkmark"></span>
                 </label>
     
                 <!-- Opciones de niveles individuales que se mostrarán al seleccionar "Niveles individuales" -->
                 <div id="levelOptions" style="display: none; margin-top: 10px;">
                     <label for="levelSelect">Elige el nivel:</label>
-                    <select id="levelSelect" onchange="cambiarPrecio();">
-                        <option value="1">Nivel 1</option>
-                        <option value="2">Nivel 2</option>
+                    <select id="levelSelect">
+                        <option selected="true" disabled="disabled">--Selecciona un nivel--</option>
                     </select>
                 </div>
             </div>
@@ -395,8 +289,8 @@
             </div>
             <div class="option" id="pago" style="display: none;">
               <h3>Curso de pago</h3>
-              <p id="pago-contenido">Precio: $50 (cambiara segun la seleccion)</p>
-              <div id="paypal-button-container"></div>
+              <p id="pago-contenido"></p>
+              <div id="paypal-button-container" style="display: none;"></div>
             </div>
           </div>
         </div>
@@ -408,4 +302,5 @@
 <script src="js/estiloBotones.js"></script>
 <script src="js/paypal.js"></script>
 <script src="js/loadNavBar.js"></script>
+<script src="js/detallesCurso.js"></script>
 </html>
