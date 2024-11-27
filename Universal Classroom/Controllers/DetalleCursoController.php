@@ -31,6 +31,25 @@ class CursoController{
                 }else{
                     echo json_encode(['success' => false, 'error' => 'Nivel no encontrado.']);
                 }
+            }else if($data['option'] == 3){
+                $curso = new Curso();
+                $cursoInfo = $curso->obtenerDetalleCurso($data['ID']);
+                $nivelInfo = $curso->obtenerNivelIndividual($data['idNivel']);
+
+                if($cursoInfo && $nivelInfo){
+                    echo json_encode(['success' => true, 'curso' => $cursoInfo, 'nivel' => $nivelInfo]);
+                }else{
+                    echo json_encode(['success' => false, 'error' => 'Nivel no encontrado.']);
+                }
+            }else if($data['option'] == 4){
+                $curso = new Curso();
+                $validacion = $curso->borrarComentario($data['idComentario']);
+
+                if($validacion){
+                    echo json_encode(['success' => true]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
             }
         }
     }

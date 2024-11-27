@@ -1,22 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const courseLinks = document.querySelectorAll(".curso-link");
+    const courseLinks = document.querySelectorAll(".curse-btn");
 
     courseLinks.forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            
-            const courseId = this.dataset.id;
-            loadCourseDetails(courseId);
+        link.addEventListener("click", e => {            
+            const courseId = e.target.getAttribute("id");
+            localStorage.setItem("idCurso", courseId);
+            window.location.href = "detallesCurso.php";
         });
     });
 });
-
-function loadCourseDetails(courseId) {
-    fetch(`views/detalleCurso.php?id=${courseId}`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("course-details-container").innerHTML = data;
-            window.history.pushState(null, null, `index.php?controller=detalleCurso&id=${courseId}`);
-        })
-        .catch(error => console.error('Error cargando los detalles del curso:', error));
-}

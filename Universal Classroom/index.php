@@ -57,7 +57,7 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
-                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
                     </div>                    
                 </div>
             <?php endforeach; ?>
@@ -74,7 +74,7 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
-                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -91,7 +91,7 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
-                        <a href="detallesCurso.php" class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
                     </div>
                 </div>
             <?php endforeach; ?>

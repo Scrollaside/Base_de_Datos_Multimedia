@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config.php';  // Ruta a config.php
 require_once '../Controllers/database.php';
 
 class Curso{
@@ -46,7 +47,7 @@ class Curso{
     //Buscar en la bd los comentarios del curso
     public function obtenerComentariosCurso($idCurso){
         $this->obtenerConexion();
-        $query = 'SELECT * FROM ObtenerComentariosCurso WHERE ID = ?';
+        $query = 'SELECT * FROM ObtenerComentariosCurso WHERE ID = ? AND Estado = 1';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $idCurso);
         $stmt->execute();
@@ -74,5 +75,21 @@ class Curso{
         }
     }
     //Buscar en la bd nivel individual
+
+    //Borrar comentario admin
+    public function borrarComentario($idComentario){
+        $this->obtenerConexion();
+        $query = 'UPDATE Comentario SET Estado = 0 WHERE ID = ?;';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idComentario);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Borrar comentario admin
 }
 ?>

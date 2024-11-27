@@ -28,6 +28,7 @@ document.getElementById("btn").addEventListener('click', function(event) {
                 window.location.href = "bloqueoDesbloqueo.php";
             }
             localStorage.setItem("ID", data.ID);
+            localStorage.setItem("TipoUsuario", data.TipoUsuario);
 
         } else {
             // Mostrar mensaje de error
