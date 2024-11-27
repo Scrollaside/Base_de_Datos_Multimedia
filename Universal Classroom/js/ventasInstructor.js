@@ -1,4 +1,20 @@
+window.addEventListener("DOMContentLoaded", function () {
 
+    fetch('./Controllers/ReporteController.php', {
+        method: "POST",
+        body: JSON.stringify({ option: 2 })
+      }).then(response => response.json())
+        .then(data => {
+          if (data.success) {
+           console.log(data);
+          }else{
+            alert('No hay nada');
+          }
+        })
+        .catch(error => {
+          alert("Error de red: " + error.message);
+        }); 
+});
 function toggleView() {
     const ventasGenerales = document.getElementById('ventasGenerales');
     const detalleVentas = document.getElementById('detalleVentas');

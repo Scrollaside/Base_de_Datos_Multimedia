@@ -48,5 +48,19 @@ class Reporte {
             echo json_encode(["error" => $e->getMessage()]);
         }
     }
+
+    public function mostrarReporteVentas(){
+        $this->obtenerConexion();
+        $query = "CALL GananciasTotales()";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+       
+    }
 }
 ?>

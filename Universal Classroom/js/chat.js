@@ -1,4 +1,4 @@
-const idNivelC = localStorage.getItem("idNivelMostrar");
+const idNivelC = parseInt(localStorage.getItem("idNivelMostrar"));
 const idUsuario = parseInt(localStorage.getItem("ID"));
 window.addEventListener("DOMContentLoaded", function () {
 
@@ -57,7 +57,7 @@ window.addEventListener("DOMContentLoaded", function () {
       const activos = document.querySelectorAll(".person");
       activos.forEach(activo => {
         activo.addEventListener('click', e => {
-          let idPersona = e.target.getAttribute("id");
+          let idPersona = parseInt(e.target.getAttribute("id"));
           const chatContenedor = document.getElementById("chatContenedor");
           chatContenedor.innerHTML = `
           <div class="top"><span>To: <span class="name" id="nombreDestinatario"></span></span></div>

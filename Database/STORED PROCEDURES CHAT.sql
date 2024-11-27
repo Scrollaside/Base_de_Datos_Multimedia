@@ -5,11 +5,11 @@ CREATE PROCEDURE mandarMensaje (
     IN p_texto TEXT,
     IN p_remitenteID INT,
     IN p_destinatarioID INT,
-    IN p_cursoID INT
+    IN p_nivelID INT
 )
 BEGIN
-    INSERT INTO Mensaje (Texto, FechaHora, Remitente, Destinatario, CursoID)
-    VALUES (p_texto, NOW(), p_remitenteID, p_destinatarioID, p_cursoID);
+    INSERT INTO Mensaje (Texto, FechaHora, Remitente, Destinatario, NivelID)
+    VALUES (p_texto, NOW(), p_remitenteID, p_destinatarioID, p_nivelID);
 END //
 DELIMITER ;
 

@@ -14,9 +14,9 @@ window.addEventListener("DOMContentLoaded", function () {
                 console.log(data);
                 url = data.nivel.Video;
                 const nombreCurso = document.getElementById("NombreCurso");
-                nombreCurso.innerHTML = data.curso.NombreCurso;
+                nombreCurso.innerHTML = data.nivel.Nombre;
                 const nivelNombre = document.getElementById("nivelNombre");
-                nivelNombre.innerHTML = data.nivel.Nombre + ' - recursos';
+                nivelNombre.innerHTML = data.nivel.Descripcion + ' - recursos';
                 const recursosNivel = document.getElementById("recursosNivel");
                 if(data.nivel.Documento !== null){
                     recursosNivel.innerHTML += `
