@@ -13,8 +13,7 @@ CREATE TABLE Usuario (
     FechaRegistro DATETIME,
     FechaActualizacion DATETIME,
     TipoUsuario INT,
-    Estado BOOLEAN,
-    Errores INT DEFAULT 0										-- Variable para contra los errores del usuario (TRIGGER)
+    Estado BOOLEAN
 );
 CREATE TABLE Categoria (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -52,28 +51,26 @@ CREATE TABLE Nivel (
     Nombre VARCHAR(255),
     Descripcion TEXT,
     Video VARCHAR(255) NOT NULL,
-    Documento VARCHAR(255), 											-- Variable agregada de documento
-    LinkRef VARCHAR(255),												-- Variable agregada link de referido
+    Documento VARCHAR(255), 											
+    LinkRef VARCHAR(255),												
     CursoID INT,
     Costo FLOAT,
+    Numero INT,
     FOREIGN KEY (CursoID) REFERENCES Curso(ID)
 );
-ALTER TABLE Nivel ADD Numero INT;
 CREATE TABLE Inscripcion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     UsuarioID INT,
     NivelID INT,
-    FechaInscripcion DATETIME,
-    FechaAcceso DATETIME,												-- Nueva variable de la ultima fecha de acceso
+    FechaInscripcion DATETIME,			
+	FechaAcceso DATETIME,	
     FechaFinalizacion DATETIME,
     Estado BOOLEAN,
-    MetodoPago BOOLEAN, 												-- Nueva variable tipo de pago, 0 paypal y 1 tarjeta
-    -- PrecioPagado INT,
-    
+    MetodoPago BOOLEAN, 												
+        
     FOREIGN KEY (UsuarioID) REFERENCES Usuario(ID),
     FOREIGN KEY (NivelID) REFERENCES Nivel(ID)						-- Cambiado la referencia de la compra del usuario
 );
-ALTER TABLE Inscripcion ADD PrecioPagado INT;
 CREATE TABLE Comentario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Texto TEXT,
@@ -109,7 +106,6 @@ CREATE TABLE Diploma (
 );
 CREATE TABLE ReporteUsuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Tipo INT,
     UsuarioID INT,
     CursosTotal FLOAT,
     Total FLOAT,
