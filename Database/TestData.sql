@@ -86,8 +86,8 @@ VALUES
     ('Nivel 1 - Fundamentos de Desarrollo Web', 'Aprende HTML y CSS desde cero', 'video_web_nivel1.mp4', NULL, NULL, 3, 100, 1),
     ('Nivel 2 - Desarrollo Web Interactivo', 'Inicia con JavaScript para el desarrollo web', 'video_web_nivel2.mp4', NULL, NULL, 3, 100, 2),
     ('Nivel 3 - Desarrollo Web Avanzado', 'Desarrollo de aplicaciones dinámicas con JavaScript', 'video_web_nivel3.mp4', NULL, NULL, 3, 100, 3),
-    ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 170, 1);
-
+    ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 170, 1),
+    ('Nivel 1 - Introducción a PHP', 'Aprende los fundamentos de PHP', 'video_php_nivel1.mp4', NULL, NULL, 11, 90, 1);
 SELECT * FROM Nivel;
 
 
@@ -103,8 +103,8 @@ VALUES
 (3, 7, NOW(), NULL, NULL, 0, 0),
 (4, 8, NOW(), NULL, NULL, 1, 1),
 (1, 9, NOW(), NOW(), NULL, 1, 0),
-(2, 10, NOW(), NOW(), NULL, 1, 1);
-
+(2, 10, NOW(), NOW(), NULL, 1, 1),
+(1, 11, NOW(), NOW(), NULL, 1, 0);
 SELECT * FROM Inscripcion;
 
 -- Inserts de Comentario
