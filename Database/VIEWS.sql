@@ -139,7 +139,9 @@ SELECT
     MAX(n.Numero) AS Nivel, 
 	CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS Pago,
 	FORMAT (AVG(i.MetodoPago), 0) AS Forma,
-     c.UsuarioCreador AS Instructor
+	DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
+	c.UsuarioCreador AS Instructor,
+    c.Titulo AS Curso
 FROM Inscripcion i
 INNER JOIN Nivel n ON n.ID = i.NivelID
 INNER JOIN Curso c ON c.ID = n.CursoID
