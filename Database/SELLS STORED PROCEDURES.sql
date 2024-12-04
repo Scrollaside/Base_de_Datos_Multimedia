@@ -1,3 +1,4 @@
+USE bdm;
 DELIMITER //
 CREATE PROCEDURE VentasGeneralSP(
 IN vg_ID INT,
@@ -31,23 +32,42 @@ END IF;
 END //
 DELIMITER ;
 
-CALL VentasGeneralSP(3,'20/11/2024' ,'02/12/2024','Todas', 'Todos');
+CALL VentasGeneralSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
 
 DELIMITER //
-CREATE PROCEDURE GananciasTotales(
-IN gt_ID INT
+CREATE PROCEDURE GananciasTotalesSP(
+IN gt_ID INT,
+IN gt_desde VARCHAR(255),
+IN gt_hasta VARCHAR(255),
+IN gt_categoria VARCHAR(255),
+IN gt_estado VARCHAR(255)
 )
 BEGIN
-SELECT i.MetodoPago, CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS TotalGanancias, c.UsuarioCreador
-FROM Inscripcion i 
-JOIN Nivel n ON i.NivelID = n.ID
-JOIN Curso c ON n.CursoID = c.ID
-WHERE c.UsuarioCreador = gt_ID
-GROUP BY i.MetodoPago;
+IF gt_categoria = 'Todas' AND gt_estado != 'Todos' THEN
+	SELECT FormaPago, IngresosTotales FROM GananciasTotales
+	WHERE Instructor = gt_ID 
+		AND Estado = gt_estado 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y');
+ELSEIF gt_estado = 'Todos' AND gt_categoria != 'Todas'THEN
+	SELECT FormaPago, IngresosTotales FROM GananciasTotales
+	WHERE Instructor = gt_ID 
+		AND Categoria = gt_categoria 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y');
+ELSEIF gt_categoria = 'Todas' AND gt_estado = 'Todos' THEN
+	SELECT FormaPago, IngresosTotales FROM GananciasTotales
+    WHERE Instructor = gt_ID 
+    AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y');
+ELSE 
+	SELECT FormaPago, IngresosTotales FROM GananciasTotales
+	WHERE Instructor = gt_ID 
+    AND Estado = gt_estado 
+    AND Categoria = gt_categoria 
+    AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y');
+END IF;
 END //
 DELIMITER ;
 
-CALL GananciasTotales(5);
+CALL GananciasTotalesSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
 
 DELIMITER //
 CREATE PROCEDURE MetodoPagoPorCurso (
@@ -59,7 +79,7 @@ SELECT * FROM MetodoPago WHERE Curso = mp_Name AND Instructor = mp_ID;
 END //
 DELIMITER ;
 
-CALL MetodoPagoPorCurso('Programacion en PHP', 5);
+CALL MetodoPagoPorCurso('Curso de Java', 7);
 
 DELIMITER //
 CREATE PROCEDURE VentasPorCursoSP(
@@ -95,4 +115,4 @@ END IF;
 END //
 DELIMITER ;
 
-CALL VentasPorCursoSP(3, 'Modelado 3D','20/11/2024' ,'02/12/2024','Todas', 'Todos');
+CALL VentasPorCursoSP(7, 'Modelado 3D','20/11/2024' ,'02/12/2024','Todas', 'Todos');

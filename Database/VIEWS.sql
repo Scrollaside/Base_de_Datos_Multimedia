@@ -139,9 +139,11 @@ SELECT
     MAX(n.Numero) AS Nivel, 
 	CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS Pago,
 	FORMAT (AVG(i.MetodoPago), 0) AS Forma,
+    c.UsuarioCreador AS Instructor,
 	DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
-	c.UsuarioCreador AS Instructor,
-    c.Titulo AS Curso
+    cg.Nombre AS Categoria,
+    c.Titulo AS Curso,
+    c.Estado AS Estado
 FROM Inscripcion i
 INNER JOIN Nivel n ON n.ID = i.NivelID
 INNER JOIN Curso c ON c.ID = n.CursoID
@@ -152,3 +154,22 @@ GROUP BY
     c.ID;
 
 SELECT * FROM VentasPorCurso;
+
+-- VIEW 9 
+alter VIEW GananciasTotales AS 
+SELECT 
+	i.MetodoPago AS FormaPago, 
+	CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS IngresosTotales, 
+    c.UsuarioCreador AS Instructor,
+    DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
+    cg.Nombre AS Categoria,
+    c.Estado AS Estado
+FROM Inscripcion i
+INNER JOIN Nivel n ON n.ID = i.NivelID
+INNER JOIN Curso c ON c.ID = n.CursoID
+INNER JOIN Usuario u ON u.ID = i.UsuarioID
+INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
+INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
+GROUP BY i.MetodoPago;
+
+SELECT * FROM GananciasTotales where Instructor = 7

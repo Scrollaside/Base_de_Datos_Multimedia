@@ -44,17 +44,17 @@ SELECT * FROM ReporteUsuario;
 -- Inserts Tabla Curso
 INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
 VALUES 
-('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 5, 'Activo', 4.5, NOW(), 10, 3),
-('Modelado 3D', 'Introducción al modelado 3D con Blender', NULL, 150.00, 8, 'Activo', 4.2, NOW(), 15, 3),
-('Desarrollo Web', 'Desarrollo web moderno con HTML, CSS y JavaScript', NULL, 80.00, 6, 'Activo', 4.7, NOW(), 20, 3),
-('Dibujo Artístico', 'Técnicas avanzadas de dibujo', NULL, 90.00, 4, 'Inactivo', 3.9, NOW(), 5, 3),
-('Marketing Digital', 'Estrategias de marketing digital', NULL, 120.00, 5, 'Activo', 4.0, NOW(), 12, 3),
-('Python para principiantes', 'Curso básico de programación en Python', NULL, 95.00, 7, 'Activo', 4.8, NOW(), 25, 3),
-('React JS', 'Desarrollo de interfaces modernas con React', NULL, 130.00, 6, 'Activo', 4.5, NOW(), 18, 3),
-('Animación 3D', 'Principios básicos de animación 3D', NULL, 200.00, 10, 'Inactivo', 4.3, NOW(), 7, 3),
-('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 3, 'Activo', 3.8, NOW(), 4, 5),
-('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 6, 'Activo', 4.6, NOW(), 9, 5),
-('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 5);
+('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 5, 'Activo', 4.5, NOW(), 10, 7),
+('Modelado 3D', 'Introducción al modelado 3D con Blender', NULL, 150.00, 8, 'Activo', 4.2, NOW(), 15, 7),
+('Desarrollo Web', 'Desarrollo web moderno con HTML, CSS y JavaScript', NULL, 80.00, 6, 'Activo', 4.7, NOW(), 20, 7),
+('Dibujo Artístico', 'Técnicas avanzadas de dibujo', NULL, 90.00, 4, 'Inactivo', 3.9, NOW(), 5, 7),
+('Marketing Digital', 'Estrategias de marketing digital', NULL, 120.00, 5, 'Activo', 4.0, NOW(), 12, 7),
+('Python para principiantes', 'Curso básico de programación en Python', NULL, 95.00, 7, 'Activo', 4.8, NOW(), 25, 7),
+('React JS', 'Desarrollo de interfaces modernas con React', NULL, 130.00, 6, 'Activo', 4.5, NOW(), 18, 7),
+('Animación 3D', 'Principios básicos de animación 3D', NULL, 200.00, 10, 'Inactivo', 4.3, NOW(), 7, 7),
+('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 3, 'Activo', 3.8, NOW(), 4, 9),
+('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 6, 'Activo', 4.6, NOW(), 9, 9),
+('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 9);
 
 SELECT * FROM curso;
 
@@ -138,20 +138,6 @@ VALUES
 
 SELECT * FROM Diploma;
 
-
-
--- Inserts Tabla Inscripcion
-INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
-VALUES
-    (1, 1, NOW(), NOW(), NULL, TRUE, 0), -- Aldo Gonzalez, Nivel 1 de Java, pago con PayPal
-    (1, 2, NOW(), NOW(), NULL, TRUE, 0), -- Aldo Gonzalez, Nivel 2 de Java, pago con PayPal
-    (2, 3, NOW(), NOW(), NULL, TRUE, 1), -- Guillermo Morin, Nivel 3 de Web, pago con tarjeta
-    (3, 5, NOW(), NOW(), NULL, TRUE, 1), -- Max Leon, Nivel 1 de 3D, pago con tarjeta
-    (4, 8, NOW(), NOW(), NULL, TRUE, 0), -- Alberto Ayala, Nivel 1 de Web, pago con PayPal
-    (2, 6, NOW(), NOW(), NULL, TRUE, 1), -- Guillermo Morin, Nivel 2 de 3D, pago con tarjeta
-    (1, 7, NOW(), NOW(), NULL, TRUE, 0); -- Aldo Gonzalez, Nivel 3 de 3D, pago con PayPal
-
-Select * from inscripcion;
 
 
 

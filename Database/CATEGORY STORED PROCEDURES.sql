@@ -29,8 +29,8 @@ END IF;
 END //
 DELIMITER ;
 
-CALL ActualizarCategorias('Test', 'TestDesc	', 1)
+CALL ActualizarCategorias('Test', 'TestDesc	', 1);
 
 
-SELECT * FROM VistaCategorias
+SELECT * FROM VistaCategorias;
 

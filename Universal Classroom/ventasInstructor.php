@@ -25,13 +25,13 @@
         <label for="categoria">Categoría:</label>
         <select id="categoria">
             <option value="todas">Todas</option>
-            <option value="tecnologia">Tecnología</option>
+            <!-- <option value="tecnologia">Tecnología</option>
             <option value="programacion">Programación</option>
             <option value="dibujo">Dibujo</option>
             <option value="web">Web</option>
             <option value="videojuegos">VideoJuegos</option>
             <option value="basededatos">Base de Datos</option>
-            <option value="marketing">Marketing</option>
+            <option value="marketing">Marketing</option> -->
         </select>
 
         <label for="estado">Estado del Curso:</label>
@@ -54,7 +54,7 @@
 
         <h1>Resumen General de Cursos</h1><br>
 
-        <table>
+        <table id="tabla-ventas-generales">
             <thead>
                 <tr>
                     <th>Curso</th>
@@ -63,8 +63,8 @@
                     <th>Ingresos</th>
                 </tr>
             </thead>
-            <tbody id="tabla-ventas-generales">
-                <tr>
+            <tbody >
+                <!-- <tr>
                     <td>Curso de Programación</td>
                     <td>120</td>
                     <td>3</td>
@@ -87,7 +87,7 @@
                     <td>72</td>
                     <td>2</td>
                     <td>$2,500.00</td>
-                </tr>
+                </tr> -->
             </tbody>           
         </table><br><br><br>
 
@@ -126,6 +126,18 @@
     <div class="detalle-ventas" id="detalleVentas" style="display: none;">
 
         <h1>Detalle de Ventas por Curso</h1><br>
+
+        <label for="cursoSlct">Curso:</label>
+        <select id="cursoSlct">
+            <!-- <option value="todas">Todas</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="programacion">Programación</option>
+            <option value="dibujo">Dibujo</option>
+            <option value="web">Web</option>
+            <option value="videojuegos">VideoJuegos</option>
+            <option value="basededatos">Base de Datos</option>
+            <option value="marketing">Marketing</option> -->
+        </select>
 
         <h2>Curso de Programación</h2>
         <table>
@@ -198,8 +210,7 @@
             <h3>Total Ingresos: $10,500.00</h3><br><br><br>
         </div>
 
-
-
+<!-- 
         <h2>Todo sobre Unreal Engine</h2>
         <table>
             <thead>
@@ -409,7 +420,7 @@
             </table>
 
             <h3>Total Ingresos: $2,500.00</h3><br><br><br>
-        </div>
+        </div> -->
 
     </div>
 
