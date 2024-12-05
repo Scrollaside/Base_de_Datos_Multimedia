@@ -37,11 +37,11 @@
         <label for="estado">Estado del Curso:</label>
         <select id="estado">
             <option value="todos">Todos</option>
-            <option value="activos">Activos</option>
-            <option value="inactivos">Inactivos</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
         </select>
 
-        <button onclick="filtrarVentas()">Filtrar</button>
+        <button onclick="getFiltros()">Filtrar</button>
     </div>
 
 
@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>Tarjeta de Crédito</td>
                         <td>$19,300.00</td>
                     </tr>
@@ -113,7 +113,7 @@
                     <tr>
                         <td>PayPal</td>
                         <td>$62,800.00</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
 
@@ -182,7 +182,7 @@
             </tbody>
         </table><br>
 
-        <div id="resumen-forma-pago">
+        <div id="resumen-forma-curso">
 
             <table>
                 <thead>

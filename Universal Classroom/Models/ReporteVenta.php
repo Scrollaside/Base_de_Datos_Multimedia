@@ -33,15 +33,17 @@ class ReporteVenta {
     }
     
 
-    public function TablaGeneral($instructor) {
+    public function TablaGeneral($instructor, $fechaDesde, $fechaHasta, $categoria, $estado) {
         $this->obtenerConexion();
-        $fechaHasta = $this->GetDate();
-        // Parámetros para el procedimiento almacenado
-        $fechaDesde = '01/01/2000';
-       // $fechaHasta = '03/12/2024'; // Fecha actual en formato 'día/mes/año'
-        $curso = 'Todas';
-        $estado = 'Todos';
-    
+        if ($fechaDesde == 'all'){
+            $fechaDesde = '01/01/1000';
+        }
+
+        if ($fechaHasta == 'all'){
+            $fechaHasta = $this->GetDate();
+        }
+        // $categoria = 'Todas';
+        // $estado = 'Todos';
         // Consulta para llamar al procedimiento almacenado
         $query = "CALL VentasGeneralSP(?, ?, ?, ?, ?)";
     
@@ -51,7 +53,7 @@ class ReporteVenta {
             $stmt->bindParam(1, $instructor, PDO::PARAM_STR);
             $stmt->bindParam(2, $fechaDesde, PDO::PARAM_STR);
             $stmt->bindParam(3, $fechaHasta, PDO::PARAM_STR);
-            $stmt->bindParam(4, $curso, PDO::PARAM_STR);
+            $stmt->bindParam(4, $categoria, PDO::PARAM_STR);
             $stmt->bindParam(5, $estado, PDO::PARAM_STR);
     
             // Ejecutar consulta
@@ -68,7 +70,43 @@ class ReporteVenta {
             echo json_encode(["error" => $e->getMessage()]);
         }
     }
+    public function IngresosGeneral($instructor, $fechaDesde, $fechaHasta, $categoria, $estado) {
+        $this->obtenerConexion();
+        if ($fechaDesde == 'all'){
+            $fechaDesde = '01/01/1000';
+        }
+
+        if ($fechaHasta == 'all'){
+            $fechaHasta = $this->GetDate();
+        }
+        // $categoria = 'Todas';
+        // $estado = 'Todos';
+        // Consulta para llamar al procedimiento almacenado
+        $query = "CALL GananciasTotalesSP(?, ?, ?, ?, ?)";
     
+        try {
+            $stmt = $this->conn->prepare($query);
+            // Asignar parámetros
+            $stmt->bindParam(1, $instructor, PDO::PARAM_STR);
+            $stmt->bindParam(2, $fechaDesde, PDO::PARAM_STR);
+            $stmt->bindParam(3, $fechaHasta, PDO::PARAM_STR);
+            $stmt->bindParam(4, $categoria, PDO::PARAM_STR);
+            $stmt->bindParam(5, $estado, PDO::PARAM_STR);
+    
+            // Ejecutar consulta
+            $stmt->execute();
+    
+            // Obtener los resultados
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           
+            echo json_encode([
+                "success" => true,
+                "data" => $resultado
+            ]);
+        } catch (PDOException $e) {
+            echo json_encode(["error" => $e->getMessage()]);
+        }
+    }
     
 }
 ?>

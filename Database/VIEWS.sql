@@ -100,7 +100,7 @@ JOIN Usuario u ON ct.Creador = u.ID;
 SELECT * FROM VistaCategorias;
 
 -- VIEW 6
-CREATE VIEW VentasGeneral AS
+CREATE OR REPLACE VIEW VentasGeneral AS
 SELECT 
     c.Titulo AS Curso, 
     COUNT(DISTINCT u.ID) AS Alumnos,
@@ -116,22 +116,11 @@ INNER JOIN Curso c ON c.ID = n.CursoID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
 INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
-GROUP BY 
-    c.ID;
+GROUP BY c.ID, cg.Nombre;
 
 SELECT * FROM VentasGeneral;
 
 -- VIEW 7
-CREATE VIEW MetodoPago AS
-SELECT c.Titulo AS Curso, i.MetodoPago, CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS TotalGanancias, c.UsuarioCreador AS Instructor
-FROM Inscripcion i
-JOIN Nivel n ON i.NivelID = n.ID
-JOIN Curso c ON n.CursoID = c.ID
-GROUP BY c.Titulo, i.MetodoPago;
-
-SELECT * FROM MetodoPago;
-
--- VIEW 8
 CREATE VIEW VentasPorCurso AS
 SELECT 
 	u.NombreCompleto AS Alumno, 
@@ -150,18 +139,38 @@ INNER JOIN Curso c ON c.ID = n.CursoID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
 INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
-GROUP BY 
-    c.ID;
+GROUP BY c.ID, c.Titulo;
 
 SELECT * FROM VentasPorCurso;
 
--- VIEW 9 
-alter VIEW GananciasTotales AS 
+-- VIEW 8
+CREATE OR REPLACE VIEW GananciasTotales AS 
 SELECT 
 	i.MetodoPago AS FormaPago, 
-	CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS IngresosTotales, 
+	n.Costo AS IngresosTotales, 
     c.UsuarioCreador AS Instructor,
     DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
+    cg.Nombre AS Categoria,
+    c.Titulo AS Curso,
+    c.Estado AS Estado
+FROM Inscripcion i
+INNER JOIN Nivel n ON n.ID = i.NivelID
+INNER JOIN Curso c ON c.ID = n.CursoID
+INNER JOIN Usuario u ON u.ID = i.UsuarioID
+INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
+INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
+GROUP BY i.MetodoPago, cg.Nombre, c.Estado;
+
+SELECT * FROM GananciasTotales;
+
+-- VIEW 10
+CREATE VIEW GananciasPorCurso AS
+SELECT 
+	i.MetodoPago AS FormaPago, 
+    CONCAT('$', FORMAT(SUM(n.Costo), 2)) AS IngresosTotales,
+	c.Titulo AS Curso,
+    c.UsuarioCreador AS Instructor,
+	DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
     cg.Nombre AS Categoria,
     c.Estado AS Estado
 FROM Inscripcion i
@@ -170,6 +179,6 @@ INNER JOIN Curso c ON c.ID = n.CursoID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
 INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
-GROUP BY i.MetodoPago;
+GROUP BY i.MetodoPago, c.Titulo;
 
-SELECT * FROM GananciasTotales where Instructor = 7
+SELECT * FROM GananciasPorCurso;

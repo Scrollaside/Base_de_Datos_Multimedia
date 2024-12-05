@@ -10,20 +10,12 @@ if (isset($_GET['accion'])){
             $controller->VentasGeneral();
             break;
 
-        // case 'GeneralFiltro':
-        //     $controller->GeneralFiltro();
-        //     break;
-
+        case 'IngresosGeneral':
+           $controller->IngresosGeneral();
+           break;
+        
         case 'VentasPorCurso':
             $controller->VentasPorCurso();
-            break;
-
-        // case 'PorCursoFiltro':
-        //     $controller->PorCursoFiltro();
-        //     break;
-        
-        case 'GananciasTotales':
-            $controller->GananciasTotales();
             break;
 
         case 'GananciasPorCurso':

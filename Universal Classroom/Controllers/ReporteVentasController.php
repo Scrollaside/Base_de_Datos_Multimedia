@@ -8,27 +8,34 @@ class ReporteVentaController {
     public function VentasGeneral() {
         $Reporte = new ReporteVenta();
         $Reporte->instructor = trim($_POST['instructor']);
-        $Reporte->TablaGeneral($Reporte->instructor);
+        $Reporte->fechaInicio = trim($_POST['fechaInicio']);
+        $Reporte->fechaFin = trim($_POST['fechaFin']);
+        $Reporte->categoria = trim($_POST['categoria']);
+        $Reporte->estado = trim($_POST['estado']);
+        
+        $Reporte->TablaGeneral($Reporte->instructor, $Reporte->fechaInicio, $Reporte->fechaFin, $Reporte->categoria, $Reporte->estado);
     }
-    // public function GeneralFiltro() {
-    //     $categoria = new Categoria();
-    //     $categoria->ListarCategorias(); // Llamar al método para listar categorías
-    // }
+
+    public function IngresosGeneral() {
+        $Reporte = new ReporteVenta();
+        $Reporte->instructor = trim($_POST['instructor']);
+        $Reporte->fechaInicio = trim($_POST['fechaInicio']);
+        $Reporte->fechaFin = trim($_POST['fechaFin']);
+        $Reporte->categoria = trim($_POST['categoria']);
+        $Reporte->estado = trim($_POST['estado']);
+        
+        $Reporte->IngresosGeneral($Reporte->instructor, $Reporte->fechaInicio, $Reporte->fechaFin, $Reporte->categoria, $Reporte->estado);
+    }  
+
     public function VentasPorCurso() {
         $categoria = new Categoria();
-        $categoria->ListarCategorias(); // Llamar al método para listar categorías
+        $categoria->ListarCategorias(); 
     }
-    // public function PorCursoFiltro() {
-    //     $categoria = new Categoria();
-    //     $categoria->ListarCategorias(); // Llamar al método para listar categorías
-    // }
-    public function GananciasTotales() {
-        $categoria = new Categoria();
-        $categoria->ListarCategorias(); // Llamar al método para listar categorías
-    }  
+
+    
     public function GananciasPorCurso() {
         $categoria = new Categoria();
-        $categoria->ListarCategorias(); // Llamar al método para listar categorías
+        $categoria->ListarCategorias(); 
     }    
 }
 

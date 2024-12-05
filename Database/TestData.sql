@@ -57,7 +57,7 @@ VALUES
 ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 9);
 
 SELECT * FROM curso;
-
+update curso set estado = 'Activo' WHERE ID = 3;
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
 VALUES 
@@ -70,7 +70,8 @@ VALUES
 (7, 3), (7, 5),
 (8, 2),
 (9, 5), (9, 1),
-(10, 3);
+(10, 3),
+(11, 3);
 
 
 -- Inserts Tabla Nivel

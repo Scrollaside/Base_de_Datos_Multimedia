@@ -1,21 +1,3 @@
-// window.addEventListener("DOMContentLoaded", function () {
-
-//     fetch('./Controllers/ReporteController.php', {
-//         method: "POST",
-//         body: JSON.stringify({ option: 2 })
-//       }).then(response => response.json())
-//         .then(data => {
-//           if (data.success) {
-//            console.log(data);
-//           }else{
-//             alert('No hay nada');
-//           }
-//         })
-//         .catch(error => {
-//           alert("Error de red: " + error.message);
-//         }); 
-// });
-
 function toggleView() {
     const ventasGenerales = document.getElementById('ventasGenerales');
     const detalleVentas = document.getElementById('detalleVentas');
@@ -33,11 +15,43 @@ function toggleView() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-   // const instructor = localStorage.getItem("ID");;
+    getFiltros();
     mostrarCategorias();
+});
+
+
+function formatFecha(date) {
+    const format = date.split('-'); // Divide la fecha 'YYYY-MM-DD'
+    return `${format[2]}/${format[1]}/${format[0]}`; // Devuelve 'DD/MM/YYYY'
+}
+
+async function getFiltros(){
+    const desde = document.getElementById("fecha-inicio").value.trim();
+    if (desde === ''){
+        localStorage.setItem('desdeF', 'all');   
+    }
+    else {
+        const desdeF = formatFecha(desde);
+        localStorage.setItem('desdeF', desdeF);
+    }
+    const hasta = document.getElementById("fecha-fin").value.trim();
+    if (hasta === ''){
+        localStorage.setItem('hastaF', 'all');   
+    }
+    else {
+        const hastaF = formatFecha(hasta);
+        localStorage.setItem('hastaF', hastaF);
+    }
+    
+    const categoria = document.getElementById("categoria").value.trim();
+    localStorage.setItem('categoriaF', categoria);
+    const estado = document.getElementById("estado").value.trim();
+    localStorage.setItem('estadoF', estado);
+
     mostrarCursos();
     TablaGeneral();
-});
+    IngresosGeneral();
+}
 
 async function mostrarCategorias(){
 
@@ -66,13 +80,22 @@ async function mostrarCursos() {
     const selectCurso = document.getElementById("cursoSlct");
     const formData = new FormData();
     const instructor = localStorage.getItem("ID");
+    const fechaInicio = localStorage.getItem("desdeF");
+    const fechaFin = localStorage.getItem("hastaF");
+    const categoria = localStorage.getItem("categoriaF");
+    const estado = localStorage.getItem("estadoF");
 
-    if (!instructor) {
-        console.error("No se encontró el ID del instructor en Local Storage.");
-        return;
-    }
+    // if (!instructor) {
+    //     console.error("No se encontró el ID del instructor en Local Storage.");
+    //     return;
+    // }
 
     formData.append("instructor", instructor);
+    formData.append("fechaInicio", fechaInicio);
+    formData.append("fechaFin", fechaFin);
+    formData.append("categoria", categoria);
+    formData.append("estado", estado);
+    
     try {
         const response = await fetch("./Controllers/ReporteVentas.php?accion=VentasGeneral", {
             method: "POST", // Cambiamos a POST para enviar datos en el cuerpo
@@ -102,13 +125,16 @@ async function TablaGeneral(){
     const tablaCursos = document.getElementById("tabla-ventas-generales").getElementsByTagName('tbody')[0];
     const formData = new FormData();
     const instructor = localStorage.getItem("ID");
-
-    if (!instructor) {
-        console.error("No se encontró el ID del instructor en Local Storage.");
-        return;
-    }
+    const fechaInicio = localStorage.getItem("desdeF");
+    const fechaFin = localStorage.getItem("hastaF");
+    const categoria = localStorage.getItem("categoriaF");
+    const estado = localStorage.getItem("estadoF");
 
     formData.append("instructor", instructor);
+    formData.append("fechaInicio", fechaInicio);
+    formData.append("fechaFin", fechaFin);
+    formData.append("categoria", categoria);
+    formData.append("estado", estado);
 
     try {
         const response = await fetch("./Controllers/ReporteVentas.php?accion=VentasGeneral", {
@@ -144,6 +170,62 @@ async function TablaGeneral(){
 
             const ingresosCell = document.createElement("td");
             ingresosCell.textContent = curso.Ingresos; // Ajustar a la clave correcta
+            row.appendChild(ingresosCell);
+
+            // Añadir la fila a la tabla
+            tablaCursos.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Error en la solicitud Fetch: ", error);
+    }
+}
+
+async function IngresosGeneral(){
+    const tablaCursos = document.getElementById("resumen-forma-pago").getElementsByTagName('tbody')[0];
+    const formData = new FormData();
+    const instructor = localStorage.getItem("ID");
+    const fechaInicio = localStorage.getItem("desdeF");
+    const fechaFin = localStorage.getItem("hastaF");
+    const categoria = localStorage.getItem("categoriaF");
+    const estado = localStorage.getItem("estadoF");
+
+    formData.append("instructor", instructor);
+    formData.append("fechaInicio", fechaInicio);
+    formData.append("fechaFin", fechaFin);
+    formData.append("categoria", categoria);
+    formData.append("estado", estado);
+
+    try {
+        const response = await fetch("./Controllers/ReporteVentas.php?accion=IngresosGeneral", {
+            method: "POST", // Cambiamos a POST para enviar datos en el cuerpo
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            console.error("Error desde el servidor: ", data.message);
+            return;
+        }
+
+        // Vaciar el cuerpo de la tabla antes de llenarla
+        tablaCursos.innerHTML = '';
+
+        // Llenar la tabla con los datos recibidos
+        data.data.forEach(forma => {
+            const row = document.createElement("tr");
+            
+            const pagoCell = document.createElement("td");
+            if (forma.FormaPago === 0){
+                pagoCell.textContent = "Tarjeta"; 
+            }
+            else if (forma.FormaPago === 1){
+                pagoCell.textContent = "PayPal"; 
+            }
+            row.appendChild(pagoCell);
+            
+            const ingresosCell = document.createElement("td");
+            ingresosCell.textContent = forma.IngresosTotales;
             row.appendChild(ingresosCell);
 
             // Añadir la fila a la tabla
