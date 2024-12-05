@@ -78,6 +78,7 @@ DELIMITER ;
 CALL GananciasTotalesSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Programacion', 'Activo');
 
 
+DROP PROCEDURE VentasPorCursoSP;
 DELIMITER //
 CREATE PROCEDURE VentasPorCursoSP(
 IN vg_ID INT,
@@ -111,7 +112,7 @@ ELSE
 END IF;
 END //
 DELIMITER ;
-CALL VentasPorCursoSP(7, 'Modelado 3D','20/11/2024' ,'02/12/2024','Todas', 'Todos');
+CALL VentasPorCursoSP(7, 'Curso de Java','20/11/2024' ,'02/12/2024','Todas', 'Todos');
 
 
 DELIMITER //

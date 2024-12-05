@@ -94,17 +94,17 @@ SELECT * FROM Nivel;
 -- Inserts Inscripcion   
 INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
 VALUES 
-(1, 1, NOW(), NOW(), NULL, 1, 0),
+(6, 1, NOW(), NOW(), NULL, 1, 0),
 (2, 2, NOW(), NOW(), NULL, 1, 1),
 (3, 3, NOW(), NULL, NULL, 0, 0),
 (4, 4, NOW(), NULL, NULL, 1, 1),
-(1, 5, NOW(), NOW(), NULL, 1, 0),
+(6, 5, NOW(), NOW(), NULL, 1, 0),
 (2, 6, NOW(), NOW(), NULL, 1, 1),
 (3, 7, NOW(), NULL, NULL, 0, 0),
 (4, 8, NOW(), NULL, NULL, 1, 1),
-(1, 9, NOW(), NOW(), NULL, 1, 0),
+(6, 9, NOW(), NOW(), NULL, 1, 0),
 (2, 10, NOW(), NOW(), NULL, 1, 1),
-(1, 11, NOW(), NOW(), NULL, 1, 0);
+(6, 11, NOW(), NOW(), NULL, 1, 0);
 SELECT * FROM Inscripcion;
 
 -- Inserts de Comentario

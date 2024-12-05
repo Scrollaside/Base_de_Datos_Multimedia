@@ -28,8 +28,15 @@ class ReporteVentaController {
     }  
 
     public function VentasPorCurso() {
-        $categoria = new Categoria();
-        $categoria->ListarCategorias(); 
+        $Reporte = new ReporteVenta();
+        $Reporte->instructor = trim($_POST['instructor']);
+        $Reporte->fechaInicio = trim($_POST['fechaInicio']);
+        $Reporte->fechaFin = trim($_POST['fechaFin']);
+        $Reporte->categoria = trim($_POST['categoria']);
+        $Reporte->estado = trim($_POST['estado']);
+        $Reporte->curso = trim($_POST['curso']);
+        
+        $Reporte->TablaPorCurso($Reporte->instructor, $Reporte->fechaInicio, $Reporte->fechaFin, $Reporte->categoria, $Reporte->estado, $Reporte->curso);
     }
 
     

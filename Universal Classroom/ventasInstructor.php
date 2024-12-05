@@ -64,30 +64,6 @@
                 </tr>
             </thead>
             <tbody >
-                <!-- <tr>
-                    <td>Curso de Programación</td>
-                    <td>120</td>
-                    <td>3</td>
-                    <td>$10,500.00</td>
-                </tr>
-                <tr>
-                    <td>Todo sobre Unreal Engine</td>
-                    <td>873</td>
-                    <td>7</td>
-                    <td>$63,700.00</td>
-                </tr>
-                <tr>
-                    <td>Curso de HTML</td>
-                    <td>350</td>
-                    <td>10</td>
-                    <td>$17,000.00</td>
-                </tr>
-                <tr>
-                    <td>Curso de C#</td>
-                    <td>72</td>
-                    <td>2</td>
-                    <td>$2,500.00</td>
-                </tr> -->
             </tbody>           
         </table><br><br><br>
 
@@ -102,18 +78,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>Tarjeta de Crédito</td>
-                        <td>$19,300.00</td>
-                    </tr>
-                    <tr>
-                        <td>Tarjeta de débito</td>
-                        <td>$11,600.00</td>
-                    </tr>
-                    <tr>
-                        <td>PayPal</td>
-                        <td>$62,800.00</td>
-                    </tr> -->
                 </tbody>
             </table>
 
@@ -128,19 +92,11 @@
         <h1>Detalle de Ventas por Curso</h1><br>
 
         <label for="cursoSlct">Curso:</label>
-        <select id="cursoSlct">
-            <!-- <option value="todas">Todas</option>
-            <option value="tecnologia">Tecnología</option>
-            <option value="programacion">Programación</option>
-            <option value="dibujo">Dibujo</option>
-            <option value="web">Web</option>
-            <option value="videojuegos">VideoJuegos</option>
-            <option value="basededatos">Base de Datos</option>
-            <option value="marketing">Marketing</option> -->
+        <select id="cursoSlct" onclick = "getCurso()">
         </select>
 
-        <h2>Curso de Programación</h2>
-        <table>
+        <h2 id="NombreCurso"></h2>
+        <table id="tabla-detalle-ventas">
             <thead>
                 <tr>
                     <th>Nombre del Alumno</th>
@@ -150,8 +106,8 @@
                     <th>Forma de Pago</th>
                 </tr>
             </thead>
-            <tbody id="tabla-detalle-ventas">
-                <tr>
+            <tbody >
+                <!-- <tr>
                     <td>Daniel Uriel Max Moreno Ysiel</td>
                     <td>16-Sep-2024</td>
                     <td>3</td>
@@ -178,7 +134,7 @@
                     <td>7</td>
                     <td>$3,500.00</td>
                     <td>PayPal</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table><br>
 

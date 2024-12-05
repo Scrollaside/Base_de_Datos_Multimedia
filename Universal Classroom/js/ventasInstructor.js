@@ -48,9 +48,22 @@ async function getFiltros(){
     const estado = document.getElementById("estado").value.trim();
     localStorage.setItem('estadoF', estado);
 
+
     mostrarCursos();
     TablaGeneral();
+    TablaPorCurso();
     IngresosGeneral();
+}
+
+async function getCurso(){
+    const curso = document.getElementById("cursoSlct").value.trim();
+    localStorage.setItem('cursoF', curso);
+    
+    const nombreCurso = document.getElementById('NombreCurso');
+    const texto = localStorage.getItem('cursoF');
+    nombreCurso.textContent = texto;
+
+    TablaPorCurso();
 }
 
 async function mostrarCategorias(){
@@ -84,6 +97,7 @@ async function mostrarCursos() {
     const fechaFin = localStorage.getItem("hastaF");
     const categoria = localStorage.getItem("categoriaF");
     const estado = localStorage.getItem("estadoF");
+ 
 
     // if (!instructor) {
     //     console.error("No se encontró el ID del instructor en Local Storage.");
@@ -95,6 +109,7 @@ async function mostrarCursos() {
     formData.append("fechaFin", fechaFin);
     formData.append("categoria", categoria);
     formData.append("estado", estado);
+    
     
     try {
         const response = await fetch("./Controllers/ReporteVentas.php?accion=VentasGeneral", {
@@ -179,7 +194,75 @@ async function TablaGeneral(){
         console.error("Error en la solicitud Fetch: ", error);
     }
 }
+async function TablaPorCurso(){
+    const tablaCursos = document.getElementById("tabla-detalle-ventas").getElementsByTagName('tbody')[0];
+    const formData = new FormData();
+    const instructor = localStorage.getItem("ID");
+    const fechaInicio = localStorage.getItem("desdeF");
+    const fechaFin = localStorage.getItem("hastaF");
+    const categoria = localStorage.getItem("categoriaF");
+    const estado = localStorage.getItem("estadoF");
+    const curso = localStorage.getItem ("cursoF");
 
+    formData.append("instructor", instructor);
+    formData.append("fechaInicio", fechaInicio);
+    formData.append("fechaFin", fechaFin);
+    formData.append("categoria", categoria);
+    formData.append("estado", estado);
+    formData.append("curso", curso);
+
+    try {
+        const response = await fetch("./Controllers/ReporteVentas.php?accion=VentasPorCurso", {
+            method: "POST", // Cambiamos a POST para enviar datos en el cuerpo
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            console.error("Error desde el servidor: ", data.message);
+            return;
+        }
+
+        // Vaciar el cuerpo de la tabla antes de llenarla
+        tablaCursos.innerHTML = '';
+
+        // Llenar la tabla con los datos recibidos
+        data.data.forEach(curso => {
+            const row = document.createElement("tr");
+
+            const alumnoCell = document.createElement("td");
+            alumnoCell.textContent = curso.Alumno; // Ajustar a la clave correcta
+            row.appendChild(alumnoCell);
+
+            const inscripcionCell = document.createElement("td");
+            inscripcionCell.textContent = curso.Inscripcion; // Ajustar a la clave correcta
+            row.appendChild(inscripcionCell);
+
+            const nivelCell = document.createElement("td");
+            nivelCell.textContent = curso.Nivel; // Ajustar a la clave correcta
+            row.appendChild(nivelCell);
+
+            const pagoCell = document.createElement("td");
+            pagoCell.textContent = curso.Pago; // Ajustar a la clave correcta
+            row.appendChild(pagoCell);
+
+            const formaCell = document.createElement("td");
+            if (curso.Forma == 0){
+                formaCell.textContent = "Tarjeta"; 
+            }
+            else if (curso.Forma == 1){
+                formaCell.textContent = "PayPal"; 
+            }
+            row.appendChild(formaCell);
+
+            // Añadir la fila a la tabla
+            tablaCursos.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Error en la solicitud Fetch: ", error);
+    }
+}
 async function IngresosGeneral(){
     const tablaCursos = document.getElementById("resumen-forma-pago").getElementsByTagName('tbody')[0];
     const formData = new FormData();
@@ -216,14 +299,14 @@ async function IngresosGeneral(){
             const row = document.createElement("tr");
             
             const pagoCell = document.createElement("td");
-            if (forma.FormaPago === 0){
+            if (forma.FormaPago == 0){
                 pagoCell.textContent = "Tarjeta"; 
             }
-            else if (forma.FormaPago === 1){
+            else if (forma.FormaPago == 1){
                 pagoCell.textContent = "PayPal"; 
             }
             row.appendChild(pagoCell);
-            
+
             const ingresosCell = document.createElement("td");
             ingresosCell.textContent = forma.IngresosTotales;
             row.appendChild(ingresosCell);

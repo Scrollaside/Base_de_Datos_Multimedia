@@ -121,7 +121,7 @@ GROUP BY c.ID, cg.Nombre;
 SELECT * FROM VentasGeneral;
 
 -- VIEW 7
-CREATE VIEW VentasPorCurso AS
+CREATE OR REPLACE VIEW VentasPorCurso AS
 SELECT 
 	u.NombreCompleto AS Alumno, 
 	DATE_FORMAT(i.FechaInscripcion, '%d/%m/%Y') AS Inscripcion, 
@@ -139,7 +139,7 @@ INNER JOIN Curso c ON c.ID = n.CursoID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
 INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
-GROUP BY c.ID, c.Titulo;
+GROUP BY i.ID;
 
 SELECT * FROM VentasPorCurso;
 
