@@ -204,21 +204,21 @@ IN ti_estado VARCHAR(255)
 BEGIN 
 IF ti_categoria = 'Todas' AND ti_estado != 'Todos' THEN
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
-	WHERE Instructor = ti_ID 
+	WHERE Instructor = ti_ID AND Curso = ti_curso
 		AND Estado = ti_estado 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
 ELSEIF ti_categoria != 'Todas' AND ti_estado = 'Todos' THEN
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
-	WHERE Instructor = ti_ID 
+	WHERE Instructor = ti_ID AND Curso = ti_curso
 		AND Categoria = ti_categoria 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
 ELSEIF ti_categoria = 'Todas' AND ti_estado = 'Todos' THEN
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
-    WHERE Instructor = ti_ID 
+    WHERE Instructor = ti_ID AND Curso = ti_curso
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
 ELSE 
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
-	WHERE Instructor = ti_ID 
+	WHERE Instructor = ti_ID AND Curso = ti_curso
 		AND Estado = ti_estado 
 		AND Categoria = ti_categoria 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');

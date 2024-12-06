@@ -8,15 +8,20 @@ function toggleView() {
         detalleVentas.style.display = 'none';
         toggleButton.textContent = 'Ver Detalle por Curso';
         localStorage.setItem('cursoF', "all");
+        TotalIngresos();
     } else {
         ventasGenerales.style.display = 'none';
         detalleVentas.style.display = 'block';
         toggleButton.textContent = 'Ver Resumen General';
+        const curso = document.getElementById("cursoSlct").value.trim();
+        localStorage.setItem('cursoF', curso);
+        TotalIngresos();
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    localStorage.setItem('cursoF', "all");
+    localStorage.setItem('cursoF', 'all');
+    localStorage.setItem('cursoSlct', 'all');
     getFiltros();
     getCurso();
     mostrarCategorias();
@@ -51,16 +56,20 @@ async function getFiltros() {
     localStorage.setItem('categoriaF', categoria);
     const estado = document.getElementById("estado").value.trim();
     localStorage.setItem('estadoF', estado);
-    const curso = document.getElementById("cursoSlct").value.trim();
-
+//    const curso = document.getElementById("cursoSlct").value.trim();
+    const curso = localStorage.getItem('cursoF')
+    //localStorage.setItem('cursoSlct', curso);
 
     mostrarCursos();
     TablaGeneral();
     IngresosGeneral();
     //TotalIngresos();
-    if (curso === 'all'){
+    if (curso !== 'all'){
         getCurso();
     }
+    // if (curso === ''){
+    //     getCurso();
+    // }
     // if (curso !== ''){
     // TablaPorCurso();
     // IngresosPorCurso();
@@ -70,6 +79,7 @@ async function getFiltros() {
 
 async function getCurso() {
     const curso = document.getElementById("cursoSlct").value.trim();
+    //localStorage.setItem('cursoSlct', curso);
     if (curso !== '') {
         localStorage.setItem('cursoF', curso);
 
@@ -391,6 +401,7 @@ async function IngresosPorCurso() {
     } catch (error) {
         console.error("Error en la solicitud Fetch: ", error);
     }
+    TotalIngresos();
 }
 
 async function TotalIngresos() {

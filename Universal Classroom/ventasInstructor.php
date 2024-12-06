@@ -170,7 +170,8 @@
 
     <h3 id = "totalingresos">Total Ingresos: </h3><br><br><br>
 
-    <script src="js/ventasInstructor.js"></script>
+    
     <script src="js/loadNavBar.js"></script>
+    <script src="js/ventasInstructor.js" defer></script>
 </body>
 </html>
