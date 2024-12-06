@@ -81,11 +81,11 @@
                 </tbody>
             </table>
 
-            <h3>Total Ingresos: $93,700.00</h3>
+            
         </div>
     </div>
 
-
+    
 
     <div class="detalle-ventas" id="detalleVentas" style="display: none;">
 
@@ -148,7 +148,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>Tarjeta de Crédito</td>
                         <td>$300.00</td>
                     </tr>
@@ -159,226 +159,16 @@
                     <tr>
                         <td>PayPal</td>
                         <td>$5,000.00</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
 
-            <h3>Total Ingresos: $10,500.00</h3><br><br><br>
+            
         </div>
-
-<!-- 
-        <h2>Todo sobre Unreal Engine</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre del Alumno</th>
-                    <th>Fecha de Inscripción</th>
-                    <th>Nivel de Avance</th>
-                    <th>Precio pagado</th>
-                    <th>Forma de Pago</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-detalle-ventas">
-                <tr>
-                    <td>Guillermo Javier Morin Tristan</td>
-                    <td>07-Feb-2023</td>
-                    <td>8</td>
-                    <td>$5,600.00</td>
-                    <td>Tarjeta de débito</td>
-                </tr>
-                <tr>
-                    <td>Max Osvaldo de León Cantú</td>
-                    <td>20-Ago-2020</td>
-                    <td>3</td>
-                    <td>$1,100.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-                <tr>
-                    <td>Aldo Rogelio González Zapata</td>
-                    <td>17-Abr-2019</td>
-                    <td>5</td>
-                    <td>$2,400.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-            </tbody>
-        </table><br>
-        
-        <div id="resumen-forma-pago">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Forma de Pago</th>
-                        <th>Ingresos Totales</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tarjeta de Crédito</td>
-                        <td>$59,000.00</td>
-                    </tr>
-                    <tr>
-                        <td>Tarjeta de débito</td>
-                        <td>$200.00</td>
-                    </tr>
-                    <tr>
-                        <td>PayPal</td>
-                        <td>$4,500.00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Total Ingresos: $63,700.00</h3><br><br><br>
-        </div>
-        
-
-
-
-        <h2>Curso de HTML</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre del Alumno</th>
-                    <th>Fecha de Inscripción</th>
-                    <th>Nivel de Avance</th>
-                    <th>Precio pagado</th>
-                    <th>Forma de Pago</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-detalle-ventas">
-                <tr>
-                    <td>Alberto Kezan Guardiola Ayala</td>
-                    <td>21-Dic-2018</td>
-                    <td>4</td>
-                    <td>$4,200.00</td>
-                    <td>Tarjeta de débito</td>
-                </tr>
-                <tr>
-                    <td>Max Osvaldo de León Cantú</td>
-                    <td>13-Ene-2019</td>
-                    <td>1</td>
-                    <td>$500.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-                <tr>
-                    <td>Daniel Uriel Max Moreno Ysiel</td>
-                    <td>30-Feb-2014</td>
-                    <td>8</td>
-                    <td>$4,350.00</td>
-                    <td>PayPal</td>
-                </tr>
-            </tbody>
-        </table><br>
-
-        <div id="resumen-forma-pago">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Forma de Pago</th>
-                        <th>Ingresos Totales</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tarjeta de Crédito</td>
-                        <td>$300.00</td>
-                    </tr>
-                    <tr>
-                        <td>Tarjeta de débito</td>
-                        <td>$3,700.00</td>
-                    </tr>
-                    <tr>
-                        <td>PayPal</td>
-                        <td>$13,000.00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Total Ingresos: $17,000.00</h3><br><br><br>
-        </div>
-
-
-
-        <h2>Curso de C#</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre del Alumno</th>
-                    <th>Fecha de Inscripción</th>
-                    <th>Nivel de Avance</th>
-                    <th>Precio pagado</th>
-                    <th>Forma de Pago</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-detalle-ventas">
-                <tr>
-                    <td>Alberto Kezan Guardiola Ayala</td>
-                    <td>12-Feb-2024</td>
-                    <td>3</td>
-                    <td>$200.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-                <tr>
-                    <td>Max Osvaldo de León Cantú</td>
-                    <td>01-Dic-2021</td>
-                    <td>3</td>
-                    <td>$400.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-                <tr>
-                    <td>Daniel Uriel Max Moreno Ysiel</td>
-                    <td>02-Mar-2017</td>
-                    <td>4</td>
-                    <td>$350.00</td>
-                    <td>Tarjeta de crédito</td>
-                </tr>
-                <tr>
-                    <td>Guillermo Javier Morin Tristan</td>
-                    <td>06-Abr-2016</td>
-                    <td>7</td>
-                    <td>$200.00</td>
-                    <td>Paypal</td>
-                </tr>
-                <tr>
-                    <td>Aldo Rogelio González Zapata</td>
-                    <td>23-Sep-2020</td>
-                    <td>5</td>
-                    <td>$850.00</td>
-                    <td>Tarjeta de débito</td>
-                </tr>
-            </tbody>
-        </table><br>
-
-        <div id="resumen-forma-pago">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Forma de Pago</th>
-                        <th>Ingresos Totales</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tarjeta de Crédito</td>
-                        <td>$1,500.00</td>
-                    </tr>
-                    <tr>
-                        <td>Tarjeta de débito</td>
-                        <td>$1,000.00</td>
-                    </tr>
-                    <tr>
-                        <td>PayPal</td>
-                        <td>$0.00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Total Ingresos: $2,500.00</h3><br><br><br>
-        </div> -->
-
+      
     </div>
+
+    <h3 id = "totalingresos">Total Ingresos: </h3><br><br><br>
 
     <script src="js/ventasInstructor.js"></script>
     <script src="js/loadNavBar.js"></script>

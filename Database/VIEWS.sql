@@ -182,3 +182,24 @@ INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
 GROUP BY i.MetodoPago, c.Titulo;
 
 SELECT * FROM GananciasPorCurso;
+
+-- VIEW 11 
+CREATE OR REPLACE VIEW TotalIngresos AS
+SELECT 
+    c.Titulo AS Curso, 
+    COUNT(DISTINCT u.ID) AS Alumnos,
+    FORMAT (AVG(n.Numero), 0) AS Promedio,
+    SUM(n.Costo) AS Ingresos,
+    c.UsuarioCreador AS Instructor,
+    DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
+    cg.Nombre AS Categoria,
+    c.Estado AS Estado
+FROM Inscripcion i
+INNER JOIN Nivel n ON n.ID = i.NivelID
+INNER JOIN Curso c ON c.ID = n.CursoID
+INNER JOIN Usuario u ON u.ID = i.UsuarioID
+INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
+INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
+GROUP BY c.ID, cg.Nombre;
+
+SELECT * FROM TotalIngresos;

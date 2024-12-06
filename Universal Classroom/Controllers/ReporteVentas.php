@@ -18,8 +18,12 @@ if (isset($_GET['accion'])){
             $controller->VentasPorCurso();
             break;
 
-        case 'GananciasPorCurso':
-            $controller->GananciasPorCurso();
+        case 'IngresosPorCurso':
+            $controller->IngresosPorCurso();
+            break;
+
+        case 'TotalIngresos':
+            $controller->TotalIngresos();
             break;
     
         default:

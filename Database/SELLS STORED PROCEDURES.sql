@@ -1,4 +1,6 @@
 USE bdm;
+
+DROP PROCEDURE IF EXISTS VentasGeneralSP;
 DELIMITER //
 CREATE PROCEDURE VentasGeneralSP(
 IN vg_ID INT,
@@ -38,7 +40,7 @@ DELIMITER ;
 CALL VentasGeneralSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Modelado', 'Todos');
 
 
-DROP PROCEDURE GananciasTotalesSP;
+DROP PROCEDURE IF EXISTS GananciasTotalesSP;
 DELIMITER //
 CREATE PROCEDURE GananciasTotalesSP(
 IN gt_ID INT,
@@ -78,7 +80,7 @@ DELIMITER ;
 CALL GananciasTotalesSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Programacion', 'Activo');
 
 
-DROP PROCEDURE VentasPorCursoSP;
+DROP PROCEDURE IF EXISTS VentasPorCursoSP;
 DELIMITER //
 CREATE PROCEDURE VentasPorCursoSP(
 IN vg_ID INT,
@@ -115,6 +117,7 @@ DELIMITER ;
 CALL VentasPorCursoSP(7, 'Curso de Java','20/11/2024' ,'02/12/2024','Todas', 'Todos');
 
 
+DROP PROCEDURE IF EXISTS GananciasPorCursoSP;
 DELIMITER //
 CREATE PROCEDURE GananciasPorCursoSP(
 IN gt_ID INT,
@@ -148,4 +151,77 @@ ELSE
 END IF;
 END //
 DELIMITER ;
-CALL GananciasPorCursoSP(7, 'Modelado 3D','01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
+CALL GananciasPorCursoSP(7, 'Curso de Java','01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
+
+
+
+DROP PROCEDURE IF EXISTS TotalIngresos1SP;
+DELIMITER // 
+CREATE PROCEDURE TotalIngresos1SP(
+IN ti_ID INT,
+IN ti_desde VARCHAR(255),
+IN ti_hasta VARCHAR(255),
+IN ti_categoria VARCHAR(255),
+IN ti_estado VARCHAR(255)
+)
+BEGIN 
+IF ti_categoria = 'Todas' AND ti_estado != 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Estado = ti_estado 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSEIF ti_categoria != 'Todas' AND ti_estado = 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Categoria = ti_categoria 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSEIF ti_categoria = 'Todas' AND ti_estado = 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+    WHERE Instructor = ti_ID 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSE 
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Estado = ti_estado 
+		AND Categoria = ti_categoria 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+END IF;
+END //
+DELIMITER ;
+CALL TotalIngresosSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
+
+
+DROP PROCEDURE IF EXISTS TotalIngresos2SP;
+DELIMITER // 
+CREATE PROCEDURE TotalIngresos2SP(
+IN ti_ID INT,
+IN ti_curso VARCHAR(255),
+IN ti_desde VARCHAR(255),
+IN ti_hasta VARCHAR(255),
+IN ti_categoria VARCHAR(255),
+IN ti_estado VARCHAR(255)
+)
+BEGIN 
+IF ti_categoria = 'Todas' AND ti_estado != 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Estado = ti_estado 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSEIF ti_categoria != 'Todas' AND ti_estado = 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Categoria = ti_categoria 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSEIF ti_categoria = 'Todas' AND ti_estado = 'Todos' THEN
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+    WHERE Instructor = ti_ID 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+ELSE 
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	WHERE Instructor = ti_ID 
+		AND Estado = ti_estado 
+		AND Categoria = ti_categoria 
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+END IF;
+END //
+DELIMITER ;

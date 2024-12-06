@@ -40,10 +40,29 @@ class ReporteVentaController {
     }
 
     
-    public function GananciasPorCurso() {
-        $categoria = new Categoria();
-        $categoria->ListarCategorias(); 
-    }    
+    public function IngresosPorCurso() {
+        $Reporte = new ReporteVenta();
+        $Reporte->instructor = trim($_POST['instructor']);
+        $Reporte->fechaInicio = trim($_POST['fechaInicio']);
+        $Reporte->fechaFin = trim($_POST['fechaFin']);
+        $Reporte->categoria = trim($_POST['categoria']);
+        $Reporte->estado = trim($_POST['estado']);
+        $Reporte->curso = trim($_POST['curso']);
+        
+        $Reporte->IngresosPorCurso($Reporte->instructor, $Reporte->fechaInicio, $Reporte->fechaFin, $Reporte->categoria, $Reporte->estado, $Reporte->curso);
+    }
+
+    public function TotalIngresos() {
+        $Reporte = new ReporteVenta();
+        $Reporte->instructor = trim($_POST['instructor']);
+        $Reporte->fechaInicio = trim($_POST['fechaInicio']);
+        $Reporte->fechaFin = trim($_POST['fechaFin']);
+        $Reporte->categoria = trim($_POST['categoria']);
+        $Reporte->estado = trim($_POST['estado']);
+        $Reporte->curso = trim($_POST['curso']);
+        
+        $Reporte->TotalIngresos($Reporte->instructor, $Reporte->fechaInicio, $Reporte->fechaFin, $Reporte->categoria, $Reporte->estado, $Reporte->curso);
+    }
 }
 
 ?>
