@@ -90,6 +90,26 @@ VALUES
     ('Nivel 1 - Introducción a PHP', 'Aprende los fundamentos de PHP', 'video_php_nivel1.mp4', NULL, NULL, 11, 90, 1);
 SELECT * FROM Nivel;
 
+alter table nivel add numero int;
+
+update nivel set Numero = 1 where id = 1;
+update nivel set Numero = 2 where id = 2;
+update nivel set Numero = 3 where id = 3;
+update nivel set Numero = 4 where id = 4;
+update nivel set Numero = 5 where id = 5;
+update nivel set Numero = 1 where id = 6;
+update nivel set Numero = 2 where id = 7;
+update nivel set Numero = 3 where id = 8;
+update nivel set Numero = 1 where id = 9;
+update nivel set Numero = 2 where id = 10;
+update nivel set Numero = 3 where id = 11;
+update nivel set Numero = 1 where id = 12;
+update nivel set Numero = 2 where id = 13;
+update nivel set Numero = 3 where id = 14;
+update nivel set Numero = 1 where id = 15;
+
+
+
 
 -- Inserts Inscripcion   
 INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)

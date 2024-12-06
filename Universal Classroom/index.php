@@ -99,14 +99,12 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
     </div>
 
 
-
-
-
      <!-- EXPLORAR MAS -->
      <div class="explore-more">
         <a href="Busqueda.php" class="explore-btn">EXPLORA MÁS</a>
     </div>
 
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="font-size: 32px">↑</button>
 
 
     <!-- FOOTER -->
@@ -164,6 +162,17 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
             });
         };
     </script>    
+
+    <script>
+        window.addEventListener('scroll', function () {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                scrollButton.style.display = 'flex';
+            } else {
+                scrollButton.style.display = 'none';
+            }
+        });
+    </script>
     
 </body>
 </html>
