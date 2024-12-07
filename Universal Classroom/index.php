@@ -104,7 +104,7 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
         <a href="Busqueda.php" class="explore-btn">EXPLORA MÁS</a>
     </div>
 
-    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="font-size: 32px">↑</button>
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
 
     <!-- FOOTER -->

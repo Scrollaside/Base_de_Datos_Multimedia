@@ -24,13 +24,14 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kardex de Cursos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/NavBar.css">
     <link rel="stylesheet" href="css/kardexEstilo.css">    
 </head>
 <body>
 
-    <div class="filters">
+ <!-- FILTROS -->
+ <div class="filters">
         <label for="fecha-inicio">Desde:</label>
         <input type="date" id="fecha-inicio">
         
@@ -59,31 +60,9 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
         <button onclick="filtrarVentas()">Filtrar</button>
     </div>
 
-    <!-- Mostrar niveles -->
-    <h2>Niveles Inscritos</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre Curso</th>
-                <th>Nombre Nivel</th>
-                <th>Fecha Inscripción</th>
-                <th>Fecha Acceso</th>
-                <th>Fecha Finalización</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($niveles as $nivel): ?>
-                <tr data-id="<?= $nivel['nivel_id'] ?>">
-                    <td><?= $nivel['nombre_curso'] ?></td>
-                    <td><?= $nivel['nombre_nivel'] ?></td>
-                    <td><?= $nivel['FechaInscripcion'] ?></td>
-                    <td><?= $nivel['FechaAcceso'] ?></td>
-                    <td><?= $nivel['FechaFinalizacion'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    
 
+    <!-- CURSOS -->
     <h2>Cursos Inscritos</h2>
     <table class="table">
         <thead>
@@ -120,23 +99,36 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
         </tbody>
     </table>
 
-    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+   
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Mostrar niveles -->
+    <h2>Niveles Inscritos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre Curso</th>
+                <th>Nombre Nivel</th>
+                <th>Fecha Inscripción</th>
+                <th>Fecha Acceso</th>
+                <th>Fecha Finalización</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($niveles as $nivel): ?>
+                <tr data-id="<?= $nivel['nivel_id'] ?>">
+                    <td><?= $nivel['nombre_curso'] ?></td>
+                    <td><?= $nivel['nombre_nivel'] ?></td>
+                    <td><?= $nivel['FechaInscripcion'] ?></td>
+                    <td><?= $nivel['FechaAcceso'] ?></td>
+                    <td><?= $nivel['FechaFinalizacion'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+   
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="js/loadNavBar.js"></script>
     <script src="js/kardex.js"></script>
-    <script>
-        window.addEventListener('scroll', function () {
-            const scrollButton = document.querySelector('.scroll-to-top');
-            if (window.scrollY > 300) {
-                scrollButton.style.display = 'flex';
-            } else {
-                scrollButton.style.display = 'none';
-            }
-        });
-    </script>
-    
-
-
+        
 </body>
 </html>

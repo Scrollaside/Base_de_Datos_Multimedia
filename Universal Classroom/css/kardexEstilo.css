@@ -1,25 +1,101 @@
-.filters {
-    margin: 20px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.6);
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    color: #444;
+}
+
+/* Filtros */
+.filters {
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+}
+
+.filters label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #555;
+}
 
 .filters select, .filters input {
-    margin-right: 105px;
-    padding: 5px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #555;
 }
 
 button {
-    padding: 15px;
+    padding: 10px 20px;
     background-color: #333;
+    border: none;
+    border-radius: 5px;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #4f4f4f;
 }
+
+/* Tablas */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+th:hover {
+    background-color: #444;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+td {
+    text-align: center;
+}
+
+.na {
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-style: italic;
+}
+
