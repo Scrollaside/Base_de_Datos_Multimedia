@@ -56,7 +56,7 @@ IF gt_categoria = 'Todas' AND gt_estado != 'Todos' THEN
 		AND Estado = gt_estado 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y')
 	GROUP BY FormaPago;
-ELSEIF gt_estado = 'Todos' AND gt_categoria != 'Todas'THEN
+ELSEIF gt_categoria != 'Todas' AND gt_estado = 'Todos' THEN
 	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM GananciasTotales
 	WHERE Instructor = gt_ID 
 		AND Categoria = gt_categoria 
@@ -77,7 +77,7 @@ ELSE
 END IF;
 END //
 DELIMITER ;
-CALL GananciasTotalesSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Programacion', 'Activo');
+CALL GananciasTotalesSP(7,'01/01/2000' , DATE_FORMAT(CURDATE(), '%d/%m/%Y'),'Todas', 'Todos');
 
 
 DROP PROCEDURE IF EXISTS VentasPorCursoSP;

@@ -14,7 +14,8 @@ CREATE TABLE Usuario (
     FechaRegistro DATETIME,
     FechaActualizacion DATETIME,
     TipoUsuario INT,
-    Estado BOOLEAN
+    Estado BOOLEAN,
+    Intentos INT DEFAULT 0
 );
 CREATE TABLE Categoria (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -90,10 +91,10 @@ CREATE TABLE Mensaje (
     FechaHora DATETIME,
     Remitente INT,
     Destinatario INT,
-    CursoID INT,
+    NivelID INT,
     FOREIGN KEY (Remitente) REFERENCES Usuario(ID),
     FOREIGN KEY (Destinatario) REFERENCES Usuario(ID),
-    FOREIGN KEY (CursoID) REFERENCES Curso(ID)
+    FOREIGN KEY (NivelID) REFERENCES Nivel(ID)
 );
 CREATE TABLE Diploma (
     ID INT PRIMARY KEY AUTO_INCREMENT,

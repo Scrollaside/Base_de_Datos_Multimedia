@@ -121,6 +121,7 @@ VALUES
 ('Excelente para entender SEO desde cero.', 4.2, NOW(), 9, 1, 1),
 ('Un curso muy útil para diseñadores.', 4.6, NOW(), 10, 2, 1);
 
+
 -- Inserts de Diplomas
 INSERT INTO Diploma (EstudianteID, CursoID, FechaFin, InstructorID)
 VALUES 

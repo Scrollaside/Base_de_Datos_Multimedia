@@ -147,7 +147,7 @@ SELECT * FROM VentasPorCurso;
 CREATE OR REPLACE VIEW GananciasTotales AS 
 SELECT 
 	i.MetodoPago AS FormaPago, 
-	n.Costo AS IngresosTotales, 
+	SUM(n.Costo) AS IngresosTotales, 
     c.UsuarioCreador AS Instructor,
     DATE_FORMAT(c.FechaCreacion, '%d/%m/%Y') AS Creacion,
     cg.Nombre AS Categoria,
@@ -200,6 +200,6 @@ INNER JOIN Curso c ON c.ID = n.CursoID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN CursoCategoria cc ON cc.CursoID = c.ID
 INNER JOIN Categoria cg ON cg.ID = cc.CategoriaID
-GROUP BY c.ID, cg.Nombre;
+GROUP BY c.ID, cg.Nombre, c.Estado;
 
 SELECT * FROM TotalIngresos;
