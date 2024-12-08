@@ -734,7 +734,26 @@ BEGIN
     WHERE ID = p_usuarioID;
 END //
 DELIMITER ;
-
+DELIMITER //
+CREATE PROCEDURE WrongLogin (
+	IN el_User VARCHAR(255)
+)
+BEGIN
+	UPDATE Usuario 
+		SET Intentos = Intentos + 1
+	WHERE NombreUsuario = el_User;
+END //
+DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE ResetTry (
+	IN rt_User VARCHAR(255)
+)
+BEGIN
+	UPDATE Usuario 
+		SET Intentos = 0
+	WHERE NombreUsuario = rt_User;
+END //
+DELIMITER ;
 
 -- ADMIN SP --
 -- ADMIN SP --

@@ -39,7 +39,7 @@ class Usuario {
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-            echo "<h2 class='Error'>PRUEBA 3.</h2>";
+           // echo "<h2 class='Error'>PRUEBA 3.</h2>";
             echo "<h2 class='Error'>El nombre de usuario ya está en uso. Por favor, elige otro.</h2>";
             return false;
         }
@@ -91,16 +91,32 @@ class Usuario {
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($usuario['Contraseña'] === $contraseña) {
-                // Retorna los detalles del usuario si el login es correcto
-                return $usuario;
+            if ($usuario['Intentos'] < 3){
+                if ($usuario['Contraseña'] === $contraseña) {
+                    $query = "CALL ResetTry(?)";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindParam(1, $nombreUsuario);
+                    $stmt->execute();
+                    // Retorna los detalles del usuario si el login es correcto
+                    return $usuario;
+                }
+                else{
+                    $query = "CALL WrongLogin(?)";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindParam(1, $nombreUsuario);
+                    $stmt->execute();
+                    $this->messageError = 'El usuario y/o la contraseña son incorrectos.';
+                }
+            }
+            else if ($usuario['Intentos'] >= 3){
+                $this->messageError = 'Demasiados intentos, contacte a un administrador para la reactivación de su cuenta.';
+               
             }
         }
 
         // Si no coincide, retorna false
         return false;
     }
-
 
     public function obtenerUsuarioPorID($id) {
         $this->obtenerConexion();

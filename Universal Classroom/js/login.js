@@ -35,8 +35,4 @@ document.getElementById("btn").addEventListener('click', function(event) {
             document.getElementById("errorMsg").textContent = data.error;
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById("errorMsg").textContent = "Ha ocurrido un error al procesar la solicitud.";
-    });
 });

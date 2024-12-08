@@ -34,9 +34,12 @@ class LoginController {
                     'TipoUsuario' => $resultado['TipoUsuario']
                 ]);
             } 
+            else if (isset($usuario->messageError)) {
+                // Respuesta de error
+                echo json_encode(['success' => false, 'error' => $usuario->messageError]);
+            }
             else {
-                // Usuario no encontrado o contraseña incorrecta
-                echo json_encode(['success' => false, 'error' => 'El usuario y/o la contraseña son incorrectos.']);
+                echo json_encode(['success' => false, 'error' => 'Método de solicitud no permitido.']);
             }
         } else {
             echo json_encode(['success' => false, 'error' => 'Método de solicitud no permitido.']);
