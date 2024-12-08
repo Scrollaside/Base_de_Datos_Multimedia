@@ -121,10 +121,10 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
     </footer>
 
 
-<script src="js/loadNavBar.js"></script>
-<script src="js/loadCourses.js"></script>
+    <script src="js/loadNavBar.js"></script>
+    <script src="js/loadCourses.js"></script>
 
-<script>
+    <script>
         function mostrarEstrellas(calificacion) {
             const estrellasLlenas = Math.floor(calificacion);
             const mediaEstrella = calificacion % 1 >= 0.5;

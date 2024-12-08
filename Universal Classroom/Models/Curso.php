@@ -40,4 +40,18 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function obtenerCursoPorCreador($id) {
+        $sql = "SELECT * FROM Curso WHERE UsuarioCreador = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function actualizarEstadoCurso($cursoID, $nuevoEstado) {
+        $sql = "UPDATE Curso SET Estado = ? WHERE ID = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$nuevoEstado, $cursoID]);
+        return $stmt->rowCount() > 0;
+    }
+    
 }
