@@ -25,6 +25,9 @@ $categoriasCurso = $edicionCurso->obtenerCategoriasCurso($cursoID);
 
 // Obtener todas las categorías disponibles
 $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
+
+$fotoPerfilSrc = $cursoInfo['Imagen'] ? 'data:image/jpeg;base64,' . base64_encode($cursoInfo['Imagen']) : 'https://cdn-icons-png.flaticon.com/512/3273/3273898.png';
+
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +36,9 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Curso</title>
-    <link rel="stylesheet" href="css/editarCurso.css">
     <link rel="stylesheet" href="css/instructor.css">
     <link rel="stylesheet" href="css/NavBar.css">
+    <link rel="stylesheet" href="css/editarCurso.css">
 </head>
 <body>
 
@@ -46,7 +49,7 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
     <div class="cursoInfo" >
 
         <div class="modulo-imagen">
-            <img src="<?php echo htmlspecialchars($cursoInfo['Imagen']); ?>" alt="Foto de perfil" id="profilePic" class="FotoPerfil">
+            <img src="<?php echo $fotoPerfilSrc; ?>" alt="Foto de perfil" class="FotoPerfil" vid="profilePic">
             <input type="file" id="NewPhoto" accept="image/*">
         </div>
                 
@@ -58,7 +61,7 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
 
         <div class="modulo-curso">            
             <label>Título:</label>
-            <input type="text" id="titulo" value="<?php echo htmlspecialchars($cursoInfo['Titulo']); ?>">
+            <input type="text" id="titulo" class="FotoPerfil" value="<?php echo htmlspecialchars($cursoInfo['Titulo']); ?>">
     
             <label>Descripción:</label>
             <textarea id="descripcion"><?php echo htmlspecialchars($cursoInfo['Descripcion']); ?></textarea>
@@ -74,10 +77,10 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
     <div class="cursoInfo" >
 
         <div class="modulo-categorias">
-            <h2>Categorías</h2>
-            <ul id="categoriasActuales">
+            <label>Categorías</label>
+            <ul id="categoriasActuales" align="left">
                 <?php foreach ($categoriasCurso as $categoria) : ?>
-                    <li data-id="<?php echo $categoria['ID']; ?>"><?php echo htmlspecialchars($categoria['Nombre']); ?></li>
+                    <li data-id="<?php echo $categoria['ID']; ?>"><?php echo htmlspecialchars($categoria['Nombre']); ?> <button class="cancelBtn">X</button></li>
                 <?php endforeach; ?>
             </ul>
                 
@@ -86,10 +89,10 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
                     <option value="<?php echo $categoria['ID']; ?>"><?php echo htmlspecialchars($categoria['Nombre']); ?></option>
                 <?php endforeach; ?>
             </select>
-            <button id="agregarCategoria">Agregar</button>
+            <button id="agregarCategoria" class="editBtn">Agregar</button>
         </div>
                 
-        <button id="guardarCategorias">Actualizar categorias</button>
+        <br><button id="guardarCategoria">Actualizar categorias</button>
 
     </div><br><br><br>
   

@@ -8,14 +8,14 @@ class EdicionCurso
 
     public function __construct($db)
     {
-        $this->pdo = $db->conectar(); // Aseguramos obtener la instancia PDO
+        $this->pdo = $db->conectar(); 
     }
 
     // Obtener información del curso
     public function obtenerInformacionCurso($cursoID)
     {
         $query = "SELECT Titulo, Descripcion, Imagen, Costo FROM Curso WHERE ID = ?";
-        $stmt = $this->pdo->prepare($query); // Usamos PDO aquí
+        $stmt = $this->pdo->prepare($query); 
         $stmt->execute([$cursoID]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -33,12 +33,21 @@ class EdicionCurso
     }
 
     // Actualizar información del curso
-    public function actualizarCurso($cursoID, $titulo, $descripcion, $imagen, $costo)
+    public function actualizarCurso($cursoID, $titulo, $descripcion, $costo)
     {
-        $query = "UPDATE Curso SET Titulo = ?, Descripcion = ?, Imagen = ?, Costo = ? WHERE ID = ?";
+        $query = "UPDATE Curso SET Titulo = ?, Descripcion = ?, Costo = ? WHERE ID = ?";
         $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([$titulo, $descripcion, $imagen, $costo, $cursoID]);
+        return $stmt->execute([$titulo, $descripcion, $costo, $cursoID]);
     }
+
+    // Actualizar foto del curso
+    public function actualizarFotoCurso($cursoID, $imagen)
+    {
+        $query = "UPDATE Curso SET Imagen = ? WHERE ID = ?";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([$imagen, $cursoID]);
+    }
+
 
     // Actualizar categorías asociadas al curso
     public function actualizarCategoriasCurso($cursoID, $nuevasCategorias)
@@ -68,6 +77,39 @@ class EdicionCurso
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+
+// Procesar solicitudes AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $db = new db();
+    $edicionCurso = new EdicionCurso($db);
+
+    $action = $_POST['action'] ?? null;
+
+    if ($action === 'actualizarInformacion') {
+        $cursoID = $_POST['cursoID'];
+        $titulo = $_POST['titulo'];
+        $descripcion = $_POST['descripcion'];
+        $costo = $_POST['costo'];
+
+        if ($edicionCurso->actualizarCurso($cursoID, $titulo, $descripcion, $costo)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Error al actualizar la información.']);
+        }
+    } elseif ($action === 'actualizarImagen') {
+        $cursoID = $_POST['cursoID'];
+        $imagen = file_get_contents($_FILES['imagen']['tmp_name']);
+
+        if ($edicionCurso->actualizarFotoCurso($cursoID, $imagen)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Error al actualizar la imagen.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Acción no válida.']);
     }
 }
 ?>
