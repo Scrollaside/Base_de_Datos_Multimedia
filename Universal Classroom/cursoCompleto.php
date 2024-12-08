@@ -50,10 +50,6 @@
     <div class="wrapper" id="mensajeWindow">
         <div class="mensajes" id="mensajeWindow2">
             <div class="left">
-                <div class="top">
-                    <input type="text" placeholder="Search" />
-                    <a href="javascript:;" class="search"></a>
-                </div>
                 <ul class="people" id="miembros">
                 </ul>
             </div>

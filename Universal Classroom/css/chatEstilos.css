@@ -38,12 +38,10 @@
 }
 
 .left, .right {
-    overflow-y: auto;
     padding: 10px;
 }
 
 .left {
-    width: 30%;
     border-right: 1px solid #eee;
 }
 
@@ -53,27 +51,40 @@
 }
 
 .chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
     height: calc(100% - 80px);
     overflow-y: auto;
-    padding: 10px;
+}
+
+.chat .bubble {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .bubble {
     padding: 10px 15px;
     margin: 10px 0;
     border-radius: 10px;
+    max-width: 70%; 
+    word-wrap: break-word; 
 }
 
 .bubble.you {
-    background-color: #00b0ff;
-    color: white;
+    background-color: #f1f1f1;
+    color: black;
     align-self: flex-start;
+    margin-left: 10px; 
 }
 
 .bubble.me {
-    background-color: #f1f1f1;
-    color: black;
+    background-color: #00b0ff;
+    color: white;
     align-self: flex-end;
+    margin-right: 10px;
 }
 
 .write {
@@ -114,38 +125,40 @@
 /* Estilo para las imágenes dentro del chat */
 /* Estilos para los elementos de la lista de personas o usuarios */
 li.person{
-    display: flex; /* Usamos flexbox para alinear la imagen y el texto */
-    align-items: center; /* Alineamos la imagen y el texto al centro */
+    display: flex;
+    align-items: center;
     background-color: #fff;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    left: -20px;
 }
 
 /* Ajuste para la imagen de usuario */
 li.person img {
-    width: 30px; /* Tamaño de la imagen */
-    height: 30px; /* Asegura que la imagen sea cuadrada */
-    border-radius: 50%; /* Redondea la imagen */
-    object-fit: cover; /* Asegura que la imagen no se distorsione */
-    margin-right: 10px; /* Espacio entre la imagen y el nombre */
+    width: 30px;
+    height: 30px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-right: 10px; 
 }
 
 /* Ajuste para el texto de los usuarios */
 li.person .user-name {
-    font-size: 16px; /* Tamaño del texto */
-    font-weight: bold; /* Hacemos que el nombre esté en negrita */
-    color: #333; /* Color de texto */
+    font-size: 16px; 
+    font-weight: bold; 
+    color: #333; 
 }
 
 li.person:hover {
-    background-color: #f1f1f1; /* Efecto hover para cuando el usuario pase el mouse */
+    background-color: #f1f1f1;
 }
 
 li.person.active {
-    background-color: #d1e7ff; /* Color de fondo para el elemento seleccionado */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Sombra para resaltar */
-    border: 1px solid #2979FF; /* Borde para mayor contraste */
+    background-color: #d1e7ff; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+    border: 1px solid #2979FF; 
 }

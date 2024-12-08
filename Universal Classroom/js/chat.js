@@ -65,7 +65,6 @@ function mostrarChats(idPersona, activo) {
 
     const chatContenedor = document.getElementById("chatContenedor");
     chatContenedor.innerHTML = `
-          <div class="top"><span>To: <span class="name" id="nombreDestinatario"></span></span></div>
           <div class="chat" id="chat-${idPersona}"></div>
            <div class="write">
                     <input id="sendInput" type="text" placeholder="Escribe un mensaje..."/>
@@ -97,27 +96,37 @@ function mostrarChats(idPersona, activo) {
                   `;
                     }
                 }
-
-                
+                contenedorChat.scrollTop = contenedorChat.scrollHeight;
             } else {
                 console.log('No hay mensajes');
             }
             const btnEnviar = document.getElementById("sendButton");
                 btnEnviar.addEventListener('click', function(){
                     const texto = document.getElementById("sendInput").value;
-                    fetch('./Controllers/Mensaje.php', {
-                        method: "POST",
-                        body: JSON.stringify({ texto: texto, idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 3 })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if(data.success){
-                            console.log('mensaje enviado');
-                        }
-                    })
-                    .catch(error => {
-                        alert("Error al mandar mensaje: " + error.message);
-                    });
+                    if(texto !== ''){
+                        fetch('./Controllers/Mensaje.php', {
+                            method: "POST",
+                            body: JSON.stringify({ texto: texto, idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 3 })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    console.log('mensaje enviado');
+                                    const contenedorChat = document.getElementById('chat-' + idPersona);
+                                    contenedorChat.innerHTML += `
+                                    <div class="bubble me">
+                                        ${texto}
+                                    </div>
+                                    `;
+                                    contenedorChat.scrollTop = contenedorChat.scrollHeight;
+                                    const limpiar = document.getElementById("sendInput");
+                                    limpiar.value = '';
+                                }
+                            })
+                            .catch(error => {
+                                alert("Error al mandar mensaje: " + error.message);
+                            });
+                    }
                 });
         })
         .catch(error => {
