@@ -201,16 +201,16 @@ VALUES (2, 3, 4000),
 -- Inserts Tabla Curso
 INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
 VALUES 
-('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 5, 'Activo', 4.5, NOW(), 10, 7),
-('Modelado 3D', 'Introducción al modelado 3D con Blender', NULL, 150.00, 8, 'Activo', 4.2, NOW(), 15, 7),
-('Desarrollo Web', 'Desarrollo web moderno con HTML, CSS y JavaScript', NULL, 80.00, 6, 'Activo', 4.7, NOW(), 20, 7),
-('Dibujo Artístico', 'Técnicas avanzadas de dibujo', NULL, 90.00, 4, 'Inactivo', 3.9, NOW(), 5, 7),
-('Marketing Digital', 'Estrategias de marketing digital', NULL, 120.00, 5, 'Activo', 4.0, NOW(), 12, 7),
-('Python para principiantes', 'Curso básico de programación en Python', NULL, 95.00, 7, 'Activo', 4.8, NOW(), 25, 7),
-('React JS', 'Desarrollo de interfaces modernas con React', NULL, 130.00, 6, 'Activo', 4.5, NOW(), 18, 7),
-('Animación 3D', 'Principios básicos de animación 3D', NULL, 200.00, 10, 'Inactivo', 4.3, NOW(), 7, 7),
-('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 3, 'Activo', 3.8, NOW(), 4, 9),
-('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 6, 'Activo', 4.6, NOW(), 9, 9),
+('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 3, 'Activo', 4.5, NOW(), 10, 7),
+('Modelado 3D', 'Introducción al modelado 3D con Blender', NULL, 150.00, 3, 'Activo', 4.2, NOW(), 15, 7),
+('Desarrollo Web', 'Desarrollo web moderno con HTML, CSS y JavaScript', NULL, 80.00, 3, 'Activo', 4.7, NOW(), 20, 7),
+('Dibujo Artístico', 'Técnicas avanzadas de dibujo', NULL, 90.00, 1, 'Inactivo', 3.9, NOW(), 5, 7),
+('Marketing Digital', 'Estrategias de marketing digital', NULL, 120.00, 1, 'Activo', 4.0, NOW(), 12, 7),
+('Python para principiantes', 'Curso básico de programación en Python', NULL, 95.00, 1, 'Activo', 4.8, NOW(), 25, 7),
+('React JS', 'Desarrollo de interfaces modernas con React', NULL, 130.00, 1, 'Activo', 4.5, NOW(), 18, 7),
+('Animación 3D', 'Principios básicos de animación 3D', NULL, 200.00, 1, 'Inactivo', 4.3, NOW(), 7, 7),
+('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 1, 'Activo', 3.8, NOW(), 4, 9),
+('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 1, 'Activo', 4.6, NOW(), 9, 9),
 ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 9);
 
 
@@ -229,7 +229,6 @@ VALUES
 (10, 3),
 (11, 3);
 
-
 -- Inserts Tabla Nivel
 INSERT INTO Nivel (Nombre, Descripcion, Video, Documento, LinkRef, CursoID, Costo, Numero)
 VALUES
@@ -243,6 +242,12 @@ VALUES
     ('Nivel 2 - Desarrollo Web Interactivo', 'Inicia con JavaScript para el desarrollo web', 'video_web_nivel2.mp4', NULL, NULL, 3, 100, 2),
     ('Nivel 3 - Desarrollo Web Avanzado', 'Desarrollo de aplicaciones dinámicas con JavaScript', 'video_web_nivel3.mp4', NULL, NULL, 3, 100, 3),
     ('Nivel 1 - Dibujo Artístico Básico', 'Técnicas de dibujo para principiantes', 'video_dibujo_nivel1.mp4', NULL, NULL, 4, 170, 1),
+    ('Nivel 1 - Introducción marketing', 'Fundamentos del marketing digital', 'video_marketing_nivel1.mp4', NULL, NULL, 5, 90, 1),
+    ('Nivel 1 - Fundamentos de Python', 'Primeros pasos con Python', 'video_python_nivel1.mp4', NULL, NULL, 6, 90, 1),
+    ('Nivel 1 - React', 'Introducción a React Native', 'video_react1.mp4', NULL, NULL, 7, 90, 1),
+    ('Nivel 1 - Maya', 'Introducción a los fundamentos del programa Autodesk Maya', 'video_maya1.mp4', NULL, NULL, 8, 90, 1),
+    ('Nivel 1 - Introducción', 'Introducción al SEO', 'video_seo1.mp4', NULL, NULL, 9, 90, 1),
+    ('Nivel 1 - Diseño', 'Introducción y conceptos básicos de la educación', 'video_diseño1.mp4', NULL, NULL, 10, 90, 1),
     ('Nivel 1 - Introducción a PHP', 'Aprende los fundamentos de PHP', 'video_php_nivel1.mp4', NULL, NULL, 11, 90, 1);
 
 -- Inserts Inscripcion   

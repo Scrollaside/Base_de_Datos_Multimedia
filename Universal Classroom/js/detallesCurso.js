@@ -76,6 +76,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     //Niveles
                     const niveles = document.getElementById("Niveles");
                     const opciones = document.getElementById('levelSelect');
+                    console.log(data.curso);
                     for (let i = 0; i < data.curso.ProgramaCurso; i++) {
                         niveles.innerHTML += `
                          <div class="tab">
@@ -96,7 +97,6 @@ window.addEventListener("DOMContentLoaded", function () {
                     //Niveles
 
                     //Comentarios
-                    console.log(tipoUsuario);
                     if (data.comentarios !== 'no') {
                         const comentariosCurso = document.getElementById("lista-comentarios");
                         const barra1 = document.getElementById("Porcentaje1");
@@ -110,7 +110,6 @@ window.addEventListener("DOMContentLoaded", function () {
                         const progreso4 = document.getElementById("Progreso4");
                         const progreso5 = document.getElementById("Progreso5");
                         let conteo1 = 0, conteo2 = 0, conteo3 = 0, conteo4 = 0, conteo5 = 0;
-                        console.log(data);
                         for (let i = 0; i < Object.keys(data.comentarios).length; i++) {
                             if(tipoUsuario === 3){
                                 comentariosCurso.innerHTML += `
@@ -224,7 +223,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 }
             })
             .catch(error => {
-                alert("Error de red: " + error.message);
+                alert("Error al obtener detalles curso: " + error.message);
             });
 
         setTimeout(() => {
