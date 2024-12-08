@@ -12,12 +12,21 @@ class CursoController{
                 $cursoInfo = $curso->obtenerDetalleCurso($data['ID']);
                 $nivelesInfo = $curso->obtenerNivelesCurso($data['ID']);
                 $comentariosInfo = $curso->obtenerComentariosCurso($data['ID']);
+                $inscripcion = $curso->obtenerNivelesInscritos($data['ID'], $data['IdUsuario']);
 
                 if($cursoInfo && $nivelesInfo){
-                    if($comentariosInfo){
-                        echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => $comentariosInfo]);
+                    if($inscripcion){
+                        if($comentariosInfo){
+                            echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => $comentariosInfo, 'inscripcion' => $inscripcion]);
+                        }else{
+                            echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => 'no', 'inscripcion' => $inscripcion]);
+                        }
                     }else{
-                        echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => 'no']);
+                        if($comentariosInfo){
+                            echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => $comentariosInfo, 'inscripcion' => 'no']);
+                        }else{
+                            echo json_encode(['success' => true, 'curso' => $cursoInfo, 'niveles' => $nivelesInfo, 'comentarios' => 'no', 'inscripcion' => 'no']);
+                        }
                     }
                 }else{
                     echo json_encode(['success' => false, 'error' => 'Curso no encontrado.']);

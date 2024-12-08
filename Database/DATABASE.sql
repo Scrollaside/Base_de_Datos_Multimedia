@@ -71,6 +71,7 @@ CREATE TABLE Inscripcion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     UsuarioID INT,
     NivelID INT,
+    CursoID INT,
     FechaInscripcion DATETIME,
     FechaAcceso DATETIME,
     FechaFinalizacion DATETIME,
@@ -79,7 +80,9 @@ CREATE TABLE Inscripcion (
     FOREIGN KEY (UsuarioID)
         REFERENCES Usuario (ID),
     FOREIGN KEY (NivelID)
-        REFERENCES Nivel (ID)
+        REFERENCES Nivel (ID),
+	FOREIGN KEY (CursoID)
+        REFERENCES Curso (ID)
 );
 CREATE TABLE Comentario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -251,21 +254,21 @@ VALUES
     ('Nivel 1 - Introducción a PHP', 'Aprende los fundamentos de PHP', 'video_php_nivel1.mp4', NULL, NULL, 11, 90, 1);
 
 -- Inserts Inscripcion   
-INSERT INTO Inscripcion (UsuarioID, NivelID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
+INSERT INTO Inscripcion (UsuarioID, NivelID, CursoID,  FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
 VALUES 
-(6, 1, NOW(), NOW(), NULL, 1, 0),
-(2, 2, NOW(), NOW(), NULL, 1, 1),
-(3, 3, NOW(), NULL, NULL, 0, 0),
-(4, 4, NOW(), NULL, NULL, 1, 1),
-(6, 5, NOW(), NOW(), NULL, 1, 0),
-(2, 6, NOW(), NOW(), NULL, 1, 1),
-(3, 7, NOW(), NULL, NULL, 0, 0),
-(4, 8, NOW(), NULL, NULL, 1, 1),
-(6, 9, NOW(), NOW(), NULL, 1, 0),
-(2, 10, NOW(), NOW(), NULL, 1, 1),
-(6, 11, NOW(), NOW(), NULL, 1, 0),
-(4, 11, NOW(), NOW(), NULL, 1, 0),
-(3, 11, NOW(), NOW(), NULL, 1, 0);
+(6, 1, 1, NOW(), NOW(), NULL, 1, 0),
+(2, 2, 1, NOW(), NOW(), NULL, 1, 1),
+(3, 3, 1, NOW(), NULL, NULL, 0, 0),
+(4, 4, 2, NOW(), NULL, NULL, 1, 1),
+(6, 5, 2, NOW(), NOW(), NULL, 1, 0),
+(2, 6, 2, NOW(), NOW(), NULL, 1, 1),
+(3, 7, 3, NOW(), NULL, NULL, 0, 0),
+(4, 8, 3, NOW(), NULL, NULL, 1, 1),
+(6, 9, 3, NOW(), NOW(), NULL, 1, 0),
+(2, 10, 4, NOW(), NOW(), NULL, 1, 1),
+(6, 11, 5, NOW(), NOW(), NULL, 1, 0),
+(4, 11, 5, NOW(), NOW(), NULL, 1, 0),
+(3, 11, 5, NOW(), NOW(), NULL, 1, 0);
 
 -- Inserts de Comentario
 INSERT INTO Comentario (Texto, Calificacion, FechaHora, CursoID, UsuarioID, Estado)
@@ -575,8 +578,9 @@ ORDER BY
 --
 CREATE VIEW obtenerMiembrosCurso AS
 SELECT
-	u.ID AS IdUsuario,
-    n.ID AS IdNivel,
+	i.UsuarioID AS IdUsuario,
+    i.NivelID AS IdNivel,
+    i.CursoID AS IdCurso,
 	u.NombreUsuario AS Miembro,
     u.Foto AS FotoPerfil
 FROM Inscripcion i
@@ -584,6 +588,16 @@ INNER JOIN Nivel n ON n.ID = i.NivelID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID;
 --
 
+--
+CREATE VIEW verificarUsuarioEnCurso AS
+SELECT 
+	i.UsuarioID AS IdUsuario,
+    i.NivelID AS IdNivel,
+    i.CursoID AS IdCurso
+    
+FROM Inscripcion
+	
+--
 
 
 

@@ -60,6 +60,24 @@ class Curso{
     }
     //Buscar en la bd los comentarios del curso
 
+    //Buscar en la bd si el usuario está inscrito a algún nivel del curso
+    public function obtenerNivelesInscritos($idCurso, $idUsuario){
+        $this->obtenerConexion();
+        $query = 'SELECT * FROM obtenerMiembrosCurso WHERE IdCurso = ? AND IdUsuario = ?';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idCurso);
+        $stmt->bindParam(2, $idUsuario);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+
+    }
+    //Buscar en la bd si el usuario está inscrito a algún nivel del curso
+
     //Buscar en la bd nivel individual
     public function obtenerNivelIndividual($idNivel){
         $this->obtenerConexion();

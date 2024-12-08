@@ -53,7 +53,7 @@
                             <img class="play_y" src="img/cursoHtml.jpg" alt="" width="56px" height="56px" loading="lazy">
                         </div>
                     </div>
-                    <button class="ir-curso" id="a">Ir al curso</button>
+                    <button class="ir-curso" id="a">Comprar curso o niveles individuales</button>
                     <!-- Modal -->
                     <div class="modal-overlay" id="modalOverlay">
                         <div class="modal">
@@ -89,7 +89,7 @@
 
     <!--Programa del curso-->
     <div class="contenido-programa">
-        <h2>Programa del curso</h2>
+        <h2 id="programaCurso"></h2>
         <div class="contenido-programa-unidades" id="Niveles">
         </div>
     </div>
