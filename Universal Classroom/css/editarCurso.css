@@ -1,0 +1,86 @@
+body {
+    font-family: Verdana, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 1000px;
+    background-color: #f0f0f0;
+}
+
+.cursoInfo {
+    border-radius: 15px;
+    padding: 25px;
+    width: 45%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+}
+
+.FotoPerfil {
+    margin-top: 100px;
+    margin-right: 35px;
+}
+
+.FotoPerfil img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.Informacion {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+input:hover, select:hover {
+    background-color: #f0f0f0;
+}
+
+button {
+    padding: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #47e36b;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+
+#editBtn {
+    background-color: #007bff;
+    color: white;
+}
+
+#editBtn:hover {
+    background-color: #0056b3; 
+}
+
+#saveBtn {
+    background-color: #28a745;
+    color: white;
+}
+
+#saveBtn:hover {
+    background-color: #218838; 
+}
+
+#cancelBtn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#cancelBtn:hover {
+    background-color: #c82333;
+}

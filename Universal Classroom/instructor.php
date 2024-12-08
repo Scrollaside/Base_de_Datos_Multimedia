@@ -105,7 +105,7 @@ $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
                         button.dataset.estado = nuevoEstado;
                         button.textContent = nuevoEstado === 'Activo' ? 'Deshabilitar Curso' : 'Habilitar Curso';
                         cursoDiv.querySelector('.detalles p:nth-child(2)').textContent = `Estado: ${nuevoEstado}`;
-                        alert("El estado del curso se ha cambiadocon éxito.");
+                        alert("El estado del curso se ha cambiado con éxito.");
                     }
                 });
             });
