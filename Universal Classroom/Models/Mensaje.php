@@ -46,6 +46,28 @@ class Mensaje{
 
     }
     //Buscar en la bd los mensajes privados
+
+    //Mandar mensaje
+    public function mandarMensaje($texto, $idRemitente, $idDestinatario, $idNivel){
+        $this->obtenerConexion();
+        $query = 'CALL mandarMensaje(?, ?, ?, ?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $texto);
+        $stmt->bindParam(2, $idRemitente);
+        $stmt->bindParam(3, $idDestinatario);
+        $stmt->bindParam(4, $idNivel);
+
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    //Mandar mensaje
 }
 
 ?>

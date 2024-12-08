@@ -25,6 +25,15 @@ class MensajeController{
                 }else{
                     echo json_encode(['success' => false, 'error' => 'No hay mensajes.']);
                 }
+            }else if($data['option'] == 3){
+                $mensaje = new Mensaje();
+                $resultado = $mensaje->mandarMensaje($data['texto'], $data['idUsuarioIS'], $data['idUsuarioChat'], $data['idNivel']);
+
+                if($resultado){
+                    echo json_encode(['success' => true]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
             }
         }
     }

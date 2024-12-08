@@ -164,7 +164,6 @@ CREATE INDEX idx_Curso_Estado ON Curso (Estado);
 -- INSERTS --
 -- INSERTS --
 -- INSERTS --
-
 INSERT INTO Usuario (NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Email, Contraseña, FechaRegistro, FechaActualizacion, TipoUsuario, Estado)
 VALUES ('Aldo Gonzalez', 'Roger Z', 'M', '2004-06-07', 'aldo@gmail.com', '123a', NOW(), null, 3, 1),
 		('Guiollermo MOrin', 'Memo', 'F', '2004-06-04', 'guille@gmail.com', '123b', NOW(), null, 2, 1),
@@ -199,7 +198,6 @@ VALUES (2, 3, 4000),
 (8, 4, 50),
 (9, 6, 9000);
 
-
 -- Inserts Tabla Curso
 INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
 VALUES 
@@ -214,6 +212,7 @@ VALUES
 ('SEO para principiantes', 'Posicionamiento en motores de búsqueda', NULL, 70.00, 3, 'Activo', 3.8, NOW(), 4, 9),
 ('Diseño UX/UI', 'Conceptos de experiencia y diseño de interfaces', NULL, 110.00, 6, 'Activo', 4.6, NOW(), 9, 9),
 ('Programacion en php', 'Conceptos de experiencia y diseño de interfaces', NULL, 30.00, 1, 'Activo', 5, NOW(), 3, 9);
+
 
 -- Inserts Tabla CursoCategoria
 INSERT INTO CursoCategoria (CursoID, CategoriaID)
@@ -259,7 +258,9 @@ VALUES
 (4, 8, NOW(), NULL, NULL, 1, 1),
 (6, 9, NOW(), NOW(), NULL, 1, 0),
 (2, 10, NOW(), NOW(), NULL, 1, 1),
-(6, 11, NOW(), NOW(), NULL, 1, 0);
+(6, 11, NOW(), NOW(), NULL, 1, 0),
+(4, 11, NOW(), NOW(), NULL, 1, 0),
+(3, 11, NOW(), NOW(), NULL, 1, 0);
 
 -- Inserts de Comentario
 INSERT INTO Comentario (Texto, Calificacion, FechaHora, CursoID, UsuarioID, Estado)
