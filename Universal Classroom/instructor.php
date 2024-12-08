@@ -52,11 +52,11 @@ $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
                     <p>Estado: <?= htmlspecialchars($curso['Estado']) ?></p>
                     <p>Fecha de creación: <?= htmlspecialchars($curso['FechaCreacion']) ?></p>
                 </div>
-                <a href="detallesCurso.php" class="curso-link">Ver Detalles</a>
+                <a href="detallesCurso.php" class="curso-link" id="<?= htmlspecialchars($curso['ID']) ?>">Ver Detalles</a>
                 <button class="curso-link estado-btn" data-id="<?= htmlspecialchars($curso['ID']) ?>" data-estado="<?= htmlspecialchars($curso['Estado']) ?>">
                     <?= $curso['Estado'] === 'Activo' ? 'Deshabilitar Curso' : 'Habilitar Curso' ?>
                 </button>
-                <a href="editarCurso.php" class="curso-link">Editar Curso</a>
+                <a href="editarCurso.php?id=<?= htmlspecialchars($curso['ID']) ?>" class="curso-link">Editar Curso</a>
             </div>
         </div>
         <?php endforeach; ?>
