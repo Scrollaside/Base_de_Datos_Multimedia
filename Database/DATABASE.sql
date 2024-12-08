@@ -1019,8 +1019,7 @@ ELSE
     GROUP BY Curso;
 END IF;
 END //
-DELIMITER ;
-DELIMITER //
+DELIMITER ;DELIMITER //
 CREATE PROCEDURE GananciasTotalesSP(
 IN gt_ID INT,
 IN gt_desde VARCHAR(255),
@@ -1030,11 +1029,14 @@ IN gt_estado VARCHAR(255)
 )
 BEGIN
 IF gt_categoria = 'Todas' AND gt_estado != 'Todos' THEN
-	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM GananciasTotales
+	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM (
+	SELECT Curso, FormaPago, IngresosTotales FROM GananciasTotales
 	WHERE Instructor = gt_ID 
 		AND Estado = gt_estado 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y')
-	GROUP BY FormaPago;
+	GROUP BY Curso, FormaPago
+    ) AS Subquery
+    GROUP BY FormaPago;
 ELSEIF gt_categoria != 'Todas' AND gt_estado = 'Todos' THEN
 	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM GananciasTotales
 	WHERE Instructor = gt_ID 
@@ -1042,9 +1044,12 @@ ELSEIF gt_categoria != 'Todas' AND gt_estado = 'Todos' THEN
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y')
 	GROUP BY FormaPago;
 ELSEIF gt_categoria = 'Todas' AND gt_estado = 'Todos' THEN
-	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM GananciasTotales
+	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM (
+	SELECT Curso, FormaPago, IngresosTotales FROM GananciasTotales
     WHERE Instructor = gt_ID 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y')
+    GROUP BY Curso, FormaPago
+    ) AS Subquery
     GROUP BY FormaPago;
 ELSE 
 	SELECT FormaPago, CONCAT('$', FORMAT(SUM(IngresosTotales), 2)) AS IngresosTotales FROM GananciasTotales
@@ -1052,7 +1057,7 @@ ELSE
 		AND Estado = gt_estado 
 		AND Categoria = gt_categoria 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(gt_desde, '%d/%m/%Y') AND STR_TO_DATE(gt_hasta, '%d/%m/%Y')
-	GROUP BY FormaPago;
+	GROUP BY FormaPago, Categoria;
 END IF;
 END //
 DELIMITER ;
@@ -1132,19 +1137,25 @@ IN ti_estado VARCHAR(255)
 )
 BEGIN 
 IF ti_categoria = 'Todas' AND ti_estado != 'Todos' THEN
-	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM (
+	SELECT Curso, Ingresos FROM TotalIngresos 
 	WHERE Instructor = ti_ID 
 		AND Estado = ti_estado 
-		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y')
+	GROUP BY Curso
+        ) AS Subquery;
 ELSEIF ti_categoria != 'Todas' AND ti_estado = 'Todos' THEN
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
 	WHERE Instructor = ti_ID 
 		AND Categoria = ti_categoria 
 		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
 ELSEIF ti_categoria = 'Todas' AND ti_estado = 'Todos' THEN
-	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
+	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM (
+	SELECT Curso, Ingresos FROM TotalIngresos 
     WHERE Instructor = ti_ID 
-		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y');
+		AND STR_TO_DATE(Creacion, '%d/%m/%Y') BETWEEN STR_TO_DATE(ti_desde, '%d/%m/%Y') AND STR_TO_DATE(ti_hasta, '%d/%m/%Y')
+	GROUP BY Curso
+        ) AS Subquery;
 ELSE 
 	SELECT CONCAT('$', FORMAT(SUM(Ingresos), 2)) AS TotalIngresos FROM TotalIngresos 
 	WHERE Instructor = ti_ID 
