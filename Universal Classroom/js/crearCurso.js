@@ -129,8 +129,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-
 });
 
+
+
+
+// INPUTS DE NIVELES SEGÚN LA CANTIDAD DE NIVELES QUE PONGAS EN EL CAMPO
+
+// Manejar la creación de niveles con la nueva validación
+document.getElementById("niveles").addEventListener("input", function() {
+    const nivelesContainer = document.getElementById("niveles-container");
+    let numNiveles = this.value;
+
+    // Limitar la longitud a un dígito
+    if (numNiveles.length > 1) {
+        this.value = numNiveles.slice(0, 1);
+    }
+
+    // Validar que el número sea un dígito entre 1 y 9
+    if (isNaN(numNiveles) || numNiveles < 1 || numNiveles > 9) {
+        nivelesContainer.innerHTML = ""; 
+        return;
+    }
+
+    // Limpiar el contenedor antes de crear los niveles
+    nivelesContainer.innerHTML = "";
+
+    // Crear dinámicamente los formularios de niveles
+    for (let i = 1; i <= numNiveles; i++) {
+        const nivelDiv = document.createElement("div");
+        nivelDiv.classList.add("nivel");
+
+        nivelDiv.innerHTML = `
+            <h3>Nivel ${i}</h3>
+            <label for="titulo-nivel-${i}">Título del Nivel:</label>
+            <input type="text" id="titulo-nivel-${i}" name="titulo-nivel-${i}" required><br>
+
+            <label for="costo-nivel-${i}">Costo Individual del Nivel:</label>
+            <input type="number" id="costo-nivel-${i}" name="costo-nivel-${i}" required><br>
+
+            <label for="contenido-nivel-${i}">Contenido:</label>
+            <textarea id="contenido-nivel-${i}" name="contenido-nivel-${i}" rows="4"></textarea><br>
+
+            <label for="pdf-nivel-${i}">Adjuntar PDF:</label>
+            <input type="file" id="pdf-nivel-${i}" name="pdf-nivel-${i}" accept="application/pdf"><br>
+
+            <label for="link-nivel-${i}">Link Externo:</label>
+            <input type="url" id="link-nivel-${i}" name="link-nivel-${i}"><br>
+
+            <label for="video-nivel-${i}">Video:</label>
+            <input type="file" id="video-nivel-${i}" name="video-nivel-${i}" accept="video/*" required><br>
+        `;
+
+        nivelesContainer.appendChild(nivelDiv);
+    }
+});
 

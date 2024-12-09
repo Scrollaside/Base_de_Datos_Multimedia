@@ -48,6 +48,7 @@
 
             <label for="niveles">Número de Niveles:</label>
             <input type="number" id="niveles" name="niveles" min="1" max="9" maxlength="1" required>
+            <div id="niveles-container"></div>
 
             <button type="submit">Crear Curso</button>
         </form>    
