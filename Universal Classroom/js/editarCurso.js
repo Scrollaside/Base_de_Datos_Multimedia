@@ -87,25 +87,99 @@ function actualizarInfo() {
 }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const agregarBtn = document.getElementById('btnAgregarCategoria');
+    const actualizarBtn = document.getElementById('guardarCategoria');
+    const listaCategorias = document.getElementById('categoriasActuales');
 
-// Agregar a la lista Categorias
-function sumarCategorias() {
-            
-}
+    // Agregar categoría a la lista
+    agregarBtn.addEventListener('click', () => {
+        const selectCategorias = document.getElementById('selectCategorias');
+        const categoriaId = selectCategorias.value;
+        const categoriaNombre = selectCategorias.selectedOptions[0].text;
+
+        if (categoriaId === '') {
+            alert('Por favor, selecciona una categoría.');
+            return;
+        }
+
+        // Evitar duplicados
+        const existe = Array.from(listaCategorias.children).some(
+            (li) => li.dataset.id === categoriaId
+        );
+        if (existe) {
+            alert('Esta categoría ya ha sido agregada.');
+            return;
+        }
+
+        // Crear nuevo elemento en la lista
+        const nuevaCategoria = document.createElement('li');
+        nuevaCategoria.dataset.id = categoriaId;
+        nuevaCategoria.innerHTML = `
+            ${categoriaNombre} <button id="cancelBtn" class="btnEliminarCategoria">X</button>
+        `;
+        listaCategorias.appendChild(nuevaCategoria);
+    });
+
+    // Eliminar categoría de la lista
+    listaCategorias.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btnEliminarCategoria')) {
+            e.target.parentElement.remove();
+        }
+    });
+
+    // Verificar si la lista está vacía
+    function verificarListaVacia() {
+        if (listaCategorias.children.length === 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    // Actualizar categorías en la base de datos
+    actualizarBtn.addEventListener('click', () => {
+
+        if(!verificarListaVacia()){
+            alert('El curso debe tener categorias.');
+        }
+        else {
+            const cursoId = document.getElementById("cursoId").value; // ID del curso
+            const categoriasSeleccionadas = Array.from(document.querySelectorAll("#categoriasActuales li"))
+               .map(li => li.dataset.id);
 
 
+            fetch("Controllers/EdicionCursoController.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    cursoId,
+                    categorias: categoriasSeleccionadas
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Categorías actualizadas correctamente.");
+                } else {
+                    alert("Error al actualizar las categorías.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
 
-// Actualizar Categorias
-function actualizarCategorias() {
-            
-}
- 
+    });
 
+});
 
 
 
 // Eventos de los botones
 document.getElementById("guardarFoto").addEventListener("click", actualizarFoto);
 document.getElementById("guardarInfo").addEventListener("click", actualizarInfo);
-agregarCategoria.addEventListener("click", sumarCategorias);
-guardarCategoria.addEventListener("click", actualizarCategorias);
+

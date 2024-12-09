@@ -63,12 +63,12 @@ button:hover {
     background-color: #0056b3; 
 }
 
-.cancelBtn {
+#cancelBtn {
     background-color: #dc3545;
     color: white;
     padding: 5px;
 }
 
-.cancelBtn:hover {
+#cancelBtn:hover {
     background-color: #c82333;
 }

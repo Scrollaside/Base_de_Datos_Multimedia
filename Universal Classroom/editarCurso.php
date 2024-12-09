@@ -43,6 +43,7 @@ $fotoPerfilSrc = $cursoInfo['Imagen'] ? 'data:image/jpeg;base64,' . base64_encod
 <body>
 
     <h1 align="center">Información del Curso</h1>
+    <input type="hidden" id="cursoId" value="<?php echo $cursoID; ?>">
 
     <div align="center">
 
@@ -74,30 +75,33 @@ $fotoPerfilSrc = $cursoInfo['Imagen'] ? 'data:image/jpeg;base64,' . base64_encod
 
     </div><br><br><br>
 
-    <div class="cursoInfo" >
+    <div class="cursoInfo">
 
         <div class="modulo-categorias">
             <label>Categorías</label>
+            <!-- Lista de categorías actuales -->
             <ul id="categoriasActuales" align="left">
                 <?php foreach ($categoriasCurso as $categoria) : ?>
-                    <li data-id="<?php echo $categoria['ID']; ?>"><?php echo htmlspecialchars($categoria['Nombre']); ?> <button class="cancelBtn">X</button></li>
+                    <li data-id="<?php echo $categoria['ID']; ?>">
+                        <?php echo htmlspecialchars($categoria['Nombre']); ?>
+                        <button id="cancelBtn" class="btnEliminarCategoria">X</button>
+                    </li>
                 <?php endforeach; ?>
             </ul>
-                
-            <select id="nuevasCategorias">
-                <?php foreach ($todasCategorias as $categoria) : ?>
-                    <option value="<?php echo $categoria['ID']; ?>"><?php echo htmlspecialchars($categoria['Nombre']); ?></option>
+                    
+            <!-- Select para agregar nuevas categorías -->
+            <select id="selectCategorias">
+                <option value="">Selecciona una categoría</option>
+                <?php foreach ($todasCategorias as $categoria): ?>
+                    <option value="<?= $categoria['ID'] ?>"><?= htmlspecialchars($categoria['Nombre']); ?></option>
                 <?php endforeach; ?>
             </select>
-            <button id="agregarCategoria" class="editBtn">Agregar</button>
+            <button id="btnAgregarCategoria" class="editBtn">Agregar Categoría</button>
         </div>
-                
-        <br><button id="guardarCategoria">Actualizar categorias</button>
-
-    </div><br><br><br>
-  
-    <p id="errorMsg" style="color:green;"></p>
-
+                    
+        <br>
+        <button id="guardarCategoria">Actualizar Categorías</button>
+    </div><br><br><br><br><br>
 
     <script src="js/editarCurso.js"></script>    
     <script src="js/loadNavBar.js"></script>

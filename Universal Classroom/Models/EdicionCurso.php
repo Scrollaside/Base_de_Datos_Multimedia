@@ -78,6 +78,23 @@ class EdicionCurso
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Eliminar todas las categorias del curso
+    public function eliminarCategoriasPorCurso($cursoId) {
+        $sql = "DELETE FROM CursoCategoria WHERE CursoID = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1, $cursoId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
+    // Agregar las nuevas categorias al curso
+    public function insertarCategoriaCurso($cursoId, $categoriaId) {
+        $sql = "INSERT INTO CursoCategoria (CursoID, CategoriaID) VALUES (?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1, $cursoId, PDO::PARAM_INT);
+        $stmt->bindParam(2, $categoriaId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
 
 
