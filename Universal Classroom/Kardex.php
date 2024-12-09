@@ -53,8 +53,8 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
         <label for="estado">Estado del Curso:</label>
         <select id="estado">
             <option value="todos">Todos</option>
-            <option value="activos">Activos</option>
-            <option value="inactivos">Inactivos</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
         </select>
 
         <button onclick="filtrarVentas()">Filtrar</button>
