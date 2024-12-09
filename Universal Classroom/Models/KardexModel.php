@@ -11,6 +11,27 @@ class KardexModel {
         $this->conexion = $conexion;
     }
 
+
+    
+    public function GetDate() {
+        try {
+            $this->obtenerConexion();
+            // Consulta para obtener la fecha formateada
+            $query = "SELECT DATE_FORMAT(CURDATE(), '%d/%m/%Y') AS fechaFormateada";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        
+            // Recuperar el resultado
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['fechaFormateada']; // Devuelve la fecha
+        } catch (PDOException $e) {
+            echo json_encode(["error" => $e->getMessage()]);
+            return null;
+        }
+    }
+
+
+
     // Obtener niveles inscritos, ajustado para incluir datos necesarios
     public function obtenerNivelesInscritos($userId) {
         $sql = "SELECT n.ID AS nivel_id, c.Titulo AS nombre_curso, n.Nombre AS nombre_nivel, 
