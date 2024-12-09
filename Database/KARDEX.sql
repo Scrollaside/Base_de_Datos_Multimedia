@@ -101,24 +101,24 @@ IN kc_estado VARCHAR(255)
 )
 BEGIN
 IF kc_categoria = 'Todas' AND kc_estado = 'Todos' THEN -- Sin Filtro
-	SELECT curso_id, nombre_curso, Estado, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
+	SELECT nivel_id, nombre_curso, nombre_nivel, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
     WHERE usuario_id = kc_ID 
 		AND STR_TO_DATE(fecha_inscripcion, '%d/%m/%Y') BETWEEN STR_TO_DATE(kc_desde, '%d/%m/%Y') AND STR_TO_DATE(kc_hasta, '%d/%m/%Y')
     GROUP BY curso_id;
 ELSEIF kc_categoria = 'Todas' AND kc_estado != 'Todos' THEN -- Filtrar Estado
-	SELECT curso_id, nombre_curso, Estado, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
+	SELECT nivel_id, nombre_curso, nombre_nivel, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
 	WHERE usuario_id = kc_ID 
 		AND Estado = kc_estado 
 		AND STR_TO_DATE(fecha_inscripcion, '%d/%m/%Y') BETWEEN STR_TO_DATE(kc_desde, '%d/%m/%Y') AND STR_TO_DATE(kc_hasta, '%d/%m/%Y')
 	GROUP BY curso_id;
 ELSEIF kc_categoria != 'Todas' AND kc_estado = 'Todos' THEN -- Filtrar Categoria
-	SELECT curso_id, nombre_curso, Estado, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
+	SELECT nivel_id, nombre_curso, nombre_nivel, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
 	WHERE usuario_id = kc_ID 
 		AND categoria = kc_categoria 
 		AND STR_TO_DATE(fecha_inscripcion, '%d/%m/%Y') BETWEEN STR_TO_DATE(kc_desde, '%d/%m/%Y') AND STR_TO_DATE(kc_hasta, '%d/%m/%Y')
 	GROUP BY curso_id;
 ELSE -- Filtrar Categoria & Estado
-	SELECT curso_id, nombre_curso, Estado, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
+	SELECT nivel_id, nombre_curso, nombre_nivel, fecha_inscripcion, ultima_fecha_acceso, fecha_finalizacion FROM KardexCursos
 	WHERE usuario_id = kc_ID 
 		AND Estado = kc_estado 
 		AND categoria = kc_categoria 
@@ -128,7 +128,7 @@ END IF;
 END //
 DELIMITER ;
 
-CALL KardexNivelesSP('6', '01/01/1001', '08/12/2024', 'Todas', 'Todos');
+CALL KardexNivelesSP('6', '01/01/1001', '08/12/2024', 'Todas', 'Todos'); -- Datos para la tabla Niveles Inscritos
 
 
 
