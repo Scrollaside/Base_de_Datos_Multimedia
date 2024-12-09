@@ -20,7 +20,6 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Cursos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/NavBar.css">
     <link rel="stylesheet" href="css/busqueda.css">
@@ -37,7 +36,9 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
                 <label for="tituloCurso" class="form-label">Título del Curso</label>
                 <input type="text" class="form-control" id="tituloCurso" name="titulo" placeholder="Escribe el título del curso" value="<?php echo htmlspecialchars($_GET['titulo'] ?? ''); ?>">
             </div>
+        </div>
 
+        <div class="row mb-3">            
             <!-- Búsqueda por categoría -->
             <div class="col-md-6 mb-3">
                 <label for="categoriaCurso" class="form-label">Categoría del Curso</label>
@@ -64,7 +65,9 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
                 <label for="usuarioPublicador" class="form-label">Usuario que publicó el curso</label>
                 <input type="text" class="form-control" id="usuarioPublicador" name="usuario" placeholder="Nombre del usuario" value="<?php echo htmlspecialchars($_GET['usuario'] ?? ''); ?>">
             </div>
+        </div>
 
+        <div class="row mb-3">
             <!-- Búsqueda por rango de fechas de publicación -->
             <div class="col-md-6 mb-3">
                 <label for="fechaPublicacion" class="form-label">Rango de Fechas de Publicación</label>
@@ -77,7 +80,7 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
 
         <!-- Botón de búsqueda -->
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center"><br><br>
                 <button type="submit" class="btn btn-primary">Buscar Cursos</button>
             </div>
         </div>
@@ -86,26 +89,28 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
     <!-- Resultados de la búsqueda -->
     <div class="mt-5">
         <h4>Resultados de la Búsqueda</h4>
-        <div id="resultadosBusqueda">
+        <div id="resultadosBusqueda" align="center">
             <?php if (count($cursos) > 0): ?>
                 <?php foreach ($cursos as $curso): ?>
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="recuadroResultante" align="left">
+                        
+                        <!-- Imagen del curso -->
+                        <div class="col-md-4">
+                            <?php if (!empty($curso['Imagen'])): ?>
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="Imagen del curso">
+                            <?php else: ?>
+                                <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+                            <?php endif; ?>
+                        </div>
+
                         <div class="row g-0">
-                            <!-- Imagen del curso -->
-                            <div class="col-md-4">
-                                <?php if (!empty($curso['Imagen'])): ?>
-                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="Imagen del curso">
-                                <?php else: ?>
-                                    <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
-                                <?php endif; ?>
-                            </div>
-                                
+                                                            
                             <!-- Detalles del curso -->
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($curso['Titulo']); ?></h5>
-                                    <p class="card-text"><?php echo htmlspecialchars($curso['Descripcion']); ?></p>
-                                    <p class="card-text">Calificación: <?php echo htmlspecialchars($curso['PromedioCalificacion']); ?></p>
+                                    <h1 class="card-title"><?php echo htmlspecialchars($curso['Titulo']); ?></h1>
+                                    <h3 class="card-text"><?php echo htmlspecialchars($curso['Descripcion']); ?></h3>
+                                    <label class="card-text">Calificación: <?php echo htmlspecialchars($curso['PromedioCalificacion']); ?></label>
                                     <p class="card-text">Creador: <?php echo htmlspecialchars($curso['Creador']); ?></p>
                                     <button class="btn btn-primary" id="<?php echo htmlspecialchars($curso['ID']); ?>">Ver Curso</button>
                                 </div>
@@ -119,6 +124,8 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
         </div>
     </div>
 </div>
+
+<button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button><br><br>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -135,6 +142,13 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
 
 
 <script src="js/loadNavBar.js"></script>
+
+<script>        
+    window.addEventListener('scroll', () => {
+        const scrollButton = document.querySelector('.scroll-to-top');
+        scrollButton.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

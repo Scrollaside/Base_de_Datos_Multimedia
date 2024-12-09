@@ -43,7 +43,15 @@ $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
     <div align="center">
         <?php foreach ($misCursos as $curso): ?>
         <div class="curso" id="curso-<?= htmlspecialchars($curso['ID']) ?>" style="opacity: <?= $curso['Estado'] === 'Activo' ? '1' : '0.5' ?>">
-            <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+            
+
+            <?php if (!empty($curso['Imagen'])): ?>
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="Imagen del curso">
+            <?php else: ?>
+                <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+            <?php endif; ?>
+
+
             <div class="curso-info" align="left">
                 <h2 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h2>
                 <p><?= htmlspecialchars($curso['Descripcion']) ?></p>
