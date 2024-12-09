@@ -70,7 +70,7 @@ class Curso{
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }else{
             return false;
         }
@@ -110,23 +110,21 @@ class Curso{
     }
     //Borrar comentario admin
 
-    //Insertar inscripción a la bd
-    public function crearInscripcion($idUsuario, $idNivel, $idCurso, $metodoPago){
-        $this->obtenerConexion();
-        $query = 'CALL agregarInscripcion (?, ?, ?, ?);';
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $idUsuario);
-        $stmt->bindParam(2, $idNivel);
-        $stmt->bindParam(3, $idCurso);
-        $stmt->bindParam(4, $metodoPago);
-        $stmt->execute();
+//Borrar comentario admin
+public function borrarCurso($idCurso){
+    $this->obtenerConexion();
+    $query = 'UPDATE Curso SET Estado = "Inactivo" WHERE ID = ?;';
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $idCurso);
+    $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-            return true;
-        }else{
-            return false;
-        }
+    if ($stmt->rowCount() > 0) {
+        return true;
+    }else{
+        return false;
     }
-    //Insertar inscripción a la bd
+}
+//Borrar comentario admin
+
 }
 ?>

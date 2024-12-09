@@ -112,7 +112,8 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
                                     <h3 class="card-text"><?php echo htmlspecialchars($curso['Descripcion']); ?></h3>
                                     <label class="card-text">Calificación: <?php echo htmlspecialchars($curso['PromedioCalificacion']); ?></label>
                                     <p class="card-text">Creador: <?php echo htmlspecialchars($curso['Creador']); ?></p>
-                                    <button class="btn btn-primary" id="<?php echo htmlspecialchars($curso['ID']); ?>">Ver Curso</button>
+                                    <button class="btn btn-primary boton-curso" id="<?php echo htmlspecialchars($curso['ID']); ?>">Ver Curso</button>
+                                    <button class="btn btn-primary boton-curso-eliminar" id="<?php echo htmlspecialchars($curso['ID']); ?>">Eliminar Curso</button>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +143,7 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
 
 
 <script src="js/loadNavBar.js"></script>
+<script src="js/loadcoursesAdmin.js"></script>
 
 <script>        
     window.addEventListener('scroll', () => {

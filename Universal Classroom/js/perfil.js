@@ -83,7 +83,7 @@ function guardarCambios() {
     }
 
     // Validación para la contraseña
-    const passwordRegex = /^(?=.*[A-ZÀ-ÿ])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;;
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;;
     if (!passwordRegex.test(password.value)) {
         statusMessage.textContent = "La contraseña debe tener 8 carácteres, mayúscula, número y carácter especial como mínimo.";
         validaciones = false;
@@ -98,7 +98,7 @@ function guardarCambios() {
 
     
     // Si ninguna validación falla, entonces no regresa y entra aqui
-    if (validaciones) {
+    
         const formData = new FormData();
         const usuarioID = document.getElementById("profileForm").getAttribute("data-usuario-id");
         formData.append("id", usuarioID);
@@ -145,7 +145,7 @@ function guardarCambios() {
     } 
 
     
-}
+
 
 // Eventos de los botones
 editBtn.addEventListener("click", habilitarEdicion);

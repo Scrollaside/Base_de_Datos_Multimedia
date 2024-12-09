@@ -59,9 +59,11 @@ class CursoController{
                 }else{
                     echo json_encode(['success' => false]);
                 }
-            }else if($data['option'] == 5){
+            }
+
+            else if($data['option'] == 5){
                 $curso = new Curso();
-                $validacion = $curso->crearInscripcion($data['IdUsuario'], $data['IdNivel'], $data['IdCurso'], $data['metodoPago']);
+                $validacion = $curso->borrarCurso($data['idCurso']);
 
                 if($validacion){
                     echo json_encode(['success' => true]);
@@ -69,6 +71,9 @@ class CursoController{
                     echo json_encode(['success' => false]);
                 }
             }
+
+
+            
         }
     }
 }

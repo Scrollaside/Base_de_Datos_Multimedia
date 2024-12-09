@@ -13,6 +13,7 @@ class Usuario {
     public $email;
     public $contraseña;
     public $tipoUsuario;
+    public $messageError;
 
     public function obtenerConexion() {
         $database = new db();
@@ -149,7 +150,7 @@ class Usuario {
 
     public function actualizarUsuarioPorID($id, $nombreCompleto, $nombreUsuario, $genero, $fechaNacimiento, $email, $contraseña, $foto = null) {
         $this->obtenerConexion();
-        $query = "UPDATE Usuario SET NombreCompleto = ?, NombreUsuario = ?, Genero = ?, FechaNacimiento = ?, Email = ?, Contraseña = ?, FechaActualizacion = NOW()";
+        $query = "UPDATE Usuario SET NombreCompleto = ?, NombreUsuario = ?, Genero = ?, FechaNacimiento = ?, Email = ?, Contraseña = ?";
         if ($foto) {
             $query .= ", Foto = ?";
         }
