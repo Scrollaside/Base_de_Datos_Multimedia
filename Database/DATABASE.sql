@@ -744,7 +744,20 @@ DELIMITER ;
 -- STORED PROCEDURES --
 -- STORED PROCEDURES --
 
+DELIMITER //
 
+CREATE PROCEDURE ObtenerNivelesNoInscritos (
+    IN p_UsuarioID INT,
+    IN p_CursoID INT
+)
+BEGIN
+    SELECT n.ID, n.Costo
+    FROM Nivel n
+    LEFT JOIN Inscripcion i ON n.ID = i.NivelID AND i.UsuarioID = p_UsuarioID
+    WHERE i.NivelID IS NULL AND n.CursoID = p_CursoID;
+END //
+
+DELIMITER ;
 -- USER SP --
 -- USER SP --
 DELIMITER //

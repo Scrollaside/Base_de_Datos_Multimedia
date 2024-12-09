@@ -63,17 +63,24 @@ class CursoController{
 
             else if($data['option'] == 5){
                 $curso = new Curso();
-                $validacion = $curso->borrarCurso($data['idCurso']);
+                $validacion = $curso->crearInscripcion($data['IdUsuario'], $data['IdNivel'], $data['IdCurso'], $data['metodoPago']);
+                //$validacion = $curso->borrarCurso($data['idCurso']);
 
                 if($validacion){
                     echo json_encode(['success' => true]);
                 }else{
                     echo json_encode(['success' => false]);
                 }
-            }
+            }else if($data['option'] == 6){
+                $curso = new Curso();
+                $niveles = $curso->obtenerNivelesNoInscritos($data['IdUsuario'], $data['ID']);
 
-
-            
+                if($niveles){
+                    echo json_encode(['success' => true, 'niveles' => $niveles]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
+            }            
         }
     }
 }

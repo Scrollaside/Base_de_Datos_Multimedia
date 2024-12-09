@@ -68,9 +68,12 @@ class Curso{
         $stmt->bindParam(1, $idCurso);
         $stmt->bindParam(2, $idUsuario);
         $stmt->execute();
+        $validacion = $stmt->rowCount();
 
-        if ($stmt->rowCount() > 0) {
+        if ($validacion == 0) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else if ($validacion > 0){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }else{
             return false;
         }
@@ -93,6 +96,45 @@ class Curso{
         }
     }
     //Buscar en la bd nivel individual
+
+    //Buscar en la bd nivel individual
+    public function obtenerNivelesNoInscritos($idUsuario, $idCurso){
+        $this->obtenerConexion();
+        $query = 'CALL ObtenerNivelesNoInscritos(?, ?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idUsuario);
+        $stmt->bindParam(2, $idCurso);
+        $stmt->execute();
+        $validacion = $stmt->rowCount();
+
+        if ($validacion == 1) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else if ($validacion > 1){
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+    }
+    //Buscar en la bd nivel individual
+
+    //Insertar inscripción a la bd
+    public function crearInscripcion($idUsuario, $idNivel, $idCurso, $metodoPago){
+        $this->obtenerConexion();
+        $query = 'CALL agregarInscripcion (?, ?, ?, ?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idUsuario);
+        $stmt->bindParam(2, $idNivel);
+        $stmt->bindParam(3, $idCurso);
+        $stmt->bindParam(4, $metodoPago);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Insertar inscripción a la bd
 
     //Borrar comentario admin
     public function borrarComentario($idComentario){
