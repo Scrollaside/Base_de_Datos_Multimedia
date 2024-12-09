@@ -54,4 +54,42 @@ class Curso {
         return $stmt->rowCount() > 0;
     }
     
+    public function insertarCurso($titulo, $imagen, $descripcion, $costo, $cantidadNiveles, $usuarioCreador) {
+        $sql = "INSERT INTO Curso (Titulo, Imagen, Descripcion, Costo, CantidadNiveles, UsuarioCreador)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$titulo, $imagen, $descripcion, $costo, $cantidadNiveles, $usuarioCreador]);
+        return $this->db->lastInsertId(); // Devuelve el ID del curso insertado
+    }
+}
+
+// Procesar la solicitud desde fetch
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_start();
+
+    if (!isset($_SESSION['ID'])) {
+        echo json_encode(['success' => false, 'message' => 'Usuario no autenticado.']);
+        exit;
+    }
+
+    $usuarioCreador = $_SESSION['ID'];
+    $titulo = $_POST['titulo'] ?? '';
+    $descripcion = $_POST['descripcion'] ?? '';
+    $costo = $_POST['costo'] ?? 0;
+    $cantidadNiveles = $_POST['cantidadNiveles'] ?? 1;
+
+    if (empty($titulo) || empty($descripcion) || empty($costo) || empty($cantidadNiveles) || !isset($_FILES['imagen']['tmp_name'])) {
+        echo json_encode(['success' => false, 'message' => 'Todos los campos deben ser rellenados.']);
+        exit;
+    }
+
+    $imagen = file_get_contents($_FILES['imagen']['tmp_name']);
+
+    try {
+        $cursoModel = new Curso();
+        $cursoId = $cursoModel->insertarCurso($titulo, $imagen, $descripcion, $costo, $cantidadNiveles, $usuarioCreador);
+        echo json_encode(['success' => true, 'cursoId' => $cursoId]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Error al insertar el curso: ' . $e->getMessage()]);
+    }
 }

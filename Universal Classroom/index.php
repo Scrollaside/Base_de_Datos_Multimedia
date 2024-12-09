@@ -51,7 +51,12 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
         <div class="cursos-container">
             <?php foreach ($mejoresCalificados as $curso): ?>
                 <div class="curso">
-                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php if (!empty($curso['Imagen'])): ?>
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php else: ?>
+                        <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+                    <?php endif; ?>
+
                     <div class="detalles">
                         <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
@@ -68,7 +73,12 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
         <div class="cursos-container">
             <?php foreach ($masVendidos as $curso): ?>
                 <div class="curso">
-                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php if (!empty($curso['Imagen'])): ?>
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php else: ?>
+                        <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+                    <?php endif; ?>
+
                     <div class="detalles">
                         <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
@@ -85,7 +95,12 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
         <div class="cursos-container">
             <?php foreach ($masRecientes as $curso): ?>
                 <div class="curso">
-                    <img src="<?= htmlspecialchars($curso['Imagen']) ?>" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php if (!empty($curso['Imagen'])): ?>
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($curso['Titulo']) ?>">
+                    <?php else: ?>
+                        <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+                    <?php endif; ?>
+
                     <div class="detalles">
                         <h3 class="titulo-by-curso"><?= htmlspecialchars($curso['Titulo']) ?></h3>
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>

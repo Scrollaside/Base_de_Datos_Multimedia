@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error("Error:", error);
+                alert("Categorías actualizadas correctamente.");
             });
         }
 
