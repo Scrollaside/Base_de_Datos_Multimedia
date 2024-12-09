@@ -37,43 +37,61 @@ document.addEventListener('DOMContentLoaded', () => {
             return; 
         }
 
-        
-        const formData = new FormData();
-        formData.append("titulo", titulo);
-        formData.append("imagen", imagen);
-        formData.append("descripcion", descripcion);
-        formData.append("costo", costo);
-        formData.append("cantidadNiveles", cantidadNiveles);
 
-        
-        try {
-            // Primera solicitud: Crear curso
-            const responseCurso = await fetch('Models/Curso.php', {
-                method: 'POST',
-                body: formData
+
+
+        // INFORMACIÓN DE LOS FORMS DE LOS NIVELES
+        const niveles = [];
+        for (let i = 1; i <= cantidadNiveles; i++) {
+            niveles.push({
+                titulo: document.getElementById(`titulo-nivel-${i}`).value.trim(),
+                costo: document.getElementById(`costo-nivel-${i}`).value,
+                contenido: document.getElementById(`contenido-nivel-${i}`).value.trim(),
+                documento: document.getElementById(`pdf-nivel-${i}`).files[0]?.name || null,
+                link: document.getElementById(`link-nivel-${i}`).value.trim(),
+                video: document.getElementById(`video-nivel-${i}`).files[0]?.name || null,
+                numero: i
             });
-    
+        }
+
+        try {
+
+            // INFORMACIÓN DEL FORM DE LA INFORMACIÖN DEL CURSO
+            const formData = new FormData();
+            formData.append("titulo", titulo);
+            formData.append("imagen", imagen);
+            formData.append("descripcion", descripcion);
+            formData.append("costo", costo);
+            formData.append("cantidadNiveles", cantidadNiveles);
+
+            const responseCurso = await fetch('Models/Curso.php', { method: 'POST', body: formData });
             const resultCurso = await responseCurso.json();
-    
+
             if (resultCurso.success) {
                 const cursoId = resultCurso.cursoId;
-    
-                // Segunda solicitud: Asociar categorías
+
                 const categoriasData = new FormData();
                 categoriasData.append("accion", "insertarCategorias");
                 categoriasData.append("cursoId", cursoId);
                 categoriasData.append("categorias", JSON.stringify(categoriasSeleccionadas.map(cat => cat.id)));
-    
-                const responseCategorias = await fetch('Models/Curso.php', {
-                    method: 'POST',
-                    body: categoriasData
-                });
-    
+
+                const responseCategorias = await fetch('Models/Curso.php', { method: 'POST', body: categoriasData });
                 const resultCategorias = await responseCategorias.json();
-    
+
                 if (resultCategorias.success) {
-                    alert('¡Curso creado con éxito!');
-                    window.location.href = 'instructor.php';
+                    const nivelesData = new FormData();
+                    nivelesData.append("cursoId", cursoId);
+                    nivelesData.append("niveles", JSON.stringify(niveles));
+
+                    const responseNiveles = await fetch('Models/nivelModel.php', { method: 'POST', body: nivelesData });
+                    const resultNiveles = await responseNiveles.json();
+
+                    if (resultNiveles.success) {
+                        alert('¡Curso creado con éxito!');
+                        window.location.href = 'instructor.php';
+                    } else {
+                        alert(resultNiveles.message || 'Error al insertar niveles.');
+                    }
                 } else {
                     alert(resultCategorias.message || 'Error al asociar categorías.');
                 }
