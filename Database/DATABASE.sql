@@ -167,6 +167,7 @@ CREATE INDEX idx_Curso_Estado ON Curso (Estado);
 -- INSERTS --
 -- INSERTS --
 -- INSERTS --
+
 INSERT INTO Usuario (NombreCompleto, NombreUsuario, Genero, FechaNacimiento, Email, Contraseña, FechaRegistro, FechaActualizacion, TipoUsuario, Estado)
 VALUES ('Aldo Gonzalez', 'Roger Z', 'M', '2004-06-07', 'aldo@gmail.com', '123a', NOW(), null, 3, 1),
 		('Guiollermo MOrin', 'Memo', 'F', '2004-06-04', 'guille@gmail.com', '123b', NOW(), null, 2, 1),
@@ -675,6 +676,69 @@ DELIMITER ;
 
 
 
+-- TRIGGERS --
+-- TRIGGERS --
+-- TRIGGERS --
+DELIMITER //
+CREATE TRIGGER bloquear_eliminacion_curso
+BEFORE DELETE ON Curso
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM Inscripcion WHERE NivelID = OLD.ID AND Estado = 1) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede eliminar un curso con estudiantes inscritos.';
+    END IF;
+END //
+DELIMITER ;
+DELIMITER //
+CREATE TRIGGER Generar_Diploma
+AFTER UPDATE ON Inscripcion
+FOR EACH ROW
+BEGIN
+    -- Declaración de variables
+    DECLARE curso_id INT;
+    DECLARE total_niveles INT;
+    DECLARE niveles_completados INT;
+
+    -- Verificar si el estado cambió de 0 a 1 (curso completado)
+    IF NEW.Estado = 1 AND OLD.Estado = 0 THEN
+        -- Obtener el curso asociado al nivel actualizado
+        SELECT CursoID INTO curso_id
+        FROM Nivel
+        WHERE ID = NEW.NivelID;
+
+        -- Contar cuántos niveles tiene el curso
+        SELECT COUNT(*) INTO total_niveles
+        FROM Nivel
+        WHERE CursoID = curso_id;
+
+        -- Contar cuántos niveles del curso están completados por el estudiante
+        SELECT COUNT(*) INTO niveles_completados
+        FROM Inscripcion I
+        JOIN Nivel N ON I.NivelID = N.ID
+        WHERE N.CursoID = curso_id AND I.UsuarioID = NEW.UsuarioID AND I.Estado = 1;
+
+        -- Verificar si todos los niveles están completados
+        IF niveles_completados = total_niveles THEN
+            -- Insertar un diploma en la tabla Diploma
+            INSERT INTO Diploma (EstudianteID, CursoID, FechaFin, InstructorID)
+            VALUES (
+                NEW.UsuarioID,  -- ID del estudiante
+                curso_id,       -- ID del curso
+                NOW(),          -- Fecha actual
+                (SELECT UsuarioCreador FROM Curso WHERE ID = curso_id) -- Instructor del curso
+            );
+        END IF;
+    END IF;
+END//
+DELIMITER ;
+
+
+
+
+
+
+
 
 -- STORED PROCEDURES --
 -- STORED PROCEDURES --
@@ -748,12 +812,16 @@ END //
 DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE WrongLogin (
-	IN el_User VARCHAR(255)
+	IN wl_User VARCHAR(255)
 )
 BEGIN
 	UPDATE Usuario 
 		SET Intentos = Intentos + 1
-	WHERE NombreUsuario = el_User;
+	WHERE NombreUsuario = wl_User;
+    
+	UPDATE Usuario
+		SET Estado = 0
+    WHERE NombreUsuario = wl_User AND Intentos >= 3;
 END //
 DELIMITER ;
 DELIMITER //
@@ -1226,4 +1294,48 @@ BEGIN
     INSERT INTO Mensaje (Texto, FechaHora, Remitente, Destinatario, NivelID)
     VALUES (p_texto, NOW(), p_remitenteID, p_destinatarioID, p_nivelID);
 END //
+DELIMITER ;
+
+
+-- DIPLOMA SP --
+-- DIPLOMA SP --
+
+DELIMITER //
+CREATE PROCEDURE VerificarDiploma (
+    IN usuario_id INT,
+    IN nivel_id INT
+)
+BEGIN
+    DECLARE curso_id INT;
+    DECLARE total_niveles INT;
+    DECLARE niveles_completados INT;
+
+    -- Obtener el curso asociado al nivel actualizado
+    SELECT CursoID INTO curso_id
+    FROM Nivel
+    WHERE ID = nivel_id;
+
+    -- Contar cuántos niveles tiene el curso
+    SELECT COUNT(*) INTO total_niveles
+    FROM Nivel
+    WHERE CursoID = curso_id;
+
+    -- Contar cuántos niveles del curso están completados por el estudiante
+    SELECT COUNT(*) INTO niveles_completados
+    FROM Inscripcion I
+    JOIN Nivel N ON I.NivelID = N.ID
+    WHERE N.CursoID = curso_id AND I.UsuarioID = usuario_id AND I.Estado = 1;
+
+    -- Verificar si todos los niveles están completados
+    IF niveles_completados = total_niveles THEN
+        -- Insertar un diploma en la tabla Diploma
+        INSERT INTO Diploma (EstudianteID, CursoID, FechaFin, InstructorID)
+        VALUES (
+            usuario_id,  -- ID del estudiante
+            curso_id,    -- ID del curso
+            NOW(),       -- Fecha actual
+            (SELECT UsuarioCreador FROM Curso WHERE ID = curso_id) -- Instructor del curso
+        );
+    END IF;
+END//
 DELIMITER ;
