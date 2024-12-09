@@ -323,15 +323,27 @@ input{
     display: block;
 }
 
-.tab label h4 {
+.tab label .lvlContenedor{
+    position: relative;
+    cursor: pointer;
+    background-color: #aed4ff;
+    padding: 16px 16px 16px 48px;
+    border-radius: 5px;
+}
+
+.tab label .lvlContenedor:hover {
+    background-color: #8eb9ff
+}
+
+.tab label .lvlContenedorNo{
     position: relative;
     cursor: pointer;
     background-color: #F2F8FF;
     padding: 16px 16px 16px 48px;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
-.tab label h4:hover {
+.tab label .lvlContenedorNo:hover {
     background-color: #d4e2f9
 }
 

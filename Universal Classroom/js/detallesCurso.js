@@ -11,6 +11,7 @@ window.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             if (data.success) {
                 agregarDetallesCurso(data);
+                localStorage.setItem('datosCurso', data);
             } else {
                 alert("Error")
             }
@@ -53,9 +54,16 @@ function agregarNiveles(data){
         const niveles = document.getElementById("Niveles");
         const opciones = document.getElementById('levelSelect');
         console.log(data.curso);
+        let esta = false;
         if(data.inscripcion.length > 1){
             for (let i = 0; i < data.curso.ProgramaCurso; i++) {
-                if(data.niveles[i].IdNivel === data.inscripcion[i].IdNivel){
+                for (let j = 0; j < Object.keys(data.inscripcion).length; j++) {
+                    if(data.niveles[i].IdNivel === data.inscripcion[j].IdNivel){
+                        esta = true;
+                        j = Object.keys(data.inscripcion).length + 1;
+                    }
+                }
+                if(esta){
                     niveles.innerHTML += `
               <div class="tab">
                   <label for="" id="tab-${i}">
@@ -63,6 +71,7 @@ function agregarNiveles(data){
                   </label>
               </div>
               `;
+              esta = false;
                 }else{
                     niveles.innerHTML += `
               <div class="tab">
@@ -74,6 +83,7 @@ function agregarNiveles(data){
               opciones.innerHTML += `
               <option value="${data.niveles[i].IdNivel}">${data.niveles[i].Nombre}</option>
               `;
+              esta = false;
                 }
             }
         }else{
@@ -115,6 +125,7 @@ function agregarNiveles(data){
             });
         });
     }
+    pago(data);
 }
 
 function agregarComentarios(data) {
@@ -385,11 +396,70 @@ function cambiarPrecio(precioHtml) {
         .then(data => {
             if (data.success) {
                 precioHtml.innerHTML = data.nivel.Nombre + ' Costo: $' + data.nivel.Costo;
-                localStorage.setItem('costoNivel', data.nivel.Costo);
             } else {
                 alert("Error");
             }
         })
         .catch(error => console.error('Error al cambiar el precio: ', error));
 
+}
+
+function pago(data){
+    const cuadro = document.getElementById("payment-options");
+    const cursoCompleto = document.getElementById('fullCourseCheckbox');
+    const nivelIndividual = document.getElementById('individualLevelsCheckbox');
+    var nivelSelec = document.getElementById('levelSelect');
+    cursoCompleto.addEventListener('click', function () {
+        if (cursoCompleto.checked) {
+            cuadro.style = "display: block";
+            nivelSelec.selectedIndex = 0;
+        }
+    });
+
+    nivelSelec.addEventListener('change', function () {
+        if (nivelSelec.value !== '--Selecciona un nivel--') {
+            cuadro.style = "display: block";
+        }
+    });
+
+    nivelIndividual.addEventListener('click', function () {
+        if (nivelIndividual.checked) {
+            if (nivelSelec.value !== '--Selecciona un nivel--') {
+                cuadro.style = "display: block";
+            } else {
+                const precioHtml = document.getElementById('pago-contenido');
+                precioHtml.innerHTML = '';
+                cuadro.style = "display: none";
+            }
+        }
+    });
+
+    // Botón para tarjeta de debito
+    document.getElementById("debitoButton").addEventListener("click", function () {
+        if(cursoCompleto.checked){
+
+        }else{
+            fetch('./Controllers/DetalleCurso.php', {
+                method: "POST",
+                body: JSON.stringify({ option: 5, IdNivel: nivelSelec.value, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 0 })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                       alert('Nivel comprado correctamente.');
+                       location.reload();
+                    } else {
+                        alert("Error");
+                    }
+                })
+                .catch(error => console.error('Error al cambiar el precio: ', error));
+            alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
+        }
+        
+    });
+
+    // Botón para tarjeta de credito
+    document.getElementById("creditoButton").addEventListener("click", function () {
+        alert("PAGO CON TARJETA DE CRÉDITO REALIZADO CORRECTAMENTE");
+    });
 }

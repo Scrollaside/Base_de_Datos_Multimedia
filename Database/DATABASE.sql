@@ -588,21 +588,6 @@ INNER JOIN Nivel n ON n.ID = i.NivelID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID;
 --
 
---
-CREATE VIEW verificarUsuarioEnCurso AS
-SELECT 
-	i.UsuarioID AS IdUsuario,
-    i.NivelID AS IdNivel,
-    i.CursoID AS IdCurso
-    
-FROM Inscripcion
-	
---
-
-
-
-
-
 -- FUNCTIONS -- 
 -- FUNCTIONS -- 
 -- FUNCTIONS -- 
@@ -698,6 +683,19 @@ DELIMITER ;
 
 -- USER SP --
 -- USER SP --
+DELIMITER //
+CREATE PROCEDURE agregarInscripcion (
+	IN p_UsuarioID INT,
+    IN p_NivelID INT,
+    IN p_CursoID INT,
+    IN p_MetodoPago BOOLEAN
+)
+BEGIN
+	INSERT INTO Inscripcion (UsuarioID, NivelID, CursoID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
+    VALUES (p_UsuarioID, p_NivelID, p_CursoID, NOW(), NULL, NULL, 1, p_MetodoPago);
+END //
+DELIMITER ;
+
 
 DELIMITER //
 CREATE PROCEDURE RegistrarUsuario (

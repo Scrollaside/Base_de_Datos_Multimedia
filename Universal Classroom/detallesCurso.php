@@ -290,7 +290,10 @@
             <div class="option" id="pago" style="display: none;">
               <h3>Curso de pago</h3>
               <p id="pago-contenido"></p>
-              <div id="paypal-button-container" style="display: none;"></div>
+                <div id="payment-options" style="display: none;">
+                    <button id="debitoButton">Pagar con tarjeta de debito</button>
+                    <button id="creditoButton">Pagar con tarjeta de crédito</button>
+                </div>
             </div>
           </div>
         </div>
