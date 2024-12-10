@@ -126,7 +126,7 @@ function agregarNiveles(data){
             niveles.innerHTML += `
           <div class="tab">
               <label for="" id="tab-${i}">
-                  <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
+                  <h4 class="lvlContenedorNo" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
               </label>
           </div>
           `;
@@ -225,8 +225,9 @@ function agregarNiveles(data){
             });
         });
 
-        opcionesPago();
+        
     }
+    opcionesPago();
 }
 
 function agregarComentarios(data) {
