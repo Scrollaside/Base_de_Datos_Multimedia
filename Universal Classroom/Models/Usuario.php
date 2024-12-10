@@ -98,6 +98,12 @@ class Usuario
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($usuario['Intentos'] < 3) {
                 if ($usuario['Contraseña'] === $contraseña) {
+
+                    if($usuario['Estado'] == 0){
+                        $this->messageError = 'El usuario se encuentra inactivo';
+                        return;
+                    }
+
                     $query = "CALL ResetTry(?)";
                     $stmt = $this->conn->prepare($query);
                     $stmt->bindParam(1, $nombreUsuario);
@@ -202,5 +208,32 @@ class Usuario
         $stmt->bindParam(1, $searchQuery, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerConteoUsuariosInactivos()
+    {
+        $this->obtenerConexion();
+        $query = "SELECT conteo_usuarios_inactivos()";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
+    }
+
+    public function obtenerConteoUsuarios()
+    {
+        $this->obtenerConexion();
+        $query = "SELECT COUNT(*) FROM Usuario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
+    }
+
+    public function obtenerConteoUsuariosActivos()
+    {
+        $this->obtenerConexion();
+        $query = "SELECT conteo_usuarios_activos()";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
     }
 }

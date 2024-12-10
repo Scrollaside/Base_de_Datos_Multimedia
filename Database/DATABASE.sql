@@ -662,6 +662,34 @@ BEGIN
     RETURN IFNULL(reporte, 'No se encontraron ventas en este periodo.');
 END //
 DELIMITER ;
+
+
+DELIMITER //
+CREATE FUNCTION conteo_usuarios_activos() 
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE result INT;
+    SELECT COUNT(*) INTO result 
+    FROM Usuario 
+    WHERE Estado = 1;
+    RETURN IFNULL(result, 0); -- Retorna 0 si no hay ventas
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE FUNCTION conteo_usuarios_inactivos() 
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE result INT;
+    SELECT COUNT(*) INTO result 
+    FROM Usuario 
+    WHERE Estado = 0;
+    RETURN IFNULL(result, 0); -- Retorna 0 si no hay ventas
+END //
+DELIMITER ;
 -- uso de la función
 
 -- FUNCTION 4

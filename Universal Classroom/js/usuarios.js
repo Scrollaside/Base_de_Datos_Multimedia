@@ -40,6 +40,7 @@ async function getUsers() {
 
     const json = [...(await response.json())];
     const users = json.map((e) => new User(e.ID, e.NombreCompleto, e.Estado));
+    countUsers();
     listUsers(users);
   } catch (error) {
     console.error(error);
@@ -71,8 +72,32 @@ async function changeStatus(userId, oldStatus) {
   }
 }
 
+async function countUsers() {
+  try {
+    let response = await fetch("./Controllers/UserController.php", {
+      // action: 'listar',
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const { activos, inactivos, total } = await response.json();
+
+    const totalCount = document.getElementById("total-count");
+    const inactiveCount = document.getElementById("inactive-count");
+    const activeCount = document.getElementById("active-count");
+
+    totalCount.innerHTML = total;
+    inactiveCount.innerHTML = inactivos;
+    activeCount.innerHTML = activos;
+
+    // location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 function searchUsers(e) {
-    e.preventDefault();
+  e.preventDefault();
   const input = document.getElementById("buscar-usuario");
   searchQuery = input.value;
   this.getUsers();

@@ -46,14 +46,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="contenedor-usuarios">
         <h1>Panel de Administración</h1>
 
-        <!-- Buscar Usuarios -->
         <section class="manejo-usuarios">
             <form onsubmit="searchUsers(event)">
 
                 <h2>Buscar Usuarios</h2>
-                <input type="text" placeholder="Buscar por nombre" id="buscar-usuario">
-                <button  id="buscar-usuario-btn">Buscar</button>
+                <div class="search">
+                    <input type="text" placeholder="Buscar por nombre" id="buscar-usuario">
+                    <button id="buscar-usuario-btn">Buscar</button>
+                </div>
             </form>
+            <div class="cards">
+
+                <div class="card total-users-card">
+                    <span class="title">
+                        Resumen
+                    </span>
+
+                    <div class="content">
+                        <span id="total-count" class="number">
+                            0
+                        </span>
+
+                        <span class="subtitle">
+                            Total
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card active-users-card">
+                    <span class="title">
+                        Resumen
+                    </span>
+
+                    <div class="content">
+                        <span id="active-count" class="number">
+                            0
+                        </span>
+
+                        <span  class="subtitle">
+                            Activos
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card inactive-users-card">
+                    <span class="title">
+                        Resumen
+                    </span>
+
+                    <div class="content">
+                        <span id="inactive-count" class="number">
+                            0
+                        </span>
+
+                        <span class="subtitle">
+                            Inactivos
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Buscar Usuarios -->
+
 
             <!-- Resultados de la Búsqueda -->
             <div class="resultado-usuarios">
