@@ -275,3 +275,15 @@ BEGIN
     END IF;
 END;
 
+DELIMITER //
+
+CREATE TRIGGER actualizar_fecha_usuario
+BEFORE UPDATE ON Usuario
+FOR EACH ROW
+BEGIN
+    SET NEW.FechaActualizacion = NOW();
+END;
+
+//
+
+DELIMITER ;
