@@ -1,5 +1,6 @@
 const idNivelC = parseInt(localStorage.getItem("idNivelMostrar"));
 const idUsuario = parseInt(localStorage.getItem("ID"));
+const idCreador = parseInt(localStorage.getItem("idCreador"));
 
 window.addEventListener("DOMContentLoaded", function () {
 
@@ -7,51 +8,46 @@ window.addEventListener("DOMContentLoaded", function () {
 
     // Obtener elementos
     const chatBtn = document.getElementById('mensajeBtn');
-    const chatWindow = document.getElementById('mensajeWindow');
-    const chatWindow2 = document.getElementById('mensajeWindow2');
-    let comparador = 1;
 
     // Mostrar el chat
     chatBtn.addEventListener('click', () => {
         const chatWrapper = document.getElementById('mensajeWindow');
-    chatWrapper.style.display = chatWrapper.style.display === 'none' || chatWrapper.style.display === '' ? 'block' : 'none';
+        chatWrapper.style.display = chatWrapper.style.display === 'none' || chatWrapper.style.display === '' ? 'block' : 'none';
     });
 });
 
 function obtenerMensajes() {
     fetch('./Controllers/Mensaje.php', {
         method: "POST",
-        body: JSON.stringify({ idNivel: idNivelC, option: 1 })
+        body: JSON.stringify({ idCreador: idCreador, option: 1 })
     }).then(response => response.json())
         .then(data => {
             if (data) {
                 console.log(data);
                 console.log(idUsuario);
                 const miembrosContenedor = document.getElementById("miembros");
-                for (let i = 0; i < Object.keys(data.miembros).length; i++) {
-                    if (data.miembros[i]['IdUsuario'] !== idUsuario) {
-                        miembrosContenedor.innerHTML += `
-                <li class="person" data-chat="${data.miembros[i]['IdUsuario']}" id="${data.miembros[i]['IdUsuario']}">
-                     <img src="img/user.png" alt="" id="${data.miembros[i]['IdUsuario']}"/>
-                     <span class="name" id="${data.miembros[i]['IdUsuario']}">${data.miembros[i]['Miembro']}</span>
+                    miembrosContenedor.innerHTML += `
+                <li class="person" data-chat="${data.miembros.IdCreador}" id="${data.miembros.IdCreador}">
+                     <img src="img/user.png" alt="" id="${data.miembros.IdCreador}"/>
+                     <span class="name" id="${data.miembros.IdCreador}">${data.miembros.NombreUsuario}</span>
                      <span class="time" id="ultimoMsjIzqTiempo"></span>
                      <span class="preview" id="ultimoMsjIzqText"></span>
                  </li>
                `;
-                    }
-                }
+
+                
                 const activos = document.querySelectorAll(".person");
                 activos.forEach(activo => {
                     activo.addEventListener('click', e => {
                         const person = document.querySelectorAll("li.active");
                         let idPersona = parseInt(e.target.getAttribute("id"));
-                        if(person.length === 0){
+                        if (person.length === 0) {
                             activo.classList.add('active');
-                        }else{
+                        } else {
                             document.querySelector('.active').classList.remove('active');
                             activo.classList.add('active');
                         }
-                        mostrarChats(idPersona, activo);
+                        mostrarChats(idPersona);
                     });
                 });
             }
@@ -61,7 +57,7 @@ function obtenerMensajes() {
         });
 }
 
-function mostrarChats(idPersona, activo) {
+function mostrarChats(idPersona) {
 
     const chatContenedor = document.getElementById("chatContenedor");
     chatContenedor.innerHTML = `
@@ -85,13 +81,15 @@ function mostrarChats(idPersona, activo) {
                     if (data.mensajes[i].Remitente === idUsuario) {
                         contenedorChat.innerHTML += `
                     <div class="bubble me">
-                        ${data.mensajes[i].Texto}
+                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                        <div class="message-time">${data.mensajes[i].Fecha}</div>
                     </div>
                   `;
                     } else {
                         contenedorChat.innerHTML += `
                     <div class="bubble you">
-                        ${data.mensajes[i].Texto}
+                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                        <div class="message-time">${data.mensajes[i].Fecha}</div>
                     </div>
                   `;
                     }
@@ -101,33 +99,34 @@ function mostrarChats(idPersona, activo) {
                 console.log('No hay mensajes');
             }
             const btnEnviar = document.getElementById("sendButton");
-                btnEnviar.addEventListener('click', function(){
-                    const texto = document.getElementById("sendInput").value;
-                    if(texto !== ''){
-                        fetch('./Controllers/Mensaje.php', {
-                            method: "POST",
-                            body: JSON.stringify({ texto: texto, idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 3 })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    console.log('mensaje enviado');
-                                    const contenedorChat = document.getElementById('chat-' + idPersona);
-                                    contenedorChat.innerHTML += `
+            btnEnviar.addEventListener('click', function () {
+                const texto = document.getElementById("sendInput").value;
+                if (texto !== '') {
+                    fetch('./Controllers/Mensaje.php', {
+                        method: "POST",
+                        body: JSON.stringify({ texto: texto, idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 3 })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('mensaje enviado');
+                                const contenedorChat = document.getElementById('chat-' + idPersona);
+                                contenedorChat.innerHTML += `
                                     <div class="bubble me">
-                                        ${texto}
+                                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                                        <div class="message-time">Justo ahora</div>
                                     </div>
                                     `;
-                                    contenedorChat.scrollTop = contenedorChat.scrollHeight;
-                                    const limpiar = document.getElementById("sendInput");
-                                    limpiar.value = '';
-                                }
-                            })
-                            .catch(error => {
-                                alert("Error al mandar mensaje: " + error.message);
-                            });
-                    }
-                });
+                                contenedorChat.scrollTop = contenedorChat.scrollHeight;
+                                const limpiar = document.getElementById("sendInput");
+                                limpiar.value = '';
+                            }
+                        })
+                        .catch(error => {
+                            alert("Error al mandar mensaje: " + error.message);
+                        });
+                }
+            });
         })
         .catch(error => {
             alert("Error de red: " + error.message);

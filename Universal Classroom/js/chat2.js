@@ -1,145 +1,126 @@
 const idNivelC = parseInt(localStorage.getItem("idNivelMostrar"));
 const idUsuario = parseInt(localStorage.getItem("ID"));
+const idCreador = parseInt(localStorage.getItem("idCreador"));
+
 window.addEventListener("DOMContentLoaded", function () {
 
-  setTimeout(() => {
+    obtenerMensajes();
+});
+
+function obtenerMensajes() {
     fetch('./Controllers/Mensaje.php', {
-      method: "POST",
-      body: JSON.stringify({ idNivel: idNivelC, option: 1 })
+        method: "POST",
+        body: JSON.stringify({ idCreador: idCreador, option: 4 })
     }).then(response => response.json())
-      .then(data => {
-        if (data) {
-          console.log(data);
-          console.log(idUsuario);
-          const miembrosContenedor = document.getElementById("miembros");
-          for(let i = 0; i < Object.keys(data.miembros).length; i++){
-            if (data.miembros[i]['IdUsuario'] !== idUsuario) {
-              miembrosContenedor.innerHTML += `
-              <li class="person" data-chat="${data.miembros[i]['IdUsuario']}" id="${data.miembros[i]['IdUsuario']}">
-                   <img src="img/user.png" alt=""/>
-                   <span class="name">${data.miembros[i]['Miembro']}</span>
-                   <span class="time" id="ultimoMsjIzqTiempo"></span>
-                   <span class="preview" id="ultimoMsjIzqText"></span>
-               </li>
-             `;
+        .then(data => {
+            if (data) {
+                console.log(data);
+                console.log(idUsuario);
+                const miembrosContenedor = document.getElementById("miembros");
+                for(let i = 0; i < Object.keys(data.alumnos).length; i++){
+                  miembrosContenedor.innerHTML += `
+                <li class="person" data-chat="${data.alumnos[i].UsuarioID}" id="${data.alumnos[i].UsuarioID}">
+                     <img src="img/user.png" alt="" id="${data.alumnos[i].UsuarioID}"/>
+                     <span class="name" id="${data.alumnos[i].UsuarioID}">${data.alumnos[i].NombreUsuario}</span>
+                     <span class="time" id="ultimoMsjIzqTiempo"></span>
+                     <span class="preview" id="ultimoMsjIzqText"></span>
+                 </li>
+               `;
+                }
+                const activos = document.querySelectorAll(".person");
+                activos.forEach(activo => {
+                    activo.addEventListener('click', e => {
+                        const person = document.querySelectorAll("li.active");
+                        let idPersona = parseInt(e.target.getAttribute("id"));
+                        if (person.length === 0) {
+                            activo.classList.add('active');
+                        } else {
+                            document.querySelector('.active').classList.remove('active');
+                            activo.classList.add('active');
+                        }
+                        mostrarChats(idPersona);
+                    });
+                });
             }
-          }
+        })
+        .catch(error => {
+            alert("Error al obtener mensajes: " + error.message);
+        });
+}
 
+function mostrarChats(idPersona) {
 
-        }
-      })
-      .catch(error => {
-        alert("Error de red: " + error.message);
-      });  
-  }, 200);
-  
-  // Obtener elementos
-  const chatBtn = document.getElementById('mensajeBtn');
-  const chatWindow = document.getElementById('mensajeWindow');
-  const chatWindow2 = document.getElementById('mensajeWindow2');
-  let comparador = 1;
-
-  // Mostrar el chat
-  chatBtn.addEventListener('click', () => {
-    if (comparador === 1) {
-      chatWindow.style.display = 'block';
-      chatWindow2.style.display = 'block';
-      comparador = 2;
-    } else if (comparador === 2) {
-      chatWindow.style.display = 'none';
-      chatWindow2.style.display = 'none';
-      comparador = 1;
-    }
-
-    
-
-    setTimeout(() => {
-      const activos = document.querySelectorAll(".person");
-      activos.forEach(activo => {
-        activo.addEventListener('click', e => {
-          let idPersona = parseInt(e.target.getAttribute("id"));
-          const chatContenedor = document.getElementById("chatContenedor");
-          chatContenedor.innerHTML = `
-          <div class="top"><span>To: <span class="name" id="nombreDestinatario"></span></span></div>
+    const chatContenedor = document.getElementById("chatContenedor");
+    chatContenedor.innerHTML = `
           <div class="chat" id="chat-${idPersona}"></div>
            <div class="write">
-                    <a href="javascript:;" class="write-link attach"></a>
-                    <input type="text" />
-                    <a href="javascript:;" class="write-link smiley"></a>
-                    <a href="javascript:;" class="write-link send"></a>
+                    <input id="sendInput" type="text" placeholder="Escribe un mensaje..."/>
+                     <button id="sendButton">Enviar</button>
                 </div>
           `;
+    document.getElementById('chat-' + idPersona).classList.add('active-chat');
 
-          activo.classList.add('active');
-          console.log(idPersona);
-          document.getElementById('chat-' + idPersona).classList.add('active-chat');
-
-          fetch('./Controllers/Mensaje.php', {
-            method: "POST",
-            body: JSON.stringify({ idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 2 })
-          }).then(response => response.json())
-            .then(data => {
-              if (data.success) {
-               console.log(data);
-               const contenedorChat = document.getElementById('chat-' + idPersona);
-               for(let i = 0; i < Object.keys(data.mensajes).length; i++){
-                if(data.mensajes[i].Remitente === idUsuario){
-                  contenedorChat.innerHTML += `
+    fetch('./Controllers/Mensaje.php', {
+        method: "POST",
+        body: JSON.stringify({ idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 2 })
+    }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log(data);
+                const contenedorChat = document.getElementById('chat-' + idPersona);
+                for (let i = 0; i < Object.keys(data.mensajes).length; i++) {
+                    if (data.mensajes[i].Remitente === idUsuario) {
+                        contenedorChat.innerHTML += `
                     <div class="bubble me">
-                        ${data.mensajes[i].Texto}
+                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                        <div class="message-time">${data.mensajes[i].Fecha}</div>
                     </div>
                   `;
-                }else{
-                  contenedorChat.innerHTML += `
+                    } else {
+                        contenedorChat.innerHTML += `
                     <div class="bubble you">
-                        ${data.mensajes[i].Texto}
+                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                        <div class="message-time">${data.mensajes[i].Fecha}</div>
                     </div>
                   `;
+                    }
                 }
-               }
-              }else{
-                alert('No hay mensajes');
-              }
-            })
-            .catch(error => {
-              alert("Error de red: " + error.message);
-            }); 
+                contenedorChat.scrollTop = contenedorChat.scrollHeight;
+            } else {
+                console.log('No hay mensajes');
+            }
+            const btnEnviar = document.getElementById("sendButton");
+            btnEnviar.addEventListener('click', function () {
+                const texto = document.getElementById("sendInput").value;
+                if (texto !== '') {
+                    fetch('./Controllers/Mensaje.php', {
+                        method: "POST",
+                        body: JSON.stringify({ texto: texto, idNivel: idNivelC, idUsuarioChat: idPersona, idUsuarioIS: idUsuario, option: 3 })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('mensaje enviado');
+                                const contenedorChat = document.getElementById('chat-' + idPersona);
+                                contenedorChat.innerHTML += `
+                                    <div class="bubble me">
+                                        <div class="message-text">${texto}</div>
+                                        <div class="message-time">Justo ahora</div>
+                                    </div>
+                                    
+                                    `;
+                                contenedorChat.scrollTop = contenedorChat.scrollHeight;
+                                const limpiar = document.getElementById("sendInput");
+                                limpiar.value = '';
+                            }
+                        })
+                        .catch(error => {
+                            alert("Error al mandar mensaje: " + error.message);
+                        });
+                }
+            });
+        })
+        .catch(error => {
+            alert("Error de red: " + error.message);
         });
-      });
-    }, 300);
-  });
-  // Mostrar el chat
-
-
-  // document.querySelector('.chat[data-chat=person2]').classList.add('active-chat')
-  // document.querySelector('.person[data-chat=person2]').classList.add('active')
-
-  // let friends = {
-  //   list: document.querySelector('ul.people'),
-  //   all: document.querySelectorAll('.left .person'),
-  //   name: ''
-  // },
-  //   chat = {
-  //     container: document.querySelector('.mensajes .right'),
-  //     current: null,
-  //     person: null,
-  //     name: document.querySelector('.mensajes .right .top .name')
-  //   }
-
-  // friends.all.forEach(f => {
-  //   f.addEventListener('mousedown', () => {
-  //     f.classList.contains('active') || setAciveChat(f)
-  //   })
-  // });
-
-  // function setAciveChat(f) {
-  //   friends.list.querySelector('.active').classList.remove('active')
-  //   f.classList.add('active')
-  //   chat.current = chat.container.querySelector('.active-chat')
-  //   chat.person = f.getAttribute('data-chat')
-  //   chat.current.classList.remove('active-chat')
-  //   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
-  //   friends.name = f.querySelector('.name').innerText
-  //   chat.name.innerHTML = friends.name
-  // }
-});
+}

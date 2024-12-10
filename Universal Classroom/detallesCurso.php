@@ -293,7 +293,13 @@
                 <div id="payment-options" style="display: none;">
                     <button id="debitoButton">Pagar con tarjeta de debito</button>
                     <button id="creditoButton">Pagar con tarjeta de crédito</button>
-                    <input type="text" placeholder="Nombre">
+                    <input class="inputTarjeta" type="text" placeholder="Numero de tarjeta: ">
+                    <input class="inputTarjeta" type="text" placeholder="Codigo de seguridad: ">
+                    <input class="inputTarjeta" type="text" placeholder="Nombre completo: ">
+                    <input class="inputTarjeta" type="text" placeholder="Direccion: ">
+                    <input class="inputTarjeta" type="text" placeholder="Ciudad: ">
+                    <input class="inputTarjeta" type="text" placeholder="Provincia: ">
+                    <input class="inputTarjeta" type="text" placeholder="Codigo postal: ">
                 </div>
             </div>
           </div>

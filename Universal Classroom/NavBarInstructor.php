@@ -34,6 +34,7 @@ if (isset($_SESSION['ID'])) {
             <li><a href="instructor.php">Mis Cursos</a></li>
             <li><a href="crear.php">Crear curso</a></li>
             <li><a href="ventasInstructor.php">Reportes de Ventas</a></li>
+            <li><a href="chatInstructor.php">Chat</a></li>
             <a href="index.php" id="loginBTN"><button>Cerrar Sesión</button></a>
         </ul>
     </nav>

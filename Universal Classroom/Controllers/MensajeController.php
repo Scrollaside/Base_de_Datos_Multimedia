@@ -9,7 +9,7 @@ class MensajeController{
             $data = json_decode(file_get_contents('php://input'), true);
             if($data['option'] == 1){
                 $mensaje = new Mensaje();
-                $miembros = $mensaje->obtenerMiembros($data['idNivel']);
+                $miembros = $mensaje->obtenerCreador($data['idCreador']);
 
                 if($miembros){
                     echo json_encode(['success' => true, 'miembros' => $miembros]);
@@ -33,6 +33,15 @@ class MensajeController{
                     echo json_encode(['success' => true]);
                 }else{
                     echo json_encode(['success' => false]);
+                }
+            }else if($data['option'] == 4){
+                $mensaje = new Mensaje();
+                $alumnos = $mensaje->obtenerAlumnos($data['idCreador']);
+
+                if($alumnos){
+                    echo json_encode(['success' => true, 'alumnos' => $alumnos]);
+                }else{
+                    echo json_encode(['success' => false, 'error' => 'No hay alumnos.']);
                 }
             }
         }

@@ -9,22 +9,43 @@ class Mensaje{
         $this->conn = $database->conectar();
     }
 
-    //Buscar en la bd los miembros del usuario
-    public function obtenerMiembros($idNivel){
+    //Buscar en la bd el creador del curso
+    public function obtenerCreador($idCreador){
         $this->obtenerConexion();
-        $query = 'SELECT * FROM obtenerMiembrosCurso WHERE IdNivel = ?';
+        $query = 'SELECT NombreUsuario, Foto, ID AS IdCreador FROM Usuario WHERE ID = ?;';
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $idNivel);
+        $stmt->bindParam(1, $idCreador);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+
+    }
+    //Buscar en la bd el creador del curso
+
+    //Buscar en la bd los alumnos del instructor
+    public function obtenerAlumnos($idCreador){
+        $this->obtenerConexion();
+        $query = 'CALL obtenerMensajesInstructor(?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idCreador);
+        $stmt->execute();
+
+        $validacion = $stmt->rowCount();
+
+        if ($validacion == 1) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else if ($validacion > 1){
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }else{
             return false;
         }
 
     }
-    //Buscar en la bd los miembros del usuario
+    //Buscar en la bd los alumnos del instructor
 
     //Buscar en la bd los mensajes privados
     public function obtenerMesajePrivado($idNivel, $idRemitente, $idDestinatario){

@@ -502,6 +502,7 @@ GROUP BY c.ID, cg.Nombre, c.Estado;
 CREATE VIEW ObtenerDetalleCurso AS
 SELECT
 	cu.ID,
+    u.ID AS IdCreador,
 	cu.Titulo AS NombreCurso,
     u.NombreUsuario AS Creador,
     cu.Descripcion AS Descripcion,
@@ -677,6 +678,21 @@ DELIMITER ;
 -- TRIGGERS --
 -- TRIGGERS --
 -- TRIGGERS --
+
+DELIMITER //
+
+CREATE TRIGGER incrementarCantidadVendidas
+AFTER INSERT ON Inscripcion
+FOR EACH ROW
+BEGIN
+    UPDATE Curso
+    SET CantidadVendidas = CantidadVendidas + 1
+    WHERE ID = NEW.CursoID;
+END//
+
+DELIMITER ;
+
+
 DELIMITER //
 CREATE TRIGGER bloquear_eliminacion_curso
 BEFORE DELETE ON Curso
@@ -741,6 +757,22 @@ DELIMITER ;
 -- STORED PROCEDURES --
 -- STORED PROCEDURES --
 -- STORED PROCEDURES --
+
+DELIMITER //
+CREATE PROCEDURE obtenerMensajesInstructor (
+	IN p_idInstructor INT
+)
+BEGIN
+SELECT DISTINCT u.ID AS UsuarioID, 
+                u.NombreUsuario, 
+                u.Foto
+FROM Inscripcion i
+INNER JOIN Usuario u ON u.ID = i.UsuarioID
+INNER JOIN Curso c ON c.ID = i.CursoID
+LEFT JOIN Nivel n ON n.ID = i.NivelID
+WHERE c.UsuarioCreador = p_idInstructor;
+END //
+DELIMITER ;
 
 DELIMITER //
 

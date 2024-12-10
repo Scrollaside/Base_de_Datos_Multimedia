@@ -10,63 +10,75 @@ window.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                agregarDetallesCurso(data);
                 localStorage.setItem('datosCurso', data);
-                // Botón para tarjeta de debito
-                document.getElementById("debitoButton").addEventListener("click", function () {
-                    const cursoCompleto = document.getElementById('fullCourseCheckbox');
-                    if (cursoCompleto.checked) {
-                        for(let i = 0; i < Object.keys(nivelesNoInscritos.niveles).length; i++){
+                this.localStorage.setItem('idCreador', data.curso.IdCreador);
+                if(tipoUsuario === 2){
+                    agregarDetallesCurso(data);
+                    agregarDetallesPago(data);
+                    agregarComentarios(data);
+                    agregarNiveles(data);
+                }else{
+                    agregarDetallesCurso(data);
+                    agregarDetallesPago(data);
+                    agregarComentarios(data);
+                    agregarNiveles(data);
+                    // Botón para tarjeta de debito
+                    document.getElementById("debitoButton").addEventListener("click", function () {
+                        const cursoCompleto = document.getElementById('fullCourseCheckbox');
+                        if (cursoCompleto.checked) {
+                            for (let i = 0; i < Object.keys(nivelesNoInscritos.niveles).length; i++) {
+                                fetch('./Controllers/DetalleCurso.php', {
+                                    method: "POST",
+                                    body: JSON.stringify({ option: 5, IdNivel: nivelesNoInscritos.niveles[i].ID, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 0 })
+                                })
+                                    .catch(error => console.error('Error al generar inscripcion: ', error));
+                            }
+                            alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
+                            location.reload();
+                        } else {
+                            var nivelSelec = document.getElementById('levelSelect').value;
+                            console.log(nivelSelec);
                             fetch('./Controllers/DetalleCurso.php', {
                                 method: "POST",
-                                body: JSON.stringify({ option: 5, IdNivel: nivelesNoInscritos.niveles[i].ID, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 0 })
+                                body: JSON.stringify({ option: 5, IdNivel: nivelSelec, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 0 })
                             })
-                            .catch(error => console.error('Error al generar inscripcion: ', error));
+                                .catch(error => console.error('Error al cambiar el precio: ', error));
+                            alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
+                            location.reload();
                         }
-                        alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
-                        location.reload();
-                    } else {
-                        var nivelSelec = document.getElementById('levelSelect').value;
-                        console.log(nivelSelec);
-                        fetch('./Controllers/DetalleCurso.php', {
-                            method: "POST",
-                            body: JSON.stringify({ option: 5, IdNivel: nivelSelec, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 0 })
-                        })
-                        .catch(error => console.error('Error al cambiar el precio: ', error));
-                        alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
-                        location.reload();
-                    }
 
-                });
-                // Botón para tarjeta de debito
+                    });
+                    // Botón para tarjeta de debito
 
-                // Botón para tarjeta de credito
-                document.getElementById("creditoButton").addEventListener("click", function () {
-                    const cursoCompleto = document.getElementById('fullCourseCheckbox');
-                    if (cursoCompleto.checked) {
-                        for(let i = 0; i < Object.keys(nivelesNoInscritos.niveles).length; i++){
+                    // Botón para tarjeta de credito
+                    document.getElementById("creditoButton").addEventListener("click", function () {
+                        const cursoCompleto = document.getElementById('fullCourseCheckbox');
+                        if (cursoCompleto.checked) {
+                            for (let i = 0; i < Object.keys(nivelesNoInscritos.niveles).length; i++) {
+                                fetch('./Controllers/DetalleCurso.php', {
+                                    method: "POST",
+                                    body: JSON.stringify({ option: 5, IdNivel: nivelesNoInscritos.niveles[i].ID, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 1 })
+                                })
+                                    .catch(error => console.error('Error al cambiar el precio: ', error));
+                            }
+                            alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
+                            location.reload();
+                        } else {
+                            var nivelSelec = document.getElementById('levelSelect').value;
+                            console.log(nivelSelec);
                             fetch('./Controllers/DetalleCurso.php', {
                                 method: "POST",
-                                body: JSON.stringify({ option: 5, IdNivel: nivelesNoInscritos.niveles[i].ID, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 1 })
+                                body: JSON.stringify({ option: 5, IdNivel: nivelSelec, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 1 })
                             })
-                            .catch(error => console.error('Error al cambiar el precio: ', error));
+                                .catch(error => console.error('Error al cambiar el precio: ', error));
+                            alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
+                            location.reload();
                         }
-                        alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
-                        location.reload();
-                    } else {
-                        var nivelSelec = document.getElementById('levelSelect').value;
-                        console.log(nivelSelec);
-                        fetch('./Controllers/DetalleCurso.php', {
-                            method: "POST",
-                            body: JSON.stringify({ option: 5, IdNivel: nivelSelec, IdUsuario: idUsuario, IdCurso: ID, metodoPago: 1 })
-                        })
-                        .catch(error => console.error('Error al cambiar el precio: ', error));
-                        alert("PAGO CON TARJETA DE DÉBITO REALIZADO CORRECTAMENTE");
-                        location.reload();
-                    }
 
-                });
-                // Botón para tarjeta de credito
+                    });
+                    // Botón para tarjeta de credito
+                }
+
             } else {
                 alert("Error")
             }
@@ -79,7 +91,31 @@ window.addEventListener("DOMContentLoaded", function () {
 function agregarNiveles(data){
     console.log(data);
     const programaCurso = document.getElementById("programaCurso");
-    if (data.inscripcion === 'no') {
+    if(tipoUsuario === 2){
+        programaCurso.innerHTML = 'Programa del curso - Instructor';
+        //Niveles
+        const niveles = document.getElementById("Niveles");
+        const opciones = document.getElementById('levelSelect');
+        console.log(data.curso);
+        for (let i = 0; i < data.curso.ProgramaCurso; i++) {
+            niveles.innerHTML += `
+          <div class="tab">
+              <label for="" id="tab-${i}">
+                  <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
+              </label>
+          </div>
+          `;
+
+            opciones.innerHTML += `
+          <option value="${data.niveles[i].IdNivel}">${data.niveles[i].Nombre}</option>
+          `;
+        }
+        opciones.addEventListener('change', function () {
+            const precioHtml = document.getElementById('pago-contenido');
+            cambiarPrecio(precioHtml);
+        });
+        //Niveles
+    }else if (data.inscripcion === 'no') {
         console.log('entre a no');
         programaCurso.innerHTML = 'Programa del curso - No está inscrito';
         //Niveles
@@ -383,10 +419,6 @@ function agregarDetallesCurso(data) {
     `;
     }
     //Datos del curso
-
-    agregarDetallesPago(data);
-    agregarComentarios(data);
-    agregarNiveles(data);
 }
 
 function agregarEstrellas(calificacion, elemento) {

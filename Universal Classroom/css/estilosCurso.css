@@ -313,12 +313,6 @@ ul strong{
     overflow: hidden;
 }
 
-input{
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-}
-
 .tab label{
     display: block;
 }
@@ -701,3 +695,6 @@ span.close {
     color: #333;
 }
 /* Estilos para el fondo del modal */
+.inputTarjeta{
+    padding: 3px;
+}
