@@ -97,6 +97,40 @@ class Curso{
     }
     //Buscar en la bd nivel individual
 
+    //Buscar en la bd si existe el diploma de un alumno
+     public function verificarDiploma($idUsuario, $idCurso){
+        $this->obtenerConexion();
+        $query = 'SELECT d.*, u.NombreUsuario FROM Diploma d INNER JOIN Usuario u ON d.EstudianteID = u.ID WHERE d.EstudianteID = ? AND d.CursoID = ?;';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idUsuario);
+        $stmt->bindParam(2, $idCurso);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+    }
+    //Buscar en la bd si existe el diploma de un alumno
+
+    //Actualizar en la bd el estado del nivel
+    public function actualizarNivel($idUsuario, $idNivel){
+        $this->obtenerConexion();
+        $query = 'CALL actualizarEstadoNivel(?, ?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $idNivel);
+        $stmt->bindParam(2, $idUsuario);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Actualizar en la bd el estado del nivel
+
     //Buscar en la bd nivel individual
     public function obtenerNivelesNoInscritos($idUsuario, $idCurso){
         $this->obtenerConexion();
@@ -135,6 +169,25 @@ class Curso{
         }
     }
     //Insertar inscripción a la bd
+
+    //Crear comentario e insertarlo en la bd
+    public function crearComentario($texto, $calificacion, $idUsuario, $idCurso){
+        $this->obtenerConexion();
+        $query = 'CALL AgregarComentario (?, ?, ?, ?);';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $texto);
+        $stmt->bindParam(2, $calificacion);
+        $stmt->bindParam(3, $idUsuario);
+        $stmt->bindParam(4, $idCurso);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Crear comentario e insertarlo en la bd
 
     //Borrar comentario admin
     public function borrarComentario($idComentario){

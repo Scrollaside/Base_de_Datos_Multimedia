@@ -84,6 +84,29 @@ footer {
     background-color: #2d7edb
 }
 
+.tab-btn label{
+    display: block;
+}
+
+.tab-btn label h4 {
+    position: relative;
+    cursor: pointer;
+    background-color: #11ff6c;
+    padding: 16px 10px 16px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.tab-btn label h4:hover {
+    background-color: #2ce472
+}
+
+.terminar-nivel{
+    position: relative;
+    top: 375px;
+}
+
 .tab input:checked~.tab-content{
     max-height: 100vh;
     overflow-y: auto;

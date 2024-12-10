@@ -80,7 +80,34 @@ class CursoController{
                 }else{
                     echo json_encode(['success' => false]);
                 }
-            }            
+            }else if($data['option'] == 7){
+                $curso = new Curso();
+                $diploma = $curso->verificarDiploma($data['IdUsuario'], $data['ID']);
+
+                if($diploma){
+                    echo json_encode(['success' => true, 'diploma' => $diploma]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
+            }else if($data['option'] == 8){
+                $curso = new Curso();
+                $actualizar = $curso->actualizarNivel($data['IdUsuario'], $data['IdNivel']);
+
+                if($actualizar){
+                    echo json_encode(['success' => true]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
+            }else if($data['option'] == 9){
+                $curso = new Curso();
+                $agregarCom = $curso->crearComentario($data['Texto'], $data['Calificacion'], $data['IdUsuario'], $data['ID']);
+
+                if($agregarCom){
+                    echo json_encode(['success' => true]);
+                }else{
+                    echo json_encode(['success' => false]);
+                }
+            } 
         }
     }
 }

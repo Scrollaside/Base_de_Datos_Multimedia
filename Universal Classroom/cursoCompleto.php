@@ -28,13 +28,18 @@
                     <video id="courseVideo" controls>
                     </video>
                 </div>
+                <!-- Video Principal -->
         
                 <!-- Lista de Temas -->
                 <div class="topics-container">
                     <h2 id="nivelNombre"></h2>
                     <div class="contenido-programa-unidades" id="recursosNivel">
                     </div>
+                    <div class="terminar-nivel" id="terminar-nivel">
+                    </div>
                 </div>
+                <!-- Lista de Temas -->
+
             </div>
         </div>
         <!--Curso, video y temas-->

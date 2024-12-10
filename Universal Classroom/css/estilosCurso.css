@@ -698,3 +698,22 @@ span.close {
 .inputTarjeta{
     padding: 3px;
 }
+
+.rating-stars {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.rating-stars li {
+    margin-right: 5px;
+    font-size: 1.5rem;
+    color: #ccc;
+}
+
+.rating-stars li.active,
+.rating-stars li:hover,
+.rating-stars li:hover ~ li {
+    color: #FFD43B; /* Color de estrellas activas */
+}

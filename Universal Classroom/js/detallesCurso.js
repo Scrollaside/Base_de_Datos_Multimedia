@@ -2,6 +2,7 @@ var ID = localStorage.getItem("idCurso");
 var tipoUsuario = parseInt(localStorage.getItem("TipoUsuario"));
 const idUsuario = parseInt(localStorage.getItem("ID"));
 let nivelesNoInscritos;
+let comIndice = 0;
 window.addEventListener("DOMContentLoaded", function () {
     fetch('./Controllers/DetalleCurso.php', {
         method: "POST",
@@ -10,14 +11,15 @@ window.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                verificarDiploma(ID, idUsuario);
                 localStorage.setItem('datosCurso', data);
                 this.localStorage.setItem('idCreador', data.curso.IdCreador);
-                if(tipoUsuario === 2){
+                if (tipoUsuario === 2) {
                     agregarDetallesCurso(data);
                     agregarDetallesPago(data);
                     agregarComentarios(data);
                     agregarNiveles(data);
-                }else{
+                } else {
                     agregarDetallesCurso(data);
                     agregarDetallesPago(data);
                     agregarComentarios(data);
@@ -88,10 +90,10 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 });
 
-function agregarNiveles(data){
+function agregarNiveles(data) {
     console.log(data);
     const programaCurso = document.getElementById("programaCurso");
-    if(tipoUsuario === 2){
+    if (tipoUsuario === 2) {
         programaCurso.innerHTML = 'Programa del curso - Instructor';
         //Niveles
         const niveles = document.getElementById("Niveles");
@@ -115,7 +117,7 @@ function agregarNiveles(data){
             cambiarPrecio(precioHtml);
         });
         //Niveles
-    }else if (data.inscripcion === 'no') {
+    } else if (data.inscripcion === 'no') {
         console.log('entre a no');
         programaCurso.innerHTML = 'Programa del curso - No está inscrito';
         //Niveles
@@ -140,39 +142,54 @@ function agregarNiveles(data){
             cambiarPrecio(precioHtml);
         });
         //Niveles
-    }else{
+    } else {
         programaCurso.innerHTML = 'Programa del curso - Alumno inscrito';
         //Niveles
         const niveles = document.getElementById("Niveles");
         const opciones = document.getElementById('levelSelect');
-        console.log(data.curso);
+        console.log(data);
         let esta = false;
+        let completado = false;
         let comparador = data.curso.ProgramaCurso;
         let indice = 0;
-        if(data.inscripcion.length > 1){
+        if (data.inscripcion.length > 1) {
             for (let i = 0; i < data.curso.ProgramaCurso; i++) {
                 for (let j = 0; j < Object.keys(data.inscripcion).length; j++) {
-                    if(data.niveles[i].IdNivel === data.inscripcion[j].IdNivel){
+                    if (data.niveles[i].IdNivel === data.inscripcion[j].IdNivel) {
                         esta = true;
+                        if (data.inscripcion[j].Estado === 1) {
+                            completado = true;
+                        }
                         j = Object.keys(data.inscripcion).length + 1;
                     }
                 }
-                if(esta){
-                    niveles.innerHTML += `
+                if (esta) {
+                    if (completado) {
+                        niveles.innerHTML += `
+                        <div class="tab">
+                            <label for="" id="tab-${i}">
+                                <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre} - Nivel completado</h4>
+                            </label>
+                        </div>
+                        `;
+                    } else {
+                        niveles.innerHTML += `
               <div class="tab">
                   <label for="" id="tab-${i}">
                       <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
                   </label>
               </div>
               `;
-              esta = false;
-              indice++;
-              if(indice === comparador){
-                document.getElementById('opciones-compra').style.display = "none";
-                const precioHtml = document.getElementById('pago-contenido');
-                precioHtml.innerHTML = "Ya posees el curso completo c:";             
-              }
-                }else{
+                    }
+                    esta = false;
+                    completado = false;
+                    indice++;
+                    if (indice === comparador) {
+                        document.getElementById('opciones-compra').style.display = "none";
+                        const precioHtml = document.getElementById('pago-contenido');
+                        precioHtml.innerHTML = "Ya posees el curso completo c:";
+                    }
+                } else {
                     niveles.innerHTML += `
               <div class="tab">
                   <label for="" id="tab-${i}">
@@ -180,23 +197,34 @@ function agregarNiveles(data){
                   </label>
               </div>
               `;
-              opciones.innerHTML += `
+                    opciones.innerHTML += `
               <option value="${data.niveles[i].IdNivel}">${data.niveles[i].Nombre}</option>
               `;
-              esta = false;
+                    esta = false;
                 }
             }
-        }else{
+        } else {
             for (let i = 0; i < data.curso.ProgramaCurso; i++) {
-                if(data.niveles[i].IdNivel === data.inscripcion[0].IdNivel){
-                    niveles.innerHTML += `
-              <div class="tab">
-                  <label for="" id="tab-${i}">
-                      <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
-                  </label>
-              </div>
-              `;
-                }else{
+                if (data.niveles[i].IdNivel === data.inscripcion[0].IdNivel) {
+                    if (data.inscripcion[0].Estado === 1) {
+                        niveles.innerHTML += `
+                        <div class="tab">
+                            <label for="" id="tab-${i}">
+                                <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre} - Nivel completado</h4>
+                            </label>
+                        </div>
+                        `;
+                    } else {
+                        niveles.innerHTML += `
+                        <div class="tab">
+                            <label for="" id="tab-${i}">
+                                <h4 class="lvlContenedor" id=${data.niveles[i].IdNivel}>${data.niveles[i].Nombre}</h4>
+                            </label>
+                        </div>
+                        `;
+                    }
+
+                } else {
                     niveles.innerHTML += `
               <div class="tab">
                   <label for="" id="tab-${i}">
@@ -204,7 +232,7 @@ function agregarNiveles(data){
                   </label>
               </div>
               `;
-              opciones.innerHTML += `
+                    opciones.innerHTML += `
               <option value="${data.niveles[i].IdNivel}">${data.niveles[i].Nombre}</option>
               `;
                 }
@@ -225,7 +253,7 @@ function agregarNiveles(data){
             });
         });
 
-        
+
     }
     opcionesPago();
 }
@@ -502,7 +530,7 @@ function cambiarPrecio(precioHtml) {
 
 }
 
-function opcionesPago(){
+function opcionesPago() {
     const cuadro = document.getElementById("payment-options");
     const cursoCompleto = document.getElementById('fullCourseCheckbox');
     const nivelIndividual = document.getElementById('individualLevelsCheckbox');
@@ -534,7 +562,7 @@ function opcionesPago(){
 }
 
 
-function funcionCursoCompletoPago(precioHtml){
+function funcionCursoCompletoPago(precioHtml) {
     fetch('./Controllers/DetalleCurso.php', {
         method: "POST",
         body: JSON.stringify({ ID: ID, IdUsuario: idUsuario, option: 6 })
@@ -545,22 +573,88 @@ function funcionCursoCompletoPago(precioHtml){
                 let niveles = data.niveles;
                 console.log(niveles[0]);
                 var precioTotal = 0;
-                if(niveles[0] !== undefined){
-                    for(let i = 0; i < Object.keys(data.niveles).length; i++){
+                if (niveles[0] !== undefined) {
+                    for (let i = 0; i < Object.keys(data.niveles).length; i++) {
                         precioTotal += data.niveles[i].Costo;
                     }
                     precioHtml.innerHTML = 'Precio por el curso completo: $' + precioTotal;
                     nivelesNoInscritos = data;
-                }else{
+                } else {
                     precioHtml.innerHTML = 'Precio por el curso completo: $' + data.niveles.Costo;
                     nivelesNoInscritos = data;
                 }
-                
+
             } else {
                 alert("No hay niveles")
             }
         })
         .catch(error => {
             alert("Error al obtener niveles del curso: " + error.message);
+        });
+}
+
+function verificarDiploma(ID, idUsuario) {
+    fetch('./Controllers/DetalleCurso.php', {
+        method: "POST",
+        body: JSON.stringify({ ID: ID, IdUsuario: idUsuario, option: 7 })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log(data);
+                const comenDip = document.getElementById("comentarioDip");
+                comenDip.style = "display: block;";
+                const stars = document.querySelectorAll('.rating-stars li');
+                let rating = 0;
+
+                // Manejar la selección de estrellas
+                stars.forEach((star) => {
+                    star.addEventListener('click', e => {
+                        rating = e.target.getAttribute('data-rating');
+                        stars.forEach((s) => {
+                            s.classList.remove('active');
+                        });
+                        star.classList.add('active');
+                        for (let i = 0; i < rating; i++) {
+                            stars[i].classList.add('active');
+                        }
+                    });
+                });
+
+                // Manejar la publicación de comentarios
+                const publicarBtn = document.getElementById('publicarComentario');
+                publicarBtn.addEventListener('click', () => {
+                    const comentario = document.getElementById('comentario').value;
+                    if (!comentario || rating === 0) {
+                        alert('Por favor, escribe un comentario y selecciona una puntuación.');
+                    }else{
+                        fetch('./Controllers/DetalleCurso.php', {
+                            method: "POST",
+                            body: JSON.stringify({ ID: ID, IdUsuario: idUsuario, Texto: comentario, Calificacion: rating, option: 9 })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if(data.success){
+                                document.getElementById('comentario').value = '';
+                            stars.forEach((s) => s.classList.remove('active'));
+                            rating = 0;
+                            location.reload();
+                            }
+                        })
+                        .catch(error => {
+                            alert("Error al agregar comentario: " + error.message);
+                        });
+                        // Limpiar el formulario
+
+                    }
+                });
+
+                console.log("Hay diploma");
+            } else {
+                console.log("No hay diploma");
+            }
+        })
+        .catch(error => {
+            alert("Error al obtener el diploma del curso: " + error.message);
         });
 }

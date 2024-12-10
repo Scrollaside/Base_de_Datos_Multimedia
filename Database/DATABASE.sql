@@ -203,7 +203,7 @@ VALUES (2, 3, 4000),
 -- Inserts Tabla Curso
 INSERT INTO Curso (Titulo, Descripcion, Imagen, Costo, CantidadNiveles, Estado, PromedioCalificacion, FechaCreacion, CantidadVendidas, UsuarioCreador)
 VALUES 
-('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 3, 'Activo', 4.5, NOW(), 10, 7),
+('Curso de Java', 'Aprende programación en Java desde cero', NULL, 100.00, 3, 'Activo', NULL, NOW(), 10, 7),
 ('Modelado 3D', 'Introducción al modelado 3D con Blender', NULL, 150.00, 3, 'Activo', 4.2, NOW(), 15, 7),
 ('Desarrollo Web', 'Desarrollo web moderno con HTML, CSS y JavaScript', NULL, 80.00, 3, 'Activo', 4.7, NOW(), 20, 7),
 ('Dibujo Artístico', 'Técnicas avanzadas de dibujo', NULL, 90.00, 1, 'Inactivo', 3.9, NOW(), 5, 7),
@@ -255,19 +255,21 @@ VALUES
 -- Inserts Inscripcion   
 INSERT INTO Inscripcion (UsuarioID, NivelID, CursoID,  FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
 VALUES 
-(6, 1, 1, NOW(), NOW(), NULL, 1, 0),
-(2, 2, 1, NOW(), NOW(), NULL, 1, 1),
+(6, 1, 1, NOW(), NOW(), NULL, 0, 0),
+(6, 2, 1, NOW(), NOW(), NULL, 0, 0),
+(6, 3, 1, NOW(), NOW(), NULL, 0, 0),
+(2, 2, 1, NOW(), NOW(), NULL, 0, 1),
 (3, 3, 1, NOW(), NULL, NULL, 0, 0),
-(4, 4, 2, NOW(), NULL, NULL, 1, 1),
-(6, 5, 2, NOW(), NOW(), NULL, 1, 0),
-(2, 6, 2, NOW(), NOW(), NULL, 1, 1),
+(4, 4, 2, NOW(), NULL, NULL, 0, 1),
+(6, 5, 2, NOW(), NOW(), NULL, 0, 0),
+(2, 6, 2, NOW(), NOW(), NULL, 0, 1),
 (3, 7, 3, NOW(), NULL, NULL, 0, 0),
-(4, 8, 3, NOW(), NULL, NULL, 1, 1),
-(6, 9, 3, NOW(), NOW(), NULL, 1, 0),
-(2, 10, 4, NOW(), NOW(), NULL, 1, 1),
-(6, 11, 5, NOW(), NOW(), NULL, 1, 0),
-(4, 11, 5, NOW(), NOW(), NULL, 1, 0),
-(3, 11, 5, NOW(), NOW(), NULL, 1, 0);
+(4, 8, 3, NOW(), NULL, NULL, 0, 1),
+(6, 9, 3, NOW(), NOW(), NULL, 0, 0),
+(2, 10, 4, NOW(), NOW(), NULL, 0, 1),
+(6, 11, 5, NOW(), NOW(), NULL, 0, 0),
+(4, 11, 5, NOW(), NOW(), NULL, 0, 0),
+(3, 11, 5, NOW(), NOW(), NULL, 0, 0);
 
 -- Inserts de Comentario
 INSERT INTO Comentario (Texto, Calificacion, FechaHora, CursoID, UsuarioID, Estado)
@@ -284,21 +286,9 @@ VALUES
 ('Un curso muy útil para diseñadores.', 4.6, NOW(), 10, 2, 1);
 
 
+
+
 -- Inserts de Diplomas
-INSERT INTO Diploma (EstudianteID, CursoID, FechaFin, InstructorID)
-VALUES 
-(1, 1, NOW(), 2),
-(2, 3, NOW(), 3),
-(3, 5, NOW(), 1),
-(4, 7, NOW(), 2),
-(1, 2, NOW(), 4),
-(2, 4, NOW(), 3),
-(3, 6, NOW(), 2),
-(4, 8, NOW(), 1),
-(1, 9, NOW(), 2),
-(2, 10, NOW(), 4);
-
-
 
 
 
@@ -582,7 +572,8 @@ SELECT
     i.NivelID AS IdNivel,
     i.CursoID AS IdCurso,
 	u.NombreUsuario AS Miembro,
-    u.Foto AS FotoPerfil
+    u.Foto AS FotoPerfil,
+    i.Estado
 FROM Inscripcion i
 INNER JOIN Nivel n ON n.ID = i.NivelID
 INNER JOIN Usuario u ON u.ID = i.UsuarioID;
@@ -818,6 +809,25 @@ END //
 DELIMITER ;
 -- USER SP --
 -- USER SP --
+
+DELIMITER //
+CREATE PROCEDURE actualizarEstadoNivel (
+    IN d_IdNivel INT,
+    IN d_IdUsuario INT
+)
+BEGIN
+    -- Actualizar el estado
+    UPDATE Inscripcion
+    SET Estado = 1
+    WHERE NivelID = d_IdNivel AND UsuarioID = d_IdUsuario;
+
+    -- Actualizar la fecha de finalización si el estado es '1'
+    UPDATE Inscripcion
+    SET FechaFinalizacion = NOW()
+    WHERE NivelID = d_IdNivel AND UsuarioID = d_IdUsuario AND Estado = 1;
+END //
+DELIMITER ;
+
 DELIMITER //
 CREATE PROCEDURE agregarInscripcion (
 	IN p_UsuarioID INT,
@@ -827,7 +837,7 @@ CREATE PROCEDURE agregarInscripcion (
 )
 BEGIN
 	INSERT INTO Inscripcion (UsuarioID, NivelID, CursoID, FechaInscripcion, FechaAcceso, FechaFinalizacion, Estado, MetodoPago)
-    VALUES (p_UsuarioID, p_NivelID, p_CursoID, NOW(), NULL, NULL, 1, p_MetodoPago);
+    VALUES (p_UsuarioID, p_NivelID, p_CursoID, NOW(), NULL, NULL, 0, p_MetodoPago);
 END //
 DELIMITER ;
 
@@ -1063,8 +1073,8 @@ CREATE PROCEDURE AgregarComentario (
     IN p_cursoID INT
 )
 BEGIN
-    INSERT INTO Comentario (Texto, Calificacion, FechaHora, UsuarioID, CursoID)
-    VALUES (p_texto, p_calificacion, NOW(), p_usuarioID, p_cursoID);
+    INSERT INTO Comentario (Texto, Calificacion, FechaHora, UsuarioID, CursoID, Estado)
+    VALUES (p_texto, p_calificacion, NOW(), p_usuarioID, p_cursoID, 1);
 END //
 DELIMITER ;
 
@@ -1411,8 +1421,10 @@ BEGIN
 END//
 DELIMITER ;
 
---TRIGGER ACTUALIZAR FECHA DE USUARIO CUANDO EDITA SU PERFIL
+-- TRIGGER ACTUALIZAR FECHA DE USUARIO CUANDO EDITA SU PERFIL
+
 DELIMITER //
+
 
 CREATE TRIGGER actualizar_fecha_usuario
 BEFORE UPDATE ON Usuario

@@ -97,6 +97,27 @@
 
     <!--Comentarios del curso-->
     <div class="contenido-comentarios">
+        <div id="comentarioDip" style="display: none;">
+        <h2>Deja tu opinión</h2>
+    <div class="comentar">
+        <!-- Sistema de puntuación -->
+        <div class="puntuacion-comentario">
+            <p>Califica este curso:</p>
+            <ul class="rating-stars">
+                <li><i class="fa-regular fa-star" data-rating="1"></i></li>
+                <li><i class="fa-regular fa-star" data-rating="2"></i></li>
+                <li><i class="fa-regular fa-star" data-rating="3"></i></li>
+                <li><i class="fa-regular fa-star" data-rating="4"></i></li>
+                <li><i class="fa-regular fa-star" data-rating="5"></i></li>
+            </ul>
+        </div>
+        <!-- Cuadro para escribir comentarios -->
+        <textarea id="comentario" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+        <!-- Botón para publicar -->
+        <button id="publicarComentario" class="btn btn-primary mt-2">Publicar</button>
+        </div>
+    
+    </div>
         <h2>Valoración de los estudiantes</h2>
         <div class="row">
             <div class="columna-detalles">
