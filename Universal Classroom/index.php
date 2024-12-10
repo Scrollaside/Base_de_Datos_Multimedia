@@ -1,6 +1,12 @@
 <?php
+session_start();
 require_once 'config.php';
 require_once 'Models/Curso.php';
+
+
+
+// Cargar la información del usuario desde la sesión
+
 
 $cursoModel = new Curso();
 
@@ -62,7 +68,11 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
-                        <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        
+                        <?php if (isset($_SESSION['TipoUsuario']) && ($_SESSION['TipoUsuario'] == '1' || $_SESSION['TipoUsuario'] == '3')): ?>
+                             <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <?php endif; ?>
+                    
                     </div>                    
                 </div>
             <?php endforeach; ?>
@@ -84,7 +94,11 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
+
+                        <?php if (isset($_SESSION['TipoUsuario']) && ($_SESSION['TipoUsuario'] == '1' || $_SESSION['TipoUsuario'] == '3')): ?>
                         <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -106,7 +120,11 @@ $masRecientes = obtenerCursosMasRecientes($cursoModel);
                         <p>Calificación: <?= htmlspecialchars($curso['PromedioCalificacion']) ?></p>
                         <h3><?= htmlspecialchars($curso['Descripcion']) ?></h3>
                         <h4><?= htmlspecialchars($curso['Categorias']) ?></h4>
+
+                        <?php if (isset($_SESSION['TipoUsuario']) && ($_SESSION['TipoUsuario'] == '1' || $_SESSION['TipoUsuario'] == '3')): ?>
                         <a class="curse-btn" id="<?= htmlspecialchars($curso['ID']) ?>">Detalles del Curso</a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -5,12 +5,11 @@ CREATE TRIGGER Generar_Diploma
 AFTER UPDATE ON Inscripcion
 FOR EACH ROW
 BEGIN
-    -- Verificar si el estado cambió de 0 a 1 (curso completado)
-    IF NEW.Estado = 1 AND OLD.Estado = 0 THEN
-        DECLARE curso_id INT;
+		DECLARE curso_id INT;
         DECLARE total_niveles INT;
         DECLARE niveles_completados INT;
-
+    -- Verificar si el estado cambió de 0 a 1 (curso completado)
+    IF NEW.Estado = 1 AND OLD.Estado = 0 THEN
         -- Obtener el curso asociado al nivel actualizado
         SELECT CursoID INTO curso_id
         FROM Nivel
@@ -104,3 +103,29 @@ END//
 
 DELIMITER ;
 
+
+SELECT ID, TipoUsuario FROM Usuario WHERE ID = 1;
+DROP TRIGGER AdminID1;
+DELIMITER //
+CREATE TRIGGER AdminID1 
+BEFORE INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+	IF NEW.ID = 1 THEN
+		SET NEW.TipoUsuario = 3;
+	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER DisableUser
+AFTER UPDATE ON Usuario
+FOR EACH ROW
+BEGIN 
+	IF NEW.Intentos = 3 THEN 
+		UPDATE Usuario
+        SET Estado = 0
+        WHERE ID = NEW.ID;
+	END IF;
+END //
+DELIMITER ;

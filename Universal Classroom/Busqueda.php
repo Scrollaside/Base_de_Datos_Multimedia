@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/Controllers/CourseSearchController.php';
 
 $controller = new CourseSearchController();
@@ -112,7 +113,11 @@ $cursos = $controller->buscarCursos($titulo, $categoria, $usuario, $fechaInicio,
                                     <h3 class="card-text"><?php echo htmlspecialchars($curso['Descripcion']); ?></h3>
                                     <label class="card-text">Calificación: <?php echo htmlspecialchars($curso['PromedioCalificacion']); ?></label>
                                     <p class="card-text">Creador: <?php echo htmlspecialchars($curso['Creador']); ?></p>
+
+                                    <?php if (isset($_SESSION['TipoUsuario']) && ($_SESSION['TipoUsuario'] == '1' || $_SESSION['TipoUsuario'] == '3')): ?>
                                     <button class="btn btn-primary boton-curso" id="<?php echo htmlspecialchars($curso['ID']); ?>">Ver Curso</button>
+                                    <?php endif; ?>
+                                    
                                     <button class="btn btn-primary boton-curso-eliminar" id="<?php echo htmlspecialchars($curso['ID']); ?>">Eliminar Curso</button>
                                 </div>
                             </div>

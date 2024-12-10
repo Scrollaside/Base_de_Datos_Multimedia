@@ -15,7 +15,7 @@ CREATE TABLE Usuario (
     FechaActualizacion DATETIME,
     TipoUsuario INT,
     Estado BOOLEAN,
-    Intentos INT DEFAULT 0
+    Intentos TINYINT DEFAULT 0
 );
 CREATE TABLE Categoria (
     ID INT PRIMARY KEY AUTO_INCREMENT,
