@@ -99,3 +99,49 @@ td {
     font-style: italic;
 }
 
+/* Estados de los niveles */
+.estado-completo {
+    background-color: green;
+    font-weight: bold;
+    text-decoration: underline;
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
+
+.estado-no-disponible {
+    background-color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
+
+.estado-en-progreso {
+    background-color: yellow;
+    font-weight: bold;
+    text-decoration: underline;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
+
+.estado-incompleto {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
+
+/* Otros estados */
+.estado-activo {
+    background-color: green;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.estado-inactivo {
+    background-color: gray;
+    font-weight: bold;
+    text-decoration: underline;
+}

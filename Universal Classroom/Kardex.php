@@ -32,7 +32,8 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kardex de Alumno</title>
     <link rel="stylesheet" href="css/NavBar.css">
-    <link rel="stylesheet" href="css/kardexEstilo.css">    
+    <link rel="stylesheet" href="css/kardexEstilo.css">   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
 
@@ -137,6 +138,116 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="js/loadNavBar.js"></script>
     <script src="js/kardex.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Subrayar en verde cuando el texto es "Activo"
+            $('td:contains("Activo")').css({
+                'background-color': 'green',
+                'color': 'white',
+                'font-weight': 'bold',
+                'text-decoration': 'none'
+            }).hover(function() {
+                $(this).css({
+                    'background-color': 'darkgreen',
+                    'color': 'yellow'
+                });
+            }, function() {
+                $(this).css({
+                    'background-color': 'green',
+                    'color': 'white'
+                });
+            });
+
+            // Subrayar en gris cuando el texto es "Inactivo"
+            $('td:contains("Inactivo")').css({
+                'background-color': 'gray',
+                'color': 'white',
+                'font-weight': 'bold',
+                'text-decoration': 'none'
+            }).hover(function() {
+                $(this).css({
+                    'background-color': 'darkgray',
+                    'color': 'yellow'
+                });
+            }, function() {
+                $(this).css({
+                    'background-color': 'gray',
+                    'color': 'white'
+                });
+            });
+
+            // Subrayar en verde con borde cuando el texto es "Completo"
+            $('td:contains("Completo")').css({
+                'background-color': 'green',
+                'color': 'white',
+                'font-weight': 'bold',
+                'text-decoration': 'none',
+                'border': '1px solid green',
+                'border-radius': '5px',
+                'padding': '2px 4px'
+            }).hover(function() {
+                $(this).css({
+                    'background-color': 'darkgreen',
+                    'color': 'yellow',
+                    'border': '1px solid yellow'
+                });
+            }, function() {
+                $(this).css({
+                    'background-color': 'green',
+                    'color': 'white',
+                    'border': '1px solid green'
+                });
+            });
+
+            // Subrayar en rojo con borde cuando el texto es "No disponible"
+            $('td:contains("No disponible")').css({
+                'background-color': 'red',
+                'color': 'white',
+                'font-weight': 'bold',
+                'text-decoration': 'none',
+                'border': '1px solid red',
+                'border-radius': '5px',
+                'padding': '2px 4px'
+            }).hover(function() {
+                $(this).css({
+                    'background-color': 'darkred',
+                    'color': 'yellow',
+                    'border': '1px solid yellow'
+                });
+            }, function() {
+                $(this).css({
+                    'background-color': 'red',
+                    'color': 'white',
+                    'border': '1px solid red'
+                });
+            });
+
+            // Subrayar en amarillo con borde cuando el texto es "En progreso"
+            $('td:contains("En progreso")').css({
+                'background-color': 'yellow',
+                'color': 'black',
+                'font-weight': 'bold',
+                'text-decoration': 'none',
+                'border': '1px solid yellow',
+                'border-radius': '5px',
+                'padding': '2px 4px'
+            }).hover(function() {
+                $(this).css({
+                    'background-color': 'gold',
+                    'color': 'black',
+                    'border': '1px solid orange'
+                });
+            }, function() {
+                $(this).css({
+                    'background-color': 'yellow',
+                    'color': 'black',
+                    'border': '1px solid yellow'
+                });
+            });
+        });
+    </script>
+        
         
 </body>
 </html>
