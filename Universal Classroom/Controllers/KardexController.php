@@ -1,11 +1,8 @@
 <?php
 // Incluir el archivo de configuración
 require_once __DIR__ . '/../config.php';
-
-// Incluir el modelo KardexModel.php
 require_once __DIR__ . '/../Models/KardexModel.php';
 
-// KardexController.php
 
 class KardexController {
     private $kardexModel;

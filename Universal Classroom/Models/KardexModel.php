@@ -10,15 +10,13 @@ class KardexModel {
     public function __construct($conexion) {
         $this->conexion = $conexion;
     }
-
-
     
     public function GetDate() {
         try {
-            $this->obtenerConexion();
+            //$this->obtenerConexion();
             // Consulta para obtener la fecha formateada
             $query = "SELECT DATE_FORMAT(CURDATE(), '%d/%m/%Y') AS fechaFormateada";
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conexion->conectar()->prepare($query);
             $stmt->execute();
         
             // Recuperar el resultado

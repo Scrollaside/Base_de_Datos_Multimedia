@@ -2,6 +2,7 @@
 session_start();
 require_once 'config.php'; 
 require_once 'Controllers/database.php'; 
+require_once PROJECT_ROOT . '/Models/EdicionCurso.php';
 
 // Crear la conexión
 $conexion = new db(); 
@@ -16,6 +17,10 @@ $userId = $_SESSION['ID'];
 // Obtener los niveles y cursos
 $niveles = $controller->obtenerNiveles($userId);
 $cursos = $controller->obtenerCursosConDetalles($userId);
+$edicionCurso = new EdicionCurso($conexion);
+
+// Obtener todas las categorías disponibles
+$todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +28,7 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardex de Cursos</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <title>Kardex de Alumno</title>
     <link rel="stylesheet" href="css/NavBar.css">
     <link rel="stylesheet" href="css/kardexEstilo.css">    
 </head>
@@ -38,26 +42,27 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
         <label for="fecha-fin">Hasta:</label>
         <input type="date" id="fecha-fin">
         
-        <label for="categoria">Categoría:</label>
+        <label for="categoria">Categoría:</label>      
         <select id="categoria">
             <option value="todas">Todas</option>
-            <option value="tecnologia">Tecnología</option>
-            <option value="programacion">Programación</option>
-            <option value="dibujo">Dibujo</option>
-            <option value="web">Web</option>
-            <option value="videojuegos">VideoJuegos</option>
-            <option value="basededatos">Base de Datos</option>
-            <option value="marketing">Marketing</option>
+                <?php foreach ($todasCategorias as $categoria): ?>
+                    <option value="<?= $categoria['ID'] ?>"><?= htmlspecialchars($categoria['Nombre']); ?></option>
+                <?php endforeach; ?>
         </select>
 
+        <label for="progreso">Nivel de progreso:</label>
+        <select id="progreso">
+            <option value="todos">Todos</option>
+            <option value="terminados">Terminados</option>
+        </select>        
+        
         <label for="estado">Estado del Curso:</label>
         <select id="estado">
             <option value="todos">Todos</option>
             <option value="activo">Activo</option>
             <option value="inactivo">Inactivo</option>
-        </select>
+        </select>   
 
-        <button onclick="filtrarVentas()">Filtrar</button>
     </div>
 
     
@@ -124,7 +129,7 @@ $cursos = $controller->obtenerCursosConDetalles($userId);
                 </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table><br><br><br><br>
    
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="js/loadNavBar.js"></script>
