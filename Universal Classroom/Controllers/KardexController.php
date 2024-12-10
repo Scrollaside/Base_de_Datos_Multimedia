@@ -17,22 +17,25 @@ class KardexController {
 
     public function obtenerCursosConDetalles($userId) {
         $cursos = $this->kardexModel->obtenerDetallesCursos($userId);
-
+    
         foreach ($cursos as &$curso) {
-            $niveles = $this->kardexModel->obtenerNivelesPorCurso($curso['curso_id']);
+            $nivelesIds = $this->kardexModel->obtenerNivelesPorCurso($curso['curso_id']);
             $curso['niveles'] = [];
-
-            for ($i = 1; $i <= 9; $i++) {
-                if (in_array($i, $niveles)) {
-                    $nivelId = array_search($i, $niveles) + 1; // Mapeo del número al ID real
-                    $curso['niveles'][$i] = $this->kardexModel->obtenerEstadoNivel($userId, $nivelId);
-                } else {
-                    $curso['niveles'][$i] = 'N/A';
-                }
+    
+            foreach ($nivelesIds as $nivelId) {
+                $estado = $this->kardexModel->obtenerEstadoNivel($userId, $nivelId);
+                $curso['niveles'][] = $estado; // Agregar estados a la lista
+            }
+    
+            // Completar con 'N/A' hasta 9 niveles
+            while (count($curso['niveles']) < 9) {
+                $curso['niveles'][] = 'N/A';
             }
         }
-
+    
         return $cursos;
     }
+    
+    
 }
 

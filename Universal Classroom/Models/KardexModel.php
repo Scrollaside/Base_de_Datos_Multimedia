@@ -2,7 +2,6 @@
 // Incluir la clase db desde el archivo database.php
 require_once __DIR__ . '/../Controllers/database.php';
 
-// KardexModel.php
 
 class KardexModel {
     private $conexion;
@@ -73,33 +72,60 @@ class KardexModel {
 
     // Obtener los niveles de un curso
     public function obtenerNivelesPorCurso($cursoId) {
-        $sql = "SELECT Numero 
+        $sql = "SELECT ID 
                 FROM Nivel 
-                WHERE CursoID = :cursoId";
-
+                WHERE CursoID = :cursoId
+                ORDER BY Numero"; 
+    
         $stmt = $this->conexion->conectar()->prepare($sql);
         $stmt->bindParam(':cursoId', $cursoId);
         $stmt->execute();
-
+    
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
     // Verificar inscripción de usuario en un nivel específico
     public function obtenerEstadoNivel($userId, $nivelId) {
-        $sql = "SELECT FechaFinalizacion 
+        $sql = "SELECT Estado 
                 FROM Inscripcion 
                 WHERE UsuarioID = :userId AND NivelID = :nivelId";
-
+    
         $stmt = $this->conexion->conectar()->prepare($sql);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':nivelId', $nivelId);
         $stmt->execute();
-
+    
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($result) {
-            return $result['FechaFinalizacion'] ? 'Completo' : 'En progreso';
+            return $result['Estado'] == 1 ? 'Completo' : 'En progreso';
         }
         return 'No disponible';
     }
+    
+
+    public function obtenerRelacionesCursoCategoria() {
+    $sql = "SELECT cc.CursoID, cc.CategoriaID 
+            FROM CursoCategoria cc";
+
+    $stmt = $this->conexion->conectar()->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $cursoCategorias = [];
+    foreach ($result as $row) {
+        $cursoId = $row['CursoID'];
+        $categoriaId = (int)$row['CategoriaID'];
+
+        if (!isset($cursoCategorias[$cursoId])) {
+            $cursoCategorias[$cursoId] = [];
+        }
+
+        $cursoCategorias[$cursoId][] = $categoriaId;
+    }
+
+    return $cursoCategorias;
+}
+    
 }

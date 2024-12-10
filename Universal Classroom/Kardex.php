@@ -3,6 +3,7 @@ session_start();
 require_once 'config.php'; 
 require_once 'Controllers/database.php'; 
 require_once PROJECT_ROOT . '/Models/EdicionCurso.php';
+require_once PROJECT_ROOT . '/Models/KardexModel.php';
 
 // Crear la conexión
 $conexion = new db(); 
@@ -10,6 +11,7 @@ $conexion = new db();
 require_once 'Controllers/KardexController.php';
 
 $controller = new KardexController($conexion);
+$kardexModel = new KardexModel($conexion);
 
 // Obtener los datos del usuario
 $userId = $_SESSION['ID']; 
@@ -43,12 +45,13 @@ $todasCategorias = $edicionCurso->obtenerTodasLasCategorias();
         <input type="date" id="fecha-fin">
         
         <label for="categoria">Categoría:</label>      
-        <select id="categoria">
+        <select id="categoria" data-curso-categorias='<?= json_encode($kardexModel->obtenerRelacionesCursoCategoria()); ?>'>
             <option value="todas">Todas</option>
-                <?php foreach ($todasCategorias as $categoria): ?>
-                    <option value="<?= $categoria['ID'] ?>"><?= htmlspecialchars($categoria['Nombre']); ?></option>
-                <?php endforeach; ?>
+            <?php foreach ($todasCategorias as $categoria): ?>
+                <option value="<?= $categoria['ID'] ?>"><?= htmlspecialchars($categoria['Nombre']); ?></option>
+            <?php endforeach; ?>
         </select>
+
 
         <label for="progreso">Nivel de progreso:</label>
         <select id="progreso">

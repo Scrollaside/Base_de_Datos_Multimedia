@@ -75,52 +75,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <div class="perfilInfo">
-        <div class="FotoPerfil">
-            <h1>Perfil de Usuario</h1>
-            <!-- Imagen de perfil del usuario -->
-            <img src="<?php echo $fotoPerfilSrc; ?>" alt="Foto de perfil" id="profilePic">
-            <input type="file" id="NewPhoto" accept="image/*" disabled>
+
+    <br><br><br><br><br>
+    <div align="center">
+
+        <div class="perfilInfo">
+            <div class="FotoPerfil">
+                <h1>Perfil de Usuario</h1>
+                <!-- Imagen de perfil del usuario -->
+                <img src="<?php echo $fotoPerfilSrc; ?>" alt="Foto de perfil" id="profilePic">
+                <input type="file" id="NewPhoto" accept="image/*" disabled>
+            </div>
+
+            <div class="Informacion" align="left">
+                <form id="profileForm" data-usuario-id="<?php echo $usuarioID; ?>">
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" value="<?php echo htmlspecialchars($nombreCompleto); ?>" disabled>
+
+                    <label for="username">Nombre de Usuario:</label>
+                    <input type="text" id="username" value="<?php echo htmlspecialchars($nombreUsuario); ?>" disabled>
+
+                    <label for="gender">Género:</label>
+                    <select id="gender" disabled>
+                        <option value="M" <?php if ($genero === 'M') echo 'selected'; ?>>Masculino</option>
+                        <option value="F" <?php if ($genero === 'F') echo 'selected'; ?>>Femenino</option>
+                        <option value="O" <?php if ($genero === 'O') echo 'selected'; ?>>Otro</option>
+                    </select>
+
+                    <label for="birth">Fecha de Nacimiento:</label>
+                    <input type="date" id="birth" value="<?php echo $fechaNacimiento; ?>" disabled>
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" value="<?php echo htmlspecialchars($email); ?>" disabled>
+
+                    <label for="password">Contraseña:</label>
+                    <input type="text" id="password" value="<?php echo htmlspecialchars($password); ?>" disabled>
+
+                    <label for="confirmPassword">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmPassword" value="<?php echo htmlspecialchars($password); ?>" disabled>
+
+                    <div class="buttons">
+                        <button type="button" id="editBtn">Editar</button>
+                        <button type="button" id="saveBtn" disabled>Guardar</button>
+                        <button type="button" id="cancelBtn" disabled>Cancelar</button>
+                    </div>
+
+                    <p id="errorMsg" style="color:green;"></p>
+                </form>
+            </div>
         </div>
 
-        <div class="Informacion">
-            <form id="profileForm" data-usuario-id="<?php echo $usuarioID; ?>">
-                <label for="name">Nombre Completo:</label>
-                <input type="text" id="name" value="<?php echo htmlspecialchars($nombreCompleto); ?>" disabled>
-
-                <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" value="<?php echo htmlspecialchars($nombreUsuario); ?>" disabled>
-
-                <label for="gender">Género:</label>
-                <select id="gender" disabled>
-                    <option value="M" <?php if ($genero === 'M') echo 'selected'; ?>>Masculino</option>
-                    <option value="F" <?php if ($genero === 'F') echo 'selected'; ?>>Femenino</option>
-                    <option value="O" <?php if ($genero === 'O') echo 'selected'; ?>>Otro</option>
-                </select>
-
-                <label for="birth">Fecha de Nacimiento:</label>
-                <input type="date" id="birth" value="<?php echo $fechaNacimiento; ?>" disabled>
-
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" value="<?php echo htmlspecialchars($email); ?>" disabled>
-
-                <label for="password">Contraseña:</label>
-                <input type="text" id="password" value="<?php echo htmlspecialchars($password); ?>" disabled>
-
-                <label for="confirmPassword">Confirmar Contraseña:</label>
-                <input type="password" id="confirmPassword" value="<?php echo htmlspecialchars($password); ?>" disabled>
-
-                <div class="buttons">
-                    <button type="button" id="editBtn">Editar</button>
-                    <button type="button" id="saveBtn" disabled>Guardar</button>
-                    <button type="button" id="cancelBtn" disabled>Cancelar</button>
-                </div>
-
-                <p id="errorMsg" style="color:green;"></p>
-            </form>
-        </div>
     </div>
-
+    
     <script src="js/loadNavBar.js"></script>
     <script src="js/perfil.js"></script>
 </body>
