@@ -105,27 +105,40 @@ class KardexModel {
     
 
     public function obtenerRelacionesCursoCategoria() {
-    $sql = "SELECT cc.CursoID, cc.CategoriaID 
-            FROM CursoCategoria cc";
+        $sql = "SELECT cc.CursoID, cc.CategoriaID 
+                FROM CursoCategoria cc";
 
-    $stmt = $this->conexion->conectar()->prepare($sql);
-    $stmt->execute();
+        $stmt = $this->conexion->conectar()->prepare($sql);
+        $stmt->execute();
 
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $cursoCategorias = [];
-    foreach ($result as $row) {
-        $cursoId = $row['CursoID'];
-        $categoriaId = (int)$row['CategoriaID'];
+        $cursoCategorias = [];
+        foreach ($result as $row) {
+            $cursoId = $row['CursoID'];
+            $categoriaId = (int)$row['CategoriaID'];
 
-        if (!isset($cursoCategorias[$cursoId])) {
-            $cursoCategorias[$cursoId] = [];
+            if (!isset($cursoCategorias[$cursoId])) {
+                $cursoCategorias[$cursoId] = [];
+            }
+
+            $cursoCategorias[$cursoId][] = $categoriaId;
         }
 
-        $cursoCategorias[$cursoId][] = $categoriaId;
+        return $cursoCategorias;
     }
 
-    return $cursoCategorias;
-}
+    public function obtenerCursosPorCategoria($categoriaId) {
+        $sql = "SELECT CursoID 
+                FROM CursoCategoria 
+                WHERE CategoriaID = :categoriaId";
+        
+        $stmt = $this->conexion->conectar()->prepare($sql);
+        $stmt->bindParam(':categoriaId', $categoriaId);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_COLUMN); // Retorna solo los IDs
+    }
+    
     
 }

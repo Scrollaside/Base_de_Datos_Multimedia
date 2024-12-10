@@ -3,14 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const progresoSelect = document.getElementById("progreso");
     const fechaInicioInput = document.getElementById("fecha-inicio");
     const fechaFinInput = document.getElementById("fecha-fin");
-    const cursosTable = document.querySelector(".table tbody"); // Primera tabla (cursos)
-    const nivelesTable = document.querySelectorAll(".table")[1].querySelector("tbody"); // Segunda tabla (niveles)
+    const categoriaSelect = document.getElementById("categoria");
+    const cursosTable = document.querySelector(".table tbody");
+    const nivelesTable = document.querySelectorAll(".table")[1].querySelector("tbody");
 
     function filtrarTablas() {
         const estadoSeleccionado = estadoSelect.value;
         const progresoSeleccionado = progresoSelect.value;
         const fechaInicio = fechaInicioInput.value ? new Date(fechaInicioInput.value) : null;
         const fechaFin = fechaFinInput.value ? new Date(fechaFinInput.value) : null;
+        const categoriaIdSeleccionada = categoriaSelect.value;
 
         const cursosVisibles = [];
 
@@ -19,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cursoFilas.forEach((fila) => {
             const estadoCelda = fila.querySelector("td:nth-child(2)");
             const progresoCelda = fila.querySelector("td:nth-child(5)");
-            const fechaCreacionCelda = fila.querySelector("td:nth-child(3)"); // Fecha en la tercera columna
+            const fechaCreacionCelda = fila.querySelector("td:nth-child(3)");
+            const categoriaCelda = fila.getAttribute('data-id'); // Asumimos que el curso tiene un atributo 'data-categoria-id'
             const cursoNombre = fila.querySelector("td:nth-child(1)").textContent.trim();
 
             const cumpleEstado =
@@ -36,7 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 fechaFin
             );
 
-            if (cumpleEstado && cumpleProgreso && cumpleFecha) {
+            const cumpleCategoria =
+                categoriaIdSeleccionada === "todas" ||
+                categoriaIdSeleccionada === categoriaCelda;
+
+            if (cumpleEstado && cumpleProgreso && cumpleFecha && cumpleCategoria) {
                 fila.style.display = ""; // Mostrar la fila
                 cursosVisibles.push(cursoNombre); // Agregar nombre del curso al array
             } else {
@@ -59,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fechaRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
         if (!fechaRegex.test(fechaTexto)) return false;
 
-        const fecha = new Date(fechaTexto.split(" ")[0]); // Solo tomamos la parte YYYY-MM-DD
+        const fecha = new Date(fechaTexto.split(" ")[0]);
 
         if (fechaInicio && fecha < fechaInicio) return false;
         if (fechaFin && fecha > fechaFin) return false;
@@ -81,8 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Agregar los eventos de los filtros
     estadoSelect.addEventListener("change", filtrarTablas);
     progresoSelect.addEventListener("change", filtrarTablas);
     fechaInicioInput.addEventListener("change", filtrarTablas);
     fechaFinInput.addEventListener("change", filtrarTablas);
+    categoriaSelect.addEventListener("change", filtrarTablas);
 });

@@ -35,7 +35,29 @@ class KardexController {
     
         return $cursos;
     }
-    
-    
+        
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $categoriaId = $data['categoriaId'] ?? null;
+
+    if ($categoriaId) {
+        require_once __DIR__ . '/../Models/KardexModel.php';
+        $conexion = new db();
+        $kardexModel = new KardexModel($conexion);
+
+        // Obtener IDs de cursos asociados a la categoría
+        $cursoIds = $kardexModel->obtenerCursosPorCategoria($categoriaId);
+
+        echo json_encode([
+            'success' => true,
+            'cursoIds' => $cursoIds
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Categoría no válida']);
+    }
+}
+
 
