@@ -9,18 +9,8 @@ if (!isset($_SESSION['ID'])) {
     exit;
 }
 
-
 $usuarioID = $_SESSION['ID'];
 $cursoModel = new Curso();
-
-// Manejo de la actualización de estado
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['curso_id'], $_POST['nuevo_estado'])) {
-    $cursoID = $_POST['curso_id'];
-    $nuevoEstado = $_POST['nuevo_estado'] === 'Activo' ? 'Inactivo' : 'Activo';
-    $cursoModel->actualizarEstadoCurso($cursoID, $nuevoEstado);
-    echo json_encode(['success' => true, 'estado' => $nuevoEstado]);
-    exit;
-}
 
 $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
 ?>
@@ -48,7 +38,7 @@ $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
             <?php if (!empty($curso['Imagen'])): ?>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($curso['Imagen']); ?>" class="img-fluid rounded-start" alt="Imagen del curso">
             <?php else: ?>
-                <img src="ruta/a/imagen_placeholder.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
+                <img src="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" class="img-fluid rounded-start" alt="Imagen no disponible">
             <?php endif; ?>
 
 
@@ -73,57 +63,42 @@ $misCursos = $cursoModel->obtenerCursoPorCreador($usuarioID);
     
     <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button><br><br>
 
-    <!-- Curso 4
-     <div class="curso" id="curso4">
-                <img src="https://img-c.udemycdn.com/course/750x422/5066618_1a4f.jpg" alt="Imagen del curso">
-                <div class="curso-info" align="left">
-                    <h2>Curso de C#</h2>
-                    <p>Descubre las bases para el lenguaje C# y el uso de recursos por forms, ven y aprende de una manera fácil y divertida todos los componentes que puedes utilizar.</p><br>
-
-                    <div class="detalles">
-                        <p>Categorías: Tecnología, Programación</p>
-                        <p>Calificación: 7.4/10</p>
-                    </div>
-
-                    <a href="detallesCurso.php" class="curso-link">Explorar Clase</a>
-                    <button class="curso-link" onclick="toggleCurso(4)">Deshabilitar Curso</button>
-                </div>
-            </div>
-    </div>
-    -->
-
-
     <script>
         document.querySelectorAll('.estado-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const cursoId = button.dataset.id;
-                const estadoActual = button.dataset.estado;
+            button.addEventListener('click', async () => {
+                const cursoId = button.getAttribute('data-id');
+                const estadoActual = button.getAttribute('data-estado');
+                const nuevoEstado = estadoActual === 'Activo' ? 'Inactivo' : 'Activo';
 
-                fetch('instructor.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ curso_id: cursoId, nuevo_estado: estadoActual })
-                })
-                .then(response => response.json())
-                .then(data => {
+                try {
+                    const response = await fetch('./Controllers/EstadoController.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ cursoId, nuevoEstado }),
+                    });
+
+                    const data = await response.json();
                     if (data.success) {
+                        button.innerText = nuevoEstado === 'Activo' ? 'Deshabilitar Curso' : 'Habilitar Curso';
+                        button.setAttribute('data-estado', nuevoEstado);
+
                         const cursoDiv = document.getElementById(`curso-${cursoId}`);
-                        const nuevoEstado = data.estado;
                         cursoDiv.style.opacity = nuevoEstado === 'Activo' ? '1' : '0.5';
-                        button.dataset.estado = nuevoEstado;
-                        button.textContent = nuevoEstado === 'Activo' ? 'Deshabilitar Curso' : 'Habilitar Curso';
-                        cursoDiv.querySelector('.detalles p:nth-child(2)').textContent = `Estado: ${nuevoEstado}`;
-                        alert("El estado del curso se ha cambiado con éxito.");
+
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
                     }
-                });
+                } catch (error) {
+                    console.error('Error al actualizar el estado:', error);
+                    alert('Ocurrió un error al intentar actualizar el estado.');
+                }
             });
         });
-
-        window.addEventListener('scroll', () => {
-            const scrollButton = document.querySelector('.scroll-to-top');
-            scrollButton.style.display = window.scrollY > 300 ? 'flex' : 'none';
-        });
     </script>
+
 
     <script>
         function mostrarEstrellas(calificacion) {

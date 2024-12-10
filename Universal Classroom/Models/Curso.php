@@ -80,7 +80,9 @@ class Curso {
 
 // Procesar la solicitud desde fetch
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     if (!isset($_SESSION['ID'])) {
         echo json_encode(['success' => false, 'message' => 'Usuario no autenticado.']);
