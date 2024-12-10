@@ -293,6 +293,7 @@
                 <div id="payment-options" style="display: none;">
                     <button id="debitoButton">Pagar con tarjeta de debito</button>
                     <button id="creditoButton">Pagar con tarjeta de crédito</button>
+                    <input type="text" placeholder="Nombre">
                 </div>
             </div>
           </div>

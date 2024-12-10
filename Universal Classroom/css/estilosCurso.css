@@ -326,13 +326,13 @@ input{
 .tab label .lvlContenedor{
     position: relative;
     cursor: pointer;
-    background-color: #aed4ff;
+    background-color: #5dff93;
     padding: 16px 16px 16px 48px;
     border-radius: 5px;
 }
 
 .tab label .lvlContenedor:hover {
-    background-color: #8eb9ff
+    background-color: #48db79
 }
 
 .tab label .lvlContenedorNo{
