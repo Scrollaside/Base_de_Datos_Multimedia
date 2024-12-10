@@ -534,7 +534,6 @@ function opcionesPago(){
 
 
 function funcionCursoCompletoPago(precioHtml){
-
     fetch('./Controllers/DetalleCurso.php', {
         method: "POST",
         body: JSON.stringify({ ID: ID, IdUsuario: idUsuario, option: 6 })
@@ -542,13 +541,20 @@ function funcionCursoCompletoPago(precioHtml){
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log(data);
+                let niveles = data.niveles;
+                console.log(niveles[0]);
                 var precioTotal = 0;
-                for(let i = 0; i < Object.keys(data.niveles).length; i++){
-                    precioTotal += data.niveles[0].Costo;
+                if(niveles[0] !== undefined){
+                    for(let i = 0; i < Object.keys(data.niveles).length; i++){
+                        precioTotal += data.niveles[i].Costo;
+                    }
+                    precioHtml.innerHTML = 'Precio por el curso completo: $' + precioTotal;
+                    nivelesNoInscritos = data;
+                }else{
+                    precioHtml.innerHTML = 'Precio por el curso completo: $' + data.niveles.Costo;
+                    nivelesNoInscritos = data;
                 }
-                precioHtml.innerHTML = 'Precio por el curso completo: $' + precioTotal;
-                nivelesNoInscritos = data;
+                
             } else {
                 alert("No hay niveles")
             }
