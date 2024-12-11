@@ -110,10 +110,11 @@ function mostrarChats(idPersona) {
                         .then(data => {
                             if (data.success) {
                                 console.log('mensaje enviado');
+                                console.log()
                                 const contenedorChat = document.getElementById('chat-' + idPersona);
                                 contenedorChat.innerHTML += `
                                     <div class="bubble me">
-                                        <div class="message-text">${data.mensajes[i].Texto}</div>
+                                        <div class="message-text">${texto}</div>
                                         <div class="message-time">Justo ahora</div>
                                     </div>
                                     `;

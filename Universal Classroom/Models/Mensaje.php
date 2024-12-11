@@ -50,7 +50,7 @@ class Mensaje{
     //Buscar en la bd los mensajes privados
     public function obtenerMesajePrivado($idNivel, $idRemitente, $idDestinatario){
         $this->obtenerConexion();
-        $query = 'SELECT * FROM obtenerMensajes WHERE (Remitente = ? OR Remitente = ?) AND (Destinatario = ? OR Destinatario = ?) AND idNivel = ?;';
+        $query = 'SELECT * FROM obtenerMensajes WHERE (Remitente = ? AND Destinatario = ?) OR (Remitente = ? AND Destinatario = ?) AND idNivel = ?;';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $idRemitente);
         $stmt->bindParam(2, $idDestinatario);

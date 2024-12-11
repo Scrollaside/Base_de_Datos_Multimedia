@@ -15,13 +15,14 @@ function obtenerMensajes() {
         .then(data => {
             if (data) {
                 console.log(data);
-                console.log(idUsuario);
+                const alumnos = Array.isArray(data.alumnos) ? data.alumnos : [data.alumnos];
                 const miembrosContenedor = document.getElementById("miembros");
-                for(let i = 0; i < Object.keys(data.alumnos).length; i++){
+                console.log(alumnos);
+                for(let i = 0; i < alumnos.length; i++){
                   miembrosContenedor.innerHTML += `
-                <li class="person" data-chat="${data.alumnos[i].UsuarioID}" id="${data.alumnos[i].UsuarioID}">
-                     <img src="img/user.png" alt="" id="${data.alumnos[i].UsuarioID}"/>
-                     <span class="name" id="${data.alumnos[i].UsuarioID}">${data.alumnos[i].NombreUsuario}</span>
+                <li class="person" data-chat="${alumnos[i].UsuarioID}" id="${alumnos[i].UsuarioID}">
+                     <img src="img/user.png" alt="" id="${alumnos[i].UsuarioID}"/>
+                     <span class="name" id="${alumnos[i].UsuarioID}">${alumnos[i].NombreUsuario}</span>
                      <span class="time" id="ultimoMsjIzqTiempo"></span>
                      <span class="preview" id="ultimoMsjIzqText"></span>
                  </li>

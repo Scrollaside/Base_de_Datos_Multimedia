@@ -36,6 +36,7 @@ class Curso{
         $stmt->bindParam(1, $idCurso);
         $stmt->execute();
 
+
         if ($stmt->rowCount() > 0) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }else{

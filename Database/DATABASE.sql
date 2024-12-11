@@ -1,6 +1,9 @@
+SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'STRICT_TRANS_TABLES',''));
 DROP DATABASE BDM;
 CREATE DATABASE BDM;
 USE BDM;
+SELECT @@sql_mode;
 
 CREATE TABLE Usuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -498,7 +501,6 @@ SELECT
     cu.Descripcion AS Descripcion,
     cu.Costo AS Precio,
     cu.PromedioCalificacion AS Rating,
-    cu.Imagen AS Imagen,
     cu.CantidadNiveles AS ProgramaCurso
 FROM Curso cu 
 INNER JOIN Usuario u ON cu.UsuarioCreador = u.ID;
@@ -572,7 +574,6 @@ SELECT
     i.NivelID AS IdNivel,
     i.CursoID AS IdCurso,
 	u.NombreUsuario AS Miembro,
-    u.Foto AS FotoPerfil,
     i.Estado
 FROM Inscripcion i
 INNER JOIN Nivel n ON n.ID = i.NivelID
@@ -783,8 +784,7 @@ CREATE PROCEDURE obtenerMensajesInstructor (
 )
 BEGIN
 SELECT DISTINCT u.ID AS UsuarioID, 
-                u.NombreUsuario, 
-                u.Foto
+                u.NombreUsuario
 FROM Inscripcion i
 INNER JOIN Usuario u ON u.ID = i.UsuarioID
 INNER JOIN Curso c ON c.ID = i.CursoID
@@ -1180,7 +1180,8 @@ ELSE
     GROUP BY Curso;
 END IF;
 END //
-DELIMITER ;DELIMITER //
+DELIMITER ;
+DELIMITER //
 CREATE PROCEDURE GananciasTotalesSP(
 IN gt_ID INT,
 IN gt_desde VARCHAR(255),
