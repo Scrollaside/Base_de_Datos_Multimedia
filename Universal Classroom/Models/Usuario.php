@@ -203,9 +203,9 @@ class Usuario
     public function obtenerUsuarios($searchQuery)
     {
         $this->obtenerConexion();
-        $query = "SELECT * FROM Usuario WHERE NombreCompleto LIKE '%$searchQuery%'";
+        $query = "SELECT * FROM Usuario WHERE NombreCompleto LIKE '%`$searchQuery`%'";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $searchQuery, PDO::PARAM_STR);
+        //$stmt->bindParam(1, $searchQuery, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

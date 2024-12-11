@@ -693,9 +693,9 @@ DELIMITER ;
 
 
 
+Generar_Diploma
 
-
--- TRIGGERS --
+-- Generar_DiplomaGenerar_DiplomaGenerar_DiplomaTRIGGERS --
 -- TRIGGERS --
 -- TRIGGERS --
 
@@ -1437,3 +1437,48 @@ END;
 //
 
 DELIMITER ;
+
+
+
+
+
+
+
+
+
+DELIMITER //
+
+CREATE TRIGGER actualizar_reporte_usuario
+AFTER INSERT ON Inscripcion
+FOR EACH ROW
+BEGIN
+    DECLARE totalCosto FLOAT DEFAULT 0.0;
+    DECLARE usuarioCreadorID INT;
+
+    -- Obtener el ID del UsuarioCreador de la tabla Curso basado en el CursoID de la nueva inscripción
+    SELECT UsuarioCreador INTO usuarioCreadorID
+    FROM Curso
+    WHERE ID = NEW.CursoID;
+
+    -- Calcular la suma de los costos de todos los niveles relacionados con el CursoID
+    SELECT SUM(N.Costo) INTO totalCosto
+    FROM Nivel N
+    INNER JOIN Inscripcion I ON N.ID = I.NivelID
+    WHERE I.CursoID = NEW.CursoID;
+
+    -- Verificar si ya existe un registro en ReporteUsuario para el UsuarioCreador
+    IF EXISTS (SELECT 1 FROM ReporteUsuario WHERE UsuarioID = usuarioCreadorID) THEN
+        -- Si existe, actualizar el total
+        UPDATE ReporteUsuario
+        SET Total = totalCosto
+        WHERE UsuarioID = usuarioCreadorID;
+    ELSE
+        -- Si no existe, insertar un nuevo registro
+        INSERT INTO ReporteUsuario (UsuarioID, CursosTotal, Total)
+        VALUES (usuarioCreadorID, 0, totalCosto);
+    END IF;
+END;
+//
+
+DELIMITER ;
+

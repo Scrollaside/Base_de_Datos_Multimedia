@@ -38,7 +38,11 @@ async function getUsers() {
       body: JSON.stringify({ search: searchQuery }),
     });
 
-    const json = [...(await response.json())];
+    
+    //console.log(await response.text());
+    const json = await response.json();
+    
+    
     const users = json.map((e) => new User(e.ID, e.NombreCompleto, e.Estado));
     countUsers();
     listUsers(users);
